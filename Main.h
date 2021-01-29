@@ -3,23 +3,20 @@
 ** You can change everything if you like
 */
 
-#ifndef __CROSSBUFFER_H__
-#define __CROSSBUFFER_H__
-#include "CrossBuffer.h"
-#endif
+#include "./CrossBufferLayer/CrossBuffer.h"
 
 #ifndef __TEXTOUTPUT_H__
 #define __TEXTOUTPUT_H__
-#include "TextOutput.h"
+#include "./CrossBufferLayer/TextOutput.h"
 #endif
 
 #ifndef __INPUT_H__
 #define __INPUT_H__
-#include "Input.h"
+#include "./CrossBufferLayer/Input.h"
 #endif
 
-/* Background Color Transform Variables */
-int   Color = 0;
+/* Background color Transform Variables */
+int color = 0;
 float DeltaColor = 0.1f;
 
 /* FPS Counting Variables */
@@ -57,7 +54,7 @@ void Setup(FrameBuffer fb, int width, int height, int deltaTime, Keyboard keyboa
 	/* Fill Yellow On The Screen */
 	for (int y = 0; y < height; y++) {
 		for (int x = 0; x < width; x++) {
-			SetPixel(fb, x, y, RGB888(255, 255, 0));
+			SetPixel(fb, x, y, CreateColor(255, 255, 0));
 		}
 	}
 }
@@ -74,18 +71,18 @@ void Update(FrameBuffer fb, int width, int height, int deltaTime, Keyboard keybo
 	/* Draw Background */
 	for (int y = 0; y < height; y++) {
 		for (int x = 0; x < width; x++) {
-			SetPixel(fb, x, y, RGB888(Color, Color, Color));
+			SetPixel(fb, x, y, CreateColor(color, color, color));
 		}
 	}
 
-	/* Calculate The Color Of The Background In The Next Frame*/
-	Color += (int)(DeltaColor * (float)deltaTime);
+	/* Calculate The color Of The Background In The Next Frame*/
+	color += (int)(color * (float)deltaTime);
 
-	if (Color >= 250) {
+	if (color >= 250) {
 		DeltaColor = -0.1f;
 	}
 
-	else if (Color <= 5) {
+	else if (color <= 5) {
 		DeltaColor = 0.1f;
 	}
 
@@ -126,7 +123,7 @@ void Update(FrameBuffer fb, int width, int height, int deltaTime, Keyboard keybo
 	/* Draw Red Cube */
 	for (int y = RedCubeY; y < RedCubeY + 100; y++) {
 		for (int x = RedCubeX; x < RedCubeX + 100; x++) {
-			SetPixel(fb, x, y, RGB888(255, 0, 0));
+			SetPixel(fb, x, y, CreateColor(255, 0, 0));
 		}
 	}
 
@@ -136,8 +133,8 @@ void Update(FrameBuffer fb, int width, int height, int deltaTime, Keyboard keybo
 	*/
 
 	/* Process Mouse Delta For Green Cube */
-	GreenCubeX += MouseSensitivity * mouse.DeltaX;
-	GreenCubeY += MouseSensitivity * mouse.DeltaY;
+	GreenCubeX += (int)(MouseSensitivity * mouse.DeltaX);
+	GreenCubeY += (int)(MouseSensitivity * mouse.DeltaY);
 
 	/* Boundary Treatment For Green Cube */
 	if (GreenCubeX < 0) {
@@ -157,7 +154,7 @@ void Update(FrameBuffer fb, int width, int height, int deltaTime, Keyboard keybo
 	/* Draw Green Cube */
 	for (int y = GreenCubeY; y < GreenCubeY + 100; y++) {
 		for (int x = GreenCubeX; x < GreenCubeX + 100; x++) {
-			SetPixel(fb, x, y, RGB888(mouse.LButtonState * 255, 255, mouse.RButtonState * 255));
+			SetPixel(fb, x, y, CreateColor(mouse.LButtonState * 255, 255, mouse.RButtonState * 255));
 		}
 	}
 
@@ -184,7 +181,7 @@ void Update(FrameBuffer fb, int width, int height, int deltaTime, Keyboard keybo
 		FPS,
 		deltaTime
 	);
-	DrawShadowString(fb, 10, 10, buffer);
+	DrawShadowString(fb, width, height, 10, 10, buffer);
 
 
 	/*
@@ -206,7 +203,7 @@ void Update(FrameBuffer fb, int width, int height, int deltaTime, Keyboard keybo
 		*(mouse.NowLockingOrNot),
 		*(mouse.HideCursorOrNot)
 	);
-	DrawShadowString(fb, 10, 30, buffer);
+	DrawShadowString(fb, width, height, 10, 30, (char*)buffer);
 }
 
 void OnDestroy() {

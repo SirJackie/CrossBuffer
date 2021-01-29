@@ -20,17 +20,17 @@
 
 #ifndef __INPUT_H__
 #define __INPUT_H__
-#include "Input.h"
+#include "../CrossBufferLayer/Input.h"
 #endif
 
 #include "resource.h"
-#include "Main.h"
+#include "../Main.h"
 
 using namespace std;
 
 /* Window Class Properties */
-#define WindowClassName L"CrossBuffer For Windows Class"
-#define WindowTitle     L"CrossBuffer For Windows"
+#define WindowClassName L"Jackie Engine Class"
+#define WindowTitle     L"Jackie Engine     <WASDQE To Move>     <IJKLUO To Look>     <R To On Or Off The Rotation>"
 
 /* DirectX Objects */
 IDirect3D9* pDirect3D;
@@ -115,10 +115,13 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR, INT)
 	int Unit = ScreenY / 30;
 
 	WindowHeight     = 26 * Unit;
-	WindowTopMargin  = 2  * Unit;
-
 	WindowWidth      = WindowHeight / 9 * 16;
+
+	//WindowWidth = 1104;
+	//WindowHeight = 624;
+
 	WindowLeftMargin = (ScreenX - WindowWidth) / 2;
+	WindowTopMargin = (ScreenY - WindowHeight) / 2;
 
 	mouse.DeltaRatio = min(WindowWidth, WindowHeight);
 	MouseX = WindowWidth / 2;
@@ -257,15 +260,23 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR, INT)
 				mouse.RealY = MouseInitY;
 				SetCursorPos(WindowLeftMargin + MouseInitX, WindowTopMargin + MouseInitY);
 
+				FrameBuffer fb;
+				fb.pBits = rect.pBits;
+				fb.Pitch = rect.Pitch;
+
 				/* Call the Setup() in Main.h */
-				Setup(rect, WindowWidth, WindowHeight, 0, keyboard, mouse);
+				Setup(fb, WindowWidth, WindowHeight, 0, keyboard, mouse);
 				FirstTimeRunning = FALSE;
 			}
 
 			/* If it is not the First Time Running */
 			else {
 				/* Call the Update() in Main.h */
-				Update(rect, WindowWidth, WindowHeight, thisTime - lastTime, keyboard, mouse);
+				FrameBuffer fb;
+				fb.pBits = rect.pBits;
+				fb.Pitch = rect.Pitch;
+
+				Update(fb, WindowWidth, WindowHeight, thisTime - lastTime, keyboard, mouse);
 			}
 
 
@@ -370,41 +381,41 @@ LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		break;
 
 	case WM_MOUSEMOVE:
-		/* If First Time Running, MouseXY = MouseInitXY, DeltaXY = 0 */
-		if (FirstTimeRunning == TRUE) {
-			break;
-		}
+		///* If First Time Running, MouseXY = MouseInitXY, DeltaXY = 0 */
+		//if (FirstTimeRunning == TRUE) {
+		//	break;
+		//}
 
-		/* Refresh MouseLastX and MouseLastY */
-		if (NowLockingOrNot == TRUE) {
-			MouseLastX = MouseInitX;
-			MouseLastY = MouseInitY;
-		}
-		else {
-			MouseLastX = MouseX;
-			MouseLastY = MouseY;
-		}
-		
-		/* Get Mouse Position */
-		MouseX = LOWORD(lParam);
-		MouseY = HIWORD(lParam);
+		///* Refresh MouseLastX and MouseLastY */
+		//if (NowLockingOrNot == TRUE) {
+		//	MouseLastX = MouseInitX;
+		//	MouseLastY = MouseInitY;
+		//}
+		//else {
+		//	MouseLastX = MouseX;
+		//	MouseLastY = MouseY;
+		//}
+		//
+		///* Get Mouse Position */
+		//MouseX = LOWORD(lParam);
+		//MouseY = HIWORD(lParam);
 
-		/* Calculate Delta */
-		mouse.RealX = MouseX;
-		mouse.RealY = MouseY;
-		mouse.RealDeltaX = MouseX - MouseLastX;
-		mouse.RealDeltaY = MouseY - MouseLastY;
-		mouse.DeltaX = 1.0f * mouse.RealDeltaX / mouse.DeltaRatio;
-		mouse.DeltaY = 1.0f * mouse.RealDeltaY / mouse.DeltaRatio;
+		///* Calculate Delta */
+		//mouse.RealX = MouseX;
+		//mouse.RealY = MouseY;
+		//mouse.RealDeltaX = MouseX - MouseLastX;
+		//mouse.RealDeltaY = MouseY - MouseLastY;
+		//mouse.DeltaX = 1.0f * mouse.RealDeltaX / mouse.DeltaRatio;
+		//mouse.DeltaY = 1.0f * mouse.RealDeltaY / mouse.DeltaRatio;
 
-		/* Lock Action */
-		if (NowLockingOrNot == TRUE) {
-			SetCursorPos(WindowLeftMargin + MouseInitX, WindowTopMargin + MouseInitY);
-		}
-		else {
-			SetCursorPos(WindowLeftMargin + mouse.RealX, WindowTopMargin + mouse.RealY);
-		}
-		break;
+		///* Lock Action */
+		//if (NowLockingOrNot == TRUE) {
+		//	SetCursorPos(WindowLeftMargin + MouseInitX, WindowTopMargin + MouseInitY);
+		//}
+		//else {
+		//	SetCursorPos(WindowLeftMargin + mouse.RealX, WindowTopMargin + mouse.RealY);
+		//}
+		//break;
 
 	default:
 		return DefWindowProc(hWnd, msg, wParam, lParam);
