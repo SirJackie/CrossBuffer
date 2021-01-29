@@ -1,6 +1,6 @@
-#include "./CrossBufferLayer/CrossBuffer.h"
-
-
+#include "CrossBufferLayer/FrameBufferSupport.h"
+#include "CrossBufferLayer/FontSupport.h"
+#include "CrossBufferLayer/IOSupport.h"
 
 
 /*
@@ -35,4 +35,6 @@ void Update(FrameBuffer fb, int deltaTime) {
 			SetPixel(fb, x, y, c);
 		}
 	}
+
+	DrawShadowString(fb, 10, 10, "Hello World!");
 }

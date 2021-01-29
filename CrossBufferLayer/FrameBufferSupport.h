@@ -1,5 +1,5 @@
-#ifndef __CSBF_CrossBuffer
-#define __CSBF_CrossBuffer
+#ifndef __CSBF_FrameBufferSupport
+#define __CSBF_FrameBufferSupport
 
 struct FrameBuffer
 {

@@ -42,5 +42,14 @@
     <ClInclude Include="..\CrossBufferLayer\CrossBuffer.h">
       <Filter>头文件\CrossBufferLayer</Filter>
     </ClInclude>
+    <ClInclude Include="..\CrossBufferLayer\FrameBufferSupport.h">
+      <Filter>头文件\CrossBufferLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CrossBufferLayer\FontSupport.h">
+      <Filter>头文件\CrossBufferLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CrossBufferLayer\IOSupport.h">
+      <Filter>头文件\CrossBufferLayer</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

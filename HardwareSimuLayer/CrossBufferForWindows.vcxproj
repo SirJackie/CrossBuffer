@@ -154,6 +154,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\CrossBufferLayer\CrossBuffer.h" />
+    <ClInclude Include="..\CrossBufferLayer\FontSupport.h" />
+    <ClInclude Include="..\CrossBufferLayer\FrameBufferSupport.h" />
+    <ClInclude Include="..\CrossBufferLayer\IOSupport.h" />
     <ClInclude Include="..\Main.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
