@@ -103,12 +103,6 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR, INT)
 
 	win.LeftMargin = (win.ScreenX - win.Width)  / 2;
 	win.TopMargin  = (win.ScreenY - win.Height) / 2;
-	
-
-	/*
-	** Call the OnCreate() in Main.h
-	*/
-	OnCreate();
 
 
 	/*
@@ -275,9 +269,6 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR, INT)
 	/*
 	** After the Main Loop
 	*/
-
-	/* Call OnDestroy() in Main.h */
-	OnDestroy();
 
 	/* Release All the Variables */
 	UnregisterClass(WindowClassName, wc.hInstance);
