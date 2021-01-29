@@ -3,7 +3,7 @@
 #include <time.h>
 #include "resource.h"
 #include "../Main.h"
-#include "../CrossBufferLayer/CrossBuffer.h"
+#include "../CrossBufferLayer/FrameBufferSupport.h"
 
 
 /*

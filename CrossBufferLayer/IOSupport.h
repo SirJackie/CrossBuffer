@@ -1,3 +1,6 @@
+#ifndef __CSBF_IOSupport
+#define __CSBF_IOSupport
+
 #include "FrameBufferSupport.h"
 #include "FontSupport.h"
 
@@ -48,3 +51,5 @@ void DrawShadowString(FrameBuffer fb, int x, int y, const char* stringPointer) {
 	DrawString(fb, x,     y,     CreateColor(0,   0,   0  , 255), stringPointer);
 	DrawString(fb, x + 1, y + 1, CreateColor(255, 255, 255, 255), stringPointer);
 }
+
+#endif

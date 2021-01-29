@@ -1,6 +1,7 @@
 #include "CrossBufferLayer/FrameBufferSupport.h"
 #include "CrossBufferLayer/FontSupport.h"
 #include "CrossBufferLayer/IOSupport.h"
+#include "CrossBufferLayer/FPSCalculator.h"
 
 
 /*
@@ -36,5 +37,6 @@ void Update(FrameBuffer fb, int deltaTime) {
 		}
 	}
 
-	DrawShadowString(fb, 10, 10, "Hello World!");
+	CalcFPS(fb, deltaTime);
+	DrawShadowString(fb, 10, 26, "Hello World!");
 }

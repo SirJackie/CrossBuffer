@@ -39,9 +39,6 @@
     <ClInclude Include="..\Main.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\CrossBufferLayer\CrossBuffer.h">
-      <Filter>头文件\CrossBufferLayer</Filter>
-    </ClInclude>
     <ClInclude Include="..\CrossBufferLayer\FrameBufferSupport.h">
       <Filter>头文件\CrossBufferLayer</Filter>
     </ClInclude>
@@ -49,6 +46,9 @@
       <Filter>头文件\CrossBufferLayer</Filter>
     </ClInclude>
     <ClInclude Include="..\CrossBufferLayer\IOSupport.h">
+      <Filter>头文件\CrossBufferLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CrossBufferLayer\FPSCalculator.h">
       <Filter>头文件\CrossBufferLayer</Filter>
     </ClInclude>
   </ItemGroup>
