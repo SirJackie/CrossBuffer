@@ -6,8 +6,6 @@
 #include "../CrossBufferLayer/CrossBuffer.h"
 
 
-
-
 /*
 ** Definitions
 */
@@ -51,8 +49,6 @@ void GetScreenResolution(int* resultX, int* resultY) {
 }
 
 
-
-
 /*
 ** Message Loop
 */
@@ -69,8 +65,6 @@ LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		return DefWindowProc(hWnd, msg, wParam, lParam);
 	}
 }
-
-
 
 
 /*
