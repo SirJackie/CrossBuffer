@@ -71,7 +71,10 @@ LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 ** Main Function
 */
 
-int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR, INT)
+int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
+	_In_opt_ HINSTANCE hPrevInstance,
+	_In_ LPWSTR    lpCmdLine,
+	_In_ int       nCmdShow)
 {
 	// Get Present Time
 	thisTime = clock();
@@ -91,12 +94,8 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR, INT)
 		GetModuleHandle(NULL), NULL, NULL, NULL, NULL,
 		WindowClassName, NULL
 	};
-	wc.hIconSm = (HICON)LoadImage(
-		hInst, MAKEINTRESOURCE(NULL), IMAGE_ICON, 16, 16, 0
-	);
-	wc.hIcon   = (HICON)LoadImage(
-		hInst, MAKEINTRESOURCE(NULL), IMAGE_ICON, 32, 32, 0
-	);
+	wc.hIconSm = LoadIcon(wc.hInstance, MAKEINTRESOURCE(IDI_SMALL));
+	wc.hIcon   = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_CROSSBUFFERFORWINDOWS));
 	RegisterClassEx(&wc);
 
 	// Create Window

@@ -51,5 +51,14 @@
     <ClInclude Include="..\CrossBufferLayer\FPSCalculator.h">
       <Filter>头文件\CrossBufferLayer</Filter>
     </ClInclude>
+    <ClInclude Include="framework.h">
+      <Filter>头文件\CrossBufferLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>头文件\CrossBufferLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件\CrossBufferLayer</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -48,8 +48,8 @@ void DrawString(FrameBuffer fb, int x, int y, int color, const char* stringPoint
 
 
 void DrawShadowString(FrameBuffer fb, int x, int y, const char* stringPointer) {
-	DrawString(fb, x,     y,     CreateColor(0,   0,   0  , 255), stringPointer);
-	DrawString(fb, x + 1, y + 1, CreateColor(255, 255, 255, 255), stringPointer);
+	DrawString(fb, x,     y,     CreateColor(0,   0,   0  ), stringPointer);
+	DrawString(fb, x + 1, y + 1, CreateColor(255, 255, 255), stringPointer);
 }
 
 #endif
