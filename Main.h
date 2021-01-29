@@ -1,19 +1,5 @@
-/*
-** This is a Demo of CrossBuffer
-** You can change everything if you like
-*/
-
 #include "./CrossBufferLayer/CrossBuffer.h"
 
-#ifndef __TEXTOUTPUT_H__
-#define __TEXTOUTPUT_H__
-#include "./CrossBufferLayer/TextOutput.h"
-#endif
-
-#ifndef __INPUT_H__
-#define __INPUT_H__
-#include "./CrossBufferLayer/Input.h"
-#endif
 
 /* Background color Transform Variables */
 int color = 0;
@@ -46,11 +32,8 @@ void OnCreate() {
 /*
 ** Setup Callback Function
 */
-void Setup(FrameBuffer fb, int width, int height, int deltaTime, Keyboard keyboard, Mouse mouse) {
-	GreenCubeX = mouse.RealX;
-	GreenCubeY = mouse.RealY;
-	MouseSensitivity = mouse.DeltaRatio;
-	LockMouse(mouse);
+void Setup(FrameBuffer fb, int width, int height, int deltaTime) {
+
 	/* Fill Yellow On The Screen */
 	for (int y = 0; y < height; y++) {
 		for (int x = 0; x < width; x++) {
@@ -63,7 +46,7 @@ void Setup(FrameBuffer fb, int width, int height, int deltaTime, Keyboard keyboa
 /*
 ** Update Callback Function
 */
-void Update(FrameBuffer fb, int width, int height, int deltaTime, Keyboard keyboard, Mouse mouse) {
+void Update(FrameBuffer fb, int width, int height, int deltaTime) {
 	/*
 	** Process Background
 	*/
@@ -87,23 +70,7 @@ void Update(FrameBuffer fb, int width, int height, int deltaTime, Keyboard keybo
 	}
 
 
-	/*
-	** Process Red Cube That Controlled By WASD
-	*/
-
-	/* Process Keyboard Input For Red Cube */
-	if (keyboard['W'] == 1) {
-		RedCubeY -= deltaTime / 2;
-	}
-	if (keyboard['S'] == 1) {
-		RedCubeY += deltaTime / 2;
-	}
-	if (keyboard['A'] == 1) {
-		RedCubeX -= deltaTime / 2;
-	}
-	if (keyboard['D'] == 1) {
-		RedCubeX += deltaTime / 2;
-	}
+	
 
 	/* Boundary Treatment For Red Cube */
 	if (RedCubeX < 0) {
@@ -132,10 +99,6 @@ void Update(FrameBuffer fb, int width, int height, int deltaTime, Keyboard keybo
 	** Process Green Cube That Controlled By Mouse
 	*/
 
-	/* Process Mouse Delta For Green Cube */
-	GreenCubeX += (int)(MouseSensitivity * mouse.DeltaX);
-	GreenCubeY += (int)(MouseSensitivity * mouse.DeltaY);
-
 	/* Boundary Treatment For Green Cube */
 	if (GreenCubeX < 0) {
 		GreenCubeX = 0;
@@ -154,7 +117,7 @@ void Update(FrameBuffer fb, int width, int height, int deltaTime, Keyboard keybo
 	/* Draw Green Cube */
 	for (int y = GreenCubeY; y < GreenCubeY + 100; y++) {
 		for (int x = GreenCubeX; x < GreenCubeX + 100; x++) {
-			SetPixel(fb, x, y, CreateColor(mouse.LButtonState * 255, 255, mouse.RButtonState * 255));
+			SetPixel(fb, x, y, 0);
 		}
 	}
 
@@ -172,38 +135,6 @@ void Update(FrameBuffer fb, int width, int height, int deltaTime, Keyboard keybo
 		deltaTimeCount -= 1000;
 		frameCount = 0;
 	}
-
-	/* Show FPS On Screen */
-	char buffer[1000];
-	sprintf_s(
-		buffer,
-		"FPS: %f; DeltaTime: %d",
-		FPS,
-		deltaTime
-	);
-	DrawShadowString(fb, width, height, 10, 10, buffer);
-
-
-	/*
-	** Show Mouse Input On Screen
-	*/
-	sprintf_s(
-		buffer,
-		"WindowWidth:%d\nWindowHeight:%d\nMouseLButtonState: %d\nMouseRButtonState: %d\nMouseRealDeltaX: %d\nMouseRealDeltaY: %d\nMouseDeltaRatio: %d\nMouseDeltaX: %f\nMouseDeltaY: %f\nWantToLockOrNot:%d\nNowLockingOrNot:%d\nHideCursorOrNot:%d",
-		width,
-		height,
-		mouse.LButtonState,
-		mouse.RButtonState,
-		mouse.RealDeltaX,
-		mouse.RealDeltaY,
-		mouse.DeltaRatio,
-		mouse.DeltaX,
-		mouse.DeltaY,
-		*(mouse.WantToLockOrNot),
-		*(mouse.NowLockingOrNot),
-		*(mouse.HideCursorOrNot)
-	);
-	DrawShadowString(fb, width, height, 10, 30, (char*)buffer);
 }
 
 void OnDestroy() {

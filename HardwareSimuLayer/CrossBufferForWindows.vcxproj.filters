@@ -42,17 +42,5 @@
     <ClInclude Include="..\CrossBufferLayer\CrossBuffer.h">
       <Filter>头文件\CrossBufferLayer</Filter>
     </ClInclude>
-    <ClInclude Include="..\CrossBufferLayer\Font.h">
-      <Filter>头文件\CrossBufferLayer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\CrossBufferLayer\FPS.h">
-      <Filter>头文件\CrossBufferLayer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\CrossBufferLayer\Input.h">
-      <Filter>头文件\CrossBufferLayer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\CrossBufferLayer\TextOutput.h">
-      <Filter>头文件\CrossBufferLayer</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

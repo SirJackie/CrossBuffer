@@ -1,28 +1,7 @@
-﻿#ifndef __IOSTREAM__
-#define __IOSTREAM__
-#include <iostream>
-#endif
-
-#ifndef __WINDOWS_H__
-#define __WINDOWS_H__
+﻿#include <iostream>
 #include <Windows.h>
-#endif
-
-#ifndef __D3D9_H__
-#define __D3D9_H__
 #include <d3d9.h>
-#endif
-
-#ifndef __TIME_H__
-#define __TIME_H__
 #include <time.h>
-#endif
-
-#ifndef __INPUT_H__
-#define __INPUT_H__
-#include "../CrossBufferLayer/Input.h"
-#endif
-
 #include "resource.h"
 #include "../Main.h"
 
@@ -43,19 +22,6 @@ int WindowLeftMargin;
 int WindowTopMargin;
 int WindowWidth;
 int WindowHeight;
-
-/* Input Objects */
-int keyboard[256];
-Mouse mouse;
-int MouseX;
-int MouseY;
-int MouseInitX;
-int MouseInitY;
-int MouseLastX;
-int MouseLastY;
-BOOL WantToLockOrNot = FALSE;
-BOOL NowLockingOrNot = FALSE;
-BOOL HideCursorOrNot = FALSE;
 
 /* Flags */
 BOOL FirstTimeRunning = TRUE;
@@ -97,11 +63,6 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR, INT)
 	/*
 	** Initialize All The Variables
 	*/
-	ZeroMemory(keyboard, 256 * sizeof(int) );
-	ZeroMemory(&mouse,   sizeof(Mouse)     );
-	mouse.WantToLockOrNot = &WantToLockOrNot;
-	mouse.NowLockingOrNot = &NowLockingOrNot;
-	mouse.HideCursorOrNot = &HideCursorOrNot;
 	thisTime = clock();
 	lastTime = thisTime;
 
@@ -122,12 +83,6 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR, INT)
 
 	WindowLeftMargin = (ScreenX - WindowWidth) / 2;
 	WindowTopMargin = (ScreenY - WindowHeight) / 2;
-
-	mouse.DeltaRatio = min(WindowWidth, WindowHeight);
-	MouseX = WindowWidth / 2;
-	MouseY = WindowHeight / 2;
-	MouseInitX = MouseX;
-	MouseInitY = MouseY;
 	
 
 	/*
@@ -215,13 +170,11 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR, INT)
 			/* Then Process it */
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
-			ShowCursor(!HideCursorOrNot);
 		}
 
 		/* Else, Process the Game Loop */
 		else
 		{
-			ShowCursor(!HideCursorOrNot);
 
 			/*
 			** Calculate the Time
@@ -256,16 +209,13 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR, INT)
 			/* If it is the First Time Running */
 			if (FirstTimeRunning) {
 				/* Set The Mouse's Initialize Position */
-				mouse.RealX = MouseInitX;
-				mouse.RealY = MouseInitY;
-				SetCursorPos(WindowLeftMargin + MouseInitX, WindowTopMargin + MouseInitY);
 
 				FrameBuffer fb;
 				fb.pBits = rect.pBits;
 				fb.Pitch = rect.Pitch;
 
 				/* Call the Setup() in Main.h */
-				Setup(fb, WindowWidth, WindowHeight, 0, keyboard, mouse);
+				Setup(fb, WindowWidth, WindowHeight, 0);
 				FirstTimeRunning = FALSE;
 			}
 
@@ -276,7 +226,7 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR, INT)
 				fb.pBits = rect.pBits;
 				fb.Pitch = rect.Pitch;
 
-				Update(fb, WindowWidth, WindowHeight, thisTime - lastTime, keyboard, mouse);
+				Update(fb, WindowWidth, WindowHeight, thisTime - lastTime);
 			}
 
 
@@ -298,14 +248,6 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR, INT)
 			** lastTime in next frame = thisTime in this frame
 			*/
 			lastTime = thisTime;
-
-			/*
-			** Clear Mouse Delta
-			*/
-			mouse.RealDeltaX = 0;
-			mouse.RealDeltaY = 0;
-			mouse.DeltaX = 0.0f;
-			mouse.DeltaY = 0.0f;
 		}
 	}
 
@@ -347,75 +289,6 @@ LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		return 0;
-
-	case WM_KEYDOWN:
-		keyboard[wParam] = 1;
-		if (wParam == KEY_ESCAPE) {
-			NowLockingOrNot = FALSE;
-			HideCursorOrNot = FALSE;
-		}
-		break;
-
-	case WM_KEYUP:
-		keyboard[wParam] = 0;
-		break;
-
-	case WM_LBUTTONDOWN:
-		mouse.LButtonState = PRESSED;
-		if(WantToLockOrNot == TRUE){
-			NowLockingOrNot = TRUE;
-			HideCursorOrNot = TRUE;
-		}
-		break;
-
-	case WM_LBUTTONUP:
-		mouse.LButtonState = UNPRESSED;
-		break;
-
-	case WM_RBUTTONDOWN:
-		mouse.RButtonState = PRESSED;
-		break;
-
-	case WM_RBUTTONUP:
-		mouse.RButtonState = UNPRESSED;
-		break;
-
-	case WM_MOUSEMOVE:
-		///* If First Time Running, MouseXY = MouseInitXY, DeltaXY = 0 */
-		//if (FirstTimeRunning == TRUE) {
-		//	break;
-		//}
-
-		///* Refresh MouseLastX and MouseLastY */
-		//if (NowLockingOrNot == TRUE) {
-		//	MouseLastX = MouseInitX;
-		//	MouseLastY = MouseInitY;
-		//}
-		//else {
-		//	MouseLastX = MouseX;
-		//	MouseLastY = MouseY;
-		//}
-		//
-		///* Get Mouse Position */
-		//MouseX = LOWORD(lParam);
-		//MouseY = HIWORD(lParam);
-
-		///* Calculate Delta */
-		//mouse.RealX = MouseX;
-		//mouse.RealY = MouseY;
-		//mouse.RealDeltaX = MouseX - MouseLastX;
-		//mouse.RealDeltaY = MouseY - MouseLastY;
-		//mouse.DeltaX = 1.0f * mouse.RealDeltaX / mouse.DeltaRatio;
-		//mouse.DeltaY = 1.0f * mouse.RealDeltaY / mouse.DeltaRatio;
-
-		///* Lock Action */
-		//if (NowLockingOrNot == TRUE) {
-		//	SetCursorPos(WindowLeftMargin + MouseInitX, WindowTopMargin + MouseInitY);
-		//}
-		//else {
-		//	SetCursorPos(WindowLeftMargin + mouse.RealX, WindowTopMargin + mouse.RealY);
-		//}
-		//break;
 
 	default:
 		return DefWindowProc(hWnd, msg, wParam, lParam);
