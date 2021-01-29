@@ -1,15 +1,26 @@
-﻿#include <iostream>
-#include <Windows.h>
+﻿#include <Windows.h>
 #include <d3d9.h>
 #include <time.h>
 #include "resource.h"
 #include "../Main.h"
+#include "../CrossBufferLayer/CrossBuffer.h"
 
-using namespace std;
+
+struct Window {
+
+	int ScreenX;
+	int ScreenY;
+	int Unit;
+
+	int Width;
+	int Height;
+	int LeftMargin;
+	int TopMargin;
+};
 
 /* Window Class Properties */
-#define WindowClassName L"Jackie Engine Class"
-#define WindowTitle     L"Jackie Engine     <WASDQE To Move>     <IJKLUO To Look>     <R To On Or Off The Rotation>"
+#define WindowClassName L"CrossBuffer Class"
+#define WindowTitle     L"CrossBuffer"
 
 /* DirectX Objects */
 IDirect3D9* pDirect3D;
@@ -18,17 +29,14 @@ IDirect3DSurface9* pBackBuffer;
 D3DLOCKED_RECT rect;
 
 /* Window Properties */
-int WindowLeftMargin;
-int WindowTopMargin;
-int WindowWidth;
-int WindowHeight;
+Window win;
 
 /* Flags */
 BOOL FirstTimeRunning = TRUE;
 
 /* Timer */
-clock_t lastTime = NULL;
-clock_t thisTime = NULL;
+clock_t lastTime = clock();
+clock_t thisTime = clock();
 
 
 /*
@@ -41,17 +49,30 @@ void GetScreenResolution(int* resultX, int* resultY) {
 	hdcScreen = CreateDC(L"DISPLAY", NULL, NULL, NULL);
 
 	// Get X and Y
-	*resultX = GetDeviceCaps(hdcScreen, HORZRES);    // pixel
-	*resultY = GetDeviceCaps(hdcScreen, VERTRES);    // pixel
+	*resultX = GetDeviceCaps(hdcScreen, HORZRES);
+	*resultY = GetDeviceCaps(hdcScreen, VERTRES);
 
 	// Release HDC
-	if (NULL != hdcScreen)
-	{
-		DeleteDC(hdcScreen);
-	}
+	if (NULL != hdcScreen) DeleteDC(hdcScreen);
 }
 
-LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
+/*
+** Message Loop
+*/
+
+LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+	switch (msg)
+	{
+	case WM_DESTROY:
+		PostQuitMessage(0);
+		return 0;
+
+	default:
+		return DefWindowProc(hWnd, msg, wParam, lParam);
+	}
+}
 
 
 /*
@@ -70,19 +91,18 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR, INT)
 	/*
 	** Calculate Window Width And Height
 	*/
-	int ScreenX, ScreenY;
-	GetScreenResolution(&ScreenX, &ScreenY);
+	GetScreenResolution(&(win.ScreenX), &(win.ScreenY));
 
-	int Unit = ScreenY / 30;
+	win.Unit = win.ScreenY / 30;
 
-	WindowHeight     = 26 * Unit;
-	WindowWidth      = WindowHeight / 9 * 16;
+	win.Height     = 26 * win.Unit;
+	win.Width      = win.Height / 9 * 16;
 
 	//WindowWidth = 1104;
 	//WindowHeight = 624;
 
-	WindowLeftMargin = (ScreenX - WindowWidth) / 2;
-	WindowTopMargin = (ScreenY - WindowHeight) / 2;
+	win.LeftMargin = (win.ScreenX - win.Width)  / 2;
+	win.TopMargin  = (win.ScreenY - win.Height) / 2;
 	
 
 	/*
@@ -115,10 +135,10 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR, INT)
 	** Create Window
 	*/
 	RECT wr;
-	wr.left   = WindowLeftMargin;
-	wr.right  = WindowWidth  + wr.left;
-	wr.top    = WindowTopMargin;
-	wr.bottom = WindowHeight + wr.top;
+	wr.left   = win.LeftMargin;
+	wr.right  = win.Width  + wr.left;
+	wr.top    = win.TopMargin;
+	wr.bottom = win.Height + wr.top;
 
 	AdjustWindowRect(&wr, WS_OVERLAPPEDWINDOW, FALSE);
 	HWND hWnd = CreateWindowW(
@@ -215,7 +235,7 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR, INT)
 				fb.Pitch = rect.Pitch;
 
 				/* Call the Setup() in Main.h */
-				Setup(fb, WindowWidth, WindowHeight, 0);
+				Setup(fb, win.Width, win.Height, 0);
 				FirstTimeRunning = FALSE;
 			}
 
@@ -226,7 +246,7 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR, INT)
 				fb.pBits = rect.pBits;
 				fb.Pitch = rect.Pitch;
 
-				Update(fb, WindowWidth, WindowHeight, thisTime - lastTime);
+				Update(fb, win.Width, win.Height, thisTime - lastTime);
 			}
 
 
@@ -278,19 +298,4 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR, INT)
 }
 
 
-/*
-** Message Loop
-*/
 
-LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
-{
-	switch (msg)
-	{
-	case WM_DESTROY:
-		PostQuitMessage(0);
-		return 0;
-
-	default:
-		return DefWindowProc(hWnd, msg, wParam, lParam);
-	}
-}
