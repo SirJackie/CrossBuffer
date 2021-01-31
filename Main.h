@@ -1,6 +1,10 @@
 #include "CrossBufferLayer/CrossBuffer.h"
 
 
+/* Define Window Class Properties */
+#define WindowClassName L"CrossBuffer Class"
+#define WindowTitle     L"CrossBuffer <Click Mouse Buttons or A and D to swap the color>"
+
 /*
 ** Setup Callback Function
 */

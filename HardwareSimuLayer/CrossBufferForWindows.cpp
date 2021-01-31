@@ -23,10 +23,6 @@ struct Window {
 	int TopMargin;
 };
 
-/* Define Window Class Properties */
-#define WindowClassName L"CrossBuffer Class"
-#define WindowTitle     L"CrossBuffer"
-
 /* Define Variables*/
 IDirect3D9* pDirect3D;
 IDirect3DDevice9* pDevice;
