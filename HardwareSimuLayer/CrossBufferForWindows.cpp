@@ -1,6 +1,8 @@
 ﻿#include <Windows.h>
 #include <d3d9.h>
 #include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "resource.h"
 #include "../Main.h"
 #include "../CrossBufferLayer/CrossBuffer.h"
@@ -35,6 +37,7 @@ clock_t lastTime = clock();
 clock_t thisTime = clock();
 Window win;
 FrameBuffer fb;
+Keyboard kb = (Keyboard)malloc(256 * sizeof(int));
 
 /* Define Functions */
 void GetScreenResolution(int* resultX, int* resultY) {
@@ -61,6 +64,39 @@ LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		PostQuitMessage(0);
 		return 0;
 
+	case WM_KEYDOWN:
+		kb[wParam] = 1;
+		if (wParam == KEY_ESCAPE) {
+			PostQuitMessage(0);
+		}
+		return DefWindowProc(hWnd, msg, wParam, lParam);
+
+	case WM_KEYUP:
+		kb[wParam] = 0;
+		return DefWindowProc(hWnd, msg, wParam, lParam);
+
+	case WM_LBUTTONDOWN:
+		kb[KEY_MOUSE_LBTN] = 1;
+		return DefWindowProc(hWnd, msg, wParam, lParam);
+
+	case WM_LBUTTONUP:
+		kb[KEY_MOUSE_LBTN] = 0;
+		return DefWindowProc(hWnd, msg, wParam, lParam);
+
+	case WM_RBUTTONDOWN:
+		kb[KEY_MOUSE_RBTN] = 1;
+		return DefWindowProc(hWnd, msg, wParam, lParam);
+
+	case WM_RBUTTONUP:
+		kb[KEY_MOUSE_RBTN] = 0;
+		return DefWindowProc(hWnd, msg, wParam, lParam);
+
+	case WM_MOUSEMOVE:
+		/* Get Mouse Position */
+		LOWORD(lParam);  // MouseX
+		HIWORD(lParam);  // MouseY
+		return DefWindowProc(hWnd, msg, wParam, lParam);
+
 	default:
 		return DefWindowProc(hWnd, msg, wParam, lParam);
 	}
@@ -76,6 +112,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	_In_ LPWSTR    lpCmdLine,
 	_In_ int       nCmdShow)
 {
+	// Zeromemory the kb
+	memset(kb, 0, 256 * sizeof(int));
+
 	// Get Present Time
 	thisTime = clock();
 	lastTime = thisTime;
@@ -169,7 +208,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			if (FirstTimeRunning) {
 				fb.pBits = rect.pBits;
 				fb.Pitch = rect.Pitch;
-				Setup(fb, 0);                      /* Call the Setup() in Main.h */
+				Setup(fb, kb, 0);                      /* Call the Setup() in Main.h */
 				FirstTimeRunning = FALSE;
 			}
 
@@ -177,7 +216,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			else {
 				fb.pBits = rect.pBits;
 				fb.Pitch = rect.Pitch;
-				Update(fb, thisTime - lastTime);   /* Call the Update() in Main.h */
+				Update(fb, kb, thisTime - lastTime);   /* Call the Update() in Main.h */
 			}
 
 			// Release Back Buffer and Swap it to Front
