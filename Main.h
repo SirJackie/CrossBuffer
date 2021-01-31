@@ -1,7 +1,4 @@
-#include "CrossBufferLayer/FrameBufferSupport.h"
-#include "CrossBufferLayer/FontSupport.h"
-#include "CrossBufferLayer/IOSupport.h"
-#include "CrossBufferLayer/FPSCalculator.h"
+#include "CrossBufferLayer/CrossBuffer.h"
 
 
 /*

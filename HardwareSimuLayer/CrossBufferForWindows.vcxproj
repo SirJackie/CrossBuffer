@@ -153,6 +153,7 @@
     <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\CrossBufferLayer\CrossBuffer.h" />
     <ClInclude Include="..\CrossBufferLayer\FontSupport.h" />
     <ClInclude Include="..\CrossBufferLayer\FPSCalculator.h" />
     <ClInclude Include="..\CrossBufferLayer\FrameBufferSupport.h" />
