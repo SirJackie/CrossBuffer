@@ -74,7 +74,7 @@ public:
     int   CurY;
 
     // Special Methods
-    FrameBuffer();
+    FrameBuffer(int Width_, int Height_, int Pitch_, Color* pBits_);
 
     // Methods
 	void DrawChar          (int x, int y, Color color, char ch);

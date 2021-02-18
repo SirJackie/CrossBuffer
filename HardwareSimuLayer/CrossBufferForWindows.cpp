@@ -32,7 +32,6 @@ BOOL FirstTimeRunning = TRUE;
 clock_t lastTime = clock();
 clock_t thisTime = clock();
 Window win;
-FrameBuffer fb;
 Keyboard kb = (Keyboard)malloc(256 * sizeof(int));
 
 /* Define Functions */
@@ -197,21 +196,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			pBackBuffer->LockRect(&rect, NULL, NULL);
 
 			// Init FrameBuffer Object
-			fb.Width = win.Width;
-			fb.Height = win.Height;
+			FrameBuffer fb(win.Width, win.Height, rect.Pitch, (Color*)rect.pBits);
 
 			// If it is the First Time Running
 			if (FirstTimeRunning) {
-				fb.pBits = rect.pBits;
-				fb.Pitch = rect.Pitch;
 				Setup(fb, kb, 0);                      /* Call the Setup() in Main.h */
 				FirstTimeRunning = FALSE;
 			}
 
 			// If it is not the First Time Running
 			else {
-				fb.pBits = rect.pBits;
-				fb.Pitch = rect.Pitch;
 				Update(fb, kb, thisTime - lastTime);   /* Call the Update() in Main.h */
 			}
 
