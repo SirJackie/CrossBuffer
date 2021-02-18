@@ -16,23 +16,27 @@ void FrameBuffer::DrawChar(int x, int y, Color color, char ch)
 	}
 }
 
-void FrameBuffer::DrawString(int x, int y, Color color, const char* stringPointer)
+void FrameBuffer::DrawString(Color color, const char* stringPointer)
 {
-	int originX = x;
 	for (; *stringPointer != 0x00; stringPointer++) {
+
+		// Before Drawing
 		if (*stringPointer == '\n') {
-			y += 16;
-			x = originX;
+			CurY += TEXT_HEIGHT;
+			CurX =  INIT_CUR_X;
 			continue;
 		}
-		this->DrawChar(x, y, color, *stringPointer);  // Draw This Char
-		x += 8;
 
-		if (x >= this->Width) {
-			y += 16;
-			x = originX;
+		// Drawing
+		this->DrawChar(CurX, CurY, color, *stringPointer);  // Draw This Char
+		CurX += TEXT_WIDTH;
+
+		// After
+		if (CurX >= this->Width) {
+			CurY += TEXT_HEIGHT;
+			CurX =  INIT_CUR_X;
 		}
-		if (y >= this->Height) {
+		if (CurY >= this->Height) {
 			return;
 		}
 
@@ -40,8 +44,17 @@ void FrameBuffer::DrawString(int x, int y, Color color, const char* stringPointe
 	return;
 }
 
+void FrameBuffer::Draw(const char* stringPointer) {
+	this->DrawString(CreateColor(0, 0, 0),       stringPointer);
+	this->DrawString(CreateColor(255, 255, 255), stringPointer);
+}
 
-void FrameBuffer::DrawShadowString(int x, int y, const char* stringPointer) {
-	this->DrawString(x,     y,     CreateColor(0, 0, 0),       stringPointer);
-	this->DrawString(x + 1, y + 1, CreateColor(255, 255, 255), stringPointer);
+FrameBuffer::FrameBuffer() {
+	Width = 0;
+	Height = 0;
+	pBits = nullptr;
+	Pitch = 0;
+
+	CurX = INIT_CUR_X;
+	CurY = INIT_CUR_Y;
 }

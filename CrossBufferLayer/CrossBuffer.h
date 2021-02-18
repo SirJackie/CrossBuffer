@@ -54,6 +54,11 @@
 ** to draw it on the screen.
 */
 
+#define INIT_CUR_X   10
+#define INIT_CUR_Y   10
+#define TEXT_WIDTH   8
+#define TEXT_HEIGHT  16
+
 class FrameBuffer
 {
 public:
@@ -68,10 +73,13 @@ public:
     int   CurX;
     int   CurY;
 
+    // Special Methods
+    FrameBuffer();
+
     // Methods
 	void DrawChar          (int x, int y, Color color, char ch);
-    void DrawString        (int x, int y, Color color, const char* stringPointer);
-    void DrawShadowString  (int x, int y, const char* stringPointer);
+    void DrawString        (Color color, const char* stringPointer);
+    void Draw              (const char* stringPointer);
 
 };
 
