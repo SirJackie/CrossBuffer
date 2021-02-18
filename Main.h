@@ -48,5 +48,5 @@ void Update(FrameBuffer fb, Keyboard kb, int deltaTime) {
 	}
 
 	//CalcFPS(fb, deltaTime);
-	fb.Draw("Hello World!");
+	fb.Draw("Hello World!\n");
 }
