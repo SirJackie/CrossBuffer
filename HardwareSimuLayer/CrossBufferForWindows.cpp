@@ -196,7 +196,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			pBackBuffer->LockRect(&rect, NULL, NULL);
 
 			// Init FrameBuffer Object
-			FrameBuffer fb(win.Width, win.Height, rect.Pitch, (Color*)rect.pBits);
+			FrameBuffer fb(512, 512, rect.Pitch, (Color*)rect.pBits);
 
 			// If it is the First Time Running
 			if (FirstTimeRunning) {

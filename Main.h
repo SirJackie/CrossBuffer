@@ -10,8 +10,6 @@
 */
 
 void Setup(FrameBuffer &fb, Keyboard kb, int deltaTime) {
-
-	FrameBuffer fb2(1024, 768);
 	/* Fill Red On The Screen */
 	for (int y = 0; y < fb.Height; y++) {
 		for (int x = 0; x < fb.Width; x++) {

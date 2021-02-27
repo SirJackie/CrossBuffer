@@ -95,7 +95,6 @@ FrameBuffer::FrameBuffer(int Width_, int Height_, int Pitch_, Color* pBits_) {
 
 	externalBits = true;
 
-
 	InitCurX = CurX = INIT_CUR_X < (Width  - TEXT_WIDTH ) ? INIT_CUR_X : 0;
 	InitCurY = CurY = INIT_CUR_Y < (Height - TEXT_HEIGHT) ? INIT_CUR_Y : 0;
 }
@@ -106,6 +105,11 @@ FrameBuffer::FrameBuffer(int Width_, int Height_) {
 
 	Pitch = Width_;
 	pBits = new Color[Pitch * Height];
+	for (int y = 0; y < Height - 1; y++) {
+		for (int x = 0; x < Width - 1; x++) {
+			SetPixel((*this), x, y, CreateColor(0, 0, 0));
+		}
+	}
 
 	externalBits = false;
 
@@ -115,11 +119,11 @@ FrameBuffer::FrameBuffer(int Width_, int Height_) {
 
 FrameBuffer::~FrameBuffer() {
 	if (externalBits == true) {
-		system("mshta javascript:alert('externalBits==true.');window.close();");
+		//system("mshta javascript:alert('externalBits==true.');window.close();");
 		return;
 	}
 	// (externalBits == false)
 		delete[] pBits;
-		system("mshta javascript:alert('externalBits==false.');window.close();");
+		//system("mshta javascript:alert('externalBits==false.');window.close();");
 	// .
 }
