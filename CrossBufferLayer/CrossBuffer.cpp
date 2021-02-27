@@ -86,10 +86,11 @@ void FrameBuffer::Draw(const char* stringPointer) {
 //}
 
 FrameBuffer::FrameBuffer(int Width_, int Height_, int Pitch_, Color* pBits_) {
-	Width = 0;
-	Height = 0;
-	pBits = nullptr;
-	Pitch = 0;
+	Width = Width_;
+	Height = Height_;
+	
+	Pitch = Pitch_;
+	pBits = pBits_;
 
 	CurX = INIT_CUR_X;
 	CurY = INIT_CUR_Y;

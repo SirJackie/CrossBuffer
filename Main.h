@@ -9,7 +9,7 @@
 ** Setup Callback Function
 */
 
-void Setup(FrameBuffer fb, Keyboard kb, int deltaTime) {
+void Setup(FrameBuffer &fb, Keyboard kb, int deltaTime) {
 	/* Fill Red On The Screen */
 	for (int y = 0; y < fb.Height; y++) {
 		for (int x = 0; x < fb.Width; x++) {
@@ -27,7 +27,7 @@ void Setup(FrameBuffer fb, Keyboard kb, int deltaTime) {
 
 Color c = CreateColor(0, 144, 255);
 
-void Update(FrameBuffer fb, Keyboard kb, int deltaTime) {
+void Update(FrameBuffer &fb, Keyboard kb, int deltaTime) {
 	/* Fill Yellow On The Screen */
 	for (int y = 0; y < fb.Height; y++) {
 		for (int x = 0; x < fb.Width; x++) {
