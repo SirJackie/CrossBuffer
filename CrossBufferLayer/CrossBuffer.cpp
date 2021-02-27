@@ -97,11 +97,6 @@ FrameBuffer::FrameBuffer(int Width_, int Height_, int Pitch_, Color* pBits_) {
 
 	InitCurX = CurX = INIT_CUR_X < (Width  - TEXT_WIDTH ) ? INIT_CUR_X : 0;
 	InitCurY = CurY = INIT_CUR_Y < (Height - TEXT_HEIGHT) ? INIT_CUR_Y : 0;
-
-	InitCurX = 0;
-	InitCurY = 0;
-	CurX = 0;
-	CurY = 0;
 }
 
 FrameBuffer::FrameBuffer(int Width_, int Height_) {
