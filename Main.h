@@ -18,7 +18,10 @@ void Setup(FrameBuffer &fb, Keyboard kb, int deltaTime) {
 	}
 }
 
-
+int StartX = 0;
+int StartY = 0;
+int EndX = 1024;
+int EndY = 500;
 
 
 /*
@@ -29,7 +32,7 @@ Color c = CreateColor(0, 144, 255);
 
 void Update(FrameBuffer &fb, Keyboard kb, int deltaTime) {
 
-	FrameBuffer fb2(1024, 500);
+	FrameBuffer fb2(EndX - StartX, EndY - StartY);
 
 	/* Fill Color On The Screen */
 	for (int y = 0; y < fb2.Height; y++) {
@@ -38,16 +41,30 @@ void Update(FrameBuffer &fb, Keyboard kb, int deltaTime) {
 		}
 	}
 
-	if (kb[KEY_MOUSE_LBTN] || kb['A']) {
-		SetColorR(c, (Color)(  (int)GetColorR(c) + 1  ));
-		SetColorG(c, (Color)(  (int)GetColorG(c) + 1  ));
-		SetColorB(c, (Color)(  (int)GetColorB(c) + 1  ));
+	if (kb['A']) {
+		StartX -= 3;
+	}
+	if (kb['D']) {
+		StartX += 3;
+	}
+	if (kb['W']) {
+		StartY -= 3;
+	}
+	if (kb['S']) {
+		StartY += 3;
 	}
 
-	if (kb[KEY_MOUSE_RBTN] || kb['D']) {
-		SetColorR(c, (Color)(  (int)GetColorR(c) - 1)  );
-		SetColorG(c, (Color)(  (int)GetColorG(c) - 1)  );
-		SetColorB(c, (Color)(  (int)GetColorB(c) - 1)  );
+	if (kb['J']) {
+		EndX -= 3;
+	}
+	if (kb['L']) {
+		EndX += 3;
+	}
+	if (kb['I']) {
+		EndY -= 3;
+	}
+	if (kb['K']) {
+		EndY += 3;
 	}
 
 	//CalcFPS(fb, deltaTime);
@@ -56,5 +73,5 @@ void Update(FrameBuffer &fb, Keyboard kb, int deltaTime) {
 	fb2.Draw("raw WHATEVER I");
 	fb2.Draw(" want!\n");
 	fb2.Draw("Third Line!\n");
-	fb.Draw(fb2, 0, 0);  // ok
+	fb.Draw(fb2, StartX, StartY);  // ok
 }
