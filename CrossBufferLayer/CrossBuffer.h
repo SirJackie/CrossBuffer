@@ -79,6 +79,7 @@ public:
     // Special Methods
     FrameBuffer(int Width_, int Height_, int Pitch_, Color* pBits_);
     FrameBuffer(int Width_, int Height_);
+    FrameBuffer();
     ~FrameBuffer();
 
     // Methods

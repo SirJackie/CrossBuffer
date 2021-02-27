@@ -73,15 +73,18 @@ void FrameBuffer::Draw(const char* stringPointer) {
 	this->DrawString(White, stringPointer);
 }
 
-//FrameBuffer::FrameBuffer() {
-//	Width = 0;
-//	Height = 0;
-//	pBits = nullptr;
-//	Pitch = 0;
-//
-//	CurX = INIT_CUR_X;
-//	CurY = INIT_CUR_Y;
-//}
+FrameBuffer::FrameBuffer() {
+	Width  = 0;
+	Height = 0;
+
+	Pitch  = 0;
+	pBits  = nullptr;
+
+	externalBits = false;
+
+	InitCurX = CurX = INIT_CUR_X < (Width  - TEXT_WIDTH ) ? INIT_CUR_X : 0;
+	InitCurY = CurY = INIT_CUR_Y < (Height - TEXT_HEIGHT) ? INIT_CUR_Y : 0;
+}
 
 FrameBuffer::FrameBuffer(int Width_, int Height_, int Pitch_, Color* pBits_) {
 	Width = Width_;
