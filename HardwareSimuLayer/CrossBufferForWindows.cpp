@@ -187,7 +187,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			// Clear & Get Back Buffer
 			pDevice->Clear(
 				0, NULL, D3DCLEAR_TARGET,
-				D3DCOLOR_XRGB(0, 0, 0), 0.0f, 0
+				D3DCOLOR_XRGB(0, 255, 0), 0.0f, 0
 			);
 			pBackBuffer = NULL;
 			pDevice->GetBackBuffer(
@@ -196,7 +196,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			pBackBuffer->LockRect(&rect, NULL, NULL);
 
 			// Init FrameBuffer Object
-			FrameBuffer fb(512, 32, rect.Pitch, (Color*)rect.pBits);
+			FrameBuffer fb(512, 42, rect.Pitch, (Color*)rect.pBits);
 
 			// If it is the First Time Running
 			if (FirstTimeRunning) {

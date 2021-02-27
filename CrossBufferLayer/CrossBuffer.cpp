@@ -19,33 +19,14 @@ void FrameBuffer::DrawChar(int x, int y, Color color, char ch)
 
 void FrameBuffer::DrawString(Color color, const char* stringPointer)
 {
-	for (; *stringPointer != 0x00; stringPointer++) {
-
-		// Before Drawing
-		if (*stringPointer == '\n') {
-			CurY += TEXT_HEIGHT;
-			CurX =  InitCurX;
-			continue;
-		}
-
-		// Drawing
-		this->DrawChar(CurX, CurY, color, *stringPointer);  // Draw This Char
-		CurX += TEXT_WIDTH;
-
-		// After
-		if (CurX >= this->Width) {
-			CurY += TEXT_HEIGHT;
-			CurX =  InitCurY;
-		}
-		if (CurY >= this->Height) {
-			return;
-		}
-
-	}
-	return;
+	;
 }
 
 void FrameBuffer::Draw(const char* stringPointer) {
+	if (CurY + TEXT_HEIGHT > Height) {
+		return;
+	}
+
 	Color White = CreateColor(255, 255, 255);
 	Color Black = CreateColor(  0,   0,   0);
 
