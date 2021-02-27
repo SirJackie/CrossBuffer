@@ -24,7 +24,7 @@ void FrameBuffer::DrawString(Color color, const char* stringPointer)
 		// Before Drawing
 		if (*stringPointer == '\n') {
 			CurY += TEXT_HEIGHT;
-			CurX =  INIT_CUR_X;
+			CurX =  InitCurX;
 			continue;
 		}
 
@@ -35,7 +35,7 @@ void FrameBuffer::DrawString(Color color, const char* stringPointer)
 		// After
 		if (CurX >= this->Width) {
 			CurY += TEXT_HEIGHT;
-			CurX =  INIT_CUR_X;
+			CurX =  InitCurY;
 		}
 		if (CurY >= this->Height) {
 			return;
@@ -54,7 +54,7 @@ void FrameBuffer::Draw(const char* stringPointer) {
 		// Before Drawing
 		if (*stringPointer == '\n') {
 			CurY += TEXT_HEIGHT;
-			CurX = INIT_CUR_X;
+			CurX = InitCurX;
 			continue;
 		}
 
@@ -66,7 +66,7 @@ void FrameBuffer::Draw(const char* stringPointer) {
 		// After
 		if (CurX >= this->Width) {
 			CurY += TEXT_HEIGHT;
-			CurX = INIT_CUR_X;
+			CurX = InitCurX;
 		}
 		if (CurY >= this->Height) {
 			return;
@@ -97,6 +97,11 @@ FrameBuffer::FrameBuffer(int Width_, int Height_, int Pitch_, Color* pBits_) {
 
 	InitCurX = CurX = INIT_CUR_X < (Width  - TEXT_WIDTH ) ? INIT_CUR_X : 0;
 	InitCurY = CurY = INIT_CUR_Y < (Height - TEXT_HEIGHT) ? INIT_CUR_Y : 0;
+
+	InitCurX = 0;
+	InitCurY = 0;
+	CurX = 0;
+	CurY = 0;
 }
 
 FrameBuffer::FrameBuffer(int Width_, int Height_) {
