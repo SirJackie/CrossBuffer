@@ -32,9 +32,9 @@ void Update(FrameBuffer &fb, Keyboard kb, int deltaTime) {
 	FrameBuffer fb2(1024, 500);
 
 	/* Fill Color On The Screen */
-	for (int y = 0; y < fb.Height; y++) {
-		for (int x = 0; x < fb.Width; x++) {
-			SetPixel(fb2, x, y, c);
+	for (int y = 0; y < fb2.Height; y++) {
+		for (int x = 0; x < fb2.Width; x++) {
+			SetPixel(fb2, x, y, CreateColor(x, y, 128));
 		}
 	}
 
@@ -52,11 +52,9 @@ void Update(FrameBuffer &fb, Keyboard kb, int deltaTime) {
 
 	//CalcFPS(fb, deltaTime);
 	fb2.Draw("Hello World!\n");
-	fb2.Draw("I can d");
-	fb2.Draw("raw WHATEVER I");
-	fb2.Draw(" want!\n");
-	fb2.Draw("Third Line!\n");
-
-	fb2.Draw(fb, 0, 0);  // not ok
+	//fb2.Draw("I can d");
+	//fb2.Draw("raw WHATEVER I");
+	//fb2.Draw(" want!\n");
+	//fb2.Draw("Third Line!\n");
 	fb.Draw(fb2, 0, 0);  // ok
 }

@@ -128,17 +128,28 @@ FrameBuffer::~FrameBuffer() {
 	// }
 }
 
-void FrameBuffer::Draw(const FrameBuffer& fb, int x, int y) {
+void FrameBuffer::Draw(const FrameBuffer& fb, int PositionX, int PositionY) {
 
-	if (x + fb.Width > this->Width) {
-		system("mshta javascript:alert('notok.');window.close();");
+	if (PositionX + fb.Width > this->Width) {
+		//system("mshta javascript:alert('notok.');window.close();");
 		return;
 	}
 
-	if (y + fb.Height > this->Height) {
-		system("mshta javascript:alert('notok.');window.close();");
+	if (PositionY + fb.Height > this->Height) {
+		//system("mshta javascript:alert('notok.');window.close();");
 		return;
 	}
 
-	system("mshta javascript:alert('ok.');window.close();");
+	//system("mshta javascript:alert('ok.');window.close();");
+
+	for (int y = 0; y < fb.Height; y++) {
+		for (int x = 0; x < fb.Width; x++) {
+			SetPixel(
+				(*this),
+				x + PositionX,
+				y + PositionY,
+				GetPixel(fb, x, y)
+			);
+		}
+	}
 }

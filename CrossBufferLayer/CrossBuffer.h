@@ -86,7 +86,7 @@ public:
 	void DrawChar          (int x, int y, Color color, char ch);
     void DrawString        (Color color, const char* stringPointer);
     void Draw              (const char* stringPointer);
-    void Draw              (const FrameBuffer& fb, int x, int y);
+    void Draw              (const FrameBuffer& fb, int PositionX, int PositionY);
 
 };
 
