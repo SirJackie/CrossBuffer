@@ -23,7 +23,12 @@ void FrameBuffer::DrawString(Color color, const char* stringPointer)
 }
 
 void FrameBuffer::Draw(const char* stringPointer) {
+
 	if (CurY + TEXT_HEIGHT > Height) {
+		return;
+	}
+
+	if (CurX + TEXT_WIDTH > Width) {
 		return;
 	}
 
