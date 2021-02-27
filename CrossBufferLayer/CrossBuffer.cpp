@@ -115,7 +115,7 @@ FrameBuffer::FrameBuffer(int Width_, int Height_) {
 
 FrameBuffer::~FrameBuffer() {
 	if (externalBits == true) {
-		//system("mshta javascript:alert('externalBits==true.');window.close();");
+		system("mshta javascript:alert('externalBits==true.');window.close();");
 		return;
 	}
 	// (externalBits == false)
