@@ -10,7 +10,6 @@
 */
 
 void Setup(FrameBuffer &fb, Keyboard kb, int deltaTime) {
-	FrameBuffer fb2;
 	/* Fill Red On The Screen */
 	for (int y = 0; y < fb.Height; y++) {
 		for (int x = 0; x < fb.Width; x++) {
@@ -29,10 +28,13 @@ void Setup(FrameBuffer &fb, Keyboard kb, int deltaTime) {
 Color c = CreateColor(0, 144, 255);
 
 void Update(FrameBuffer &fb, Keyboard kb, int deltaTime) {
-	/* Fill Yellow On The Screen */
+
+	FrameBuffer fb2(1024, 500);
+
+	/* Fill Color On The Screen */
 	for (int y = 0; y < fb.Height; y++) {
 		for (int x = 0; x < fb.Width; x++) {
-			SetPixel(fb, x, y, c);
+			SetPixel(fb2, x, y, c);
 		}
 	}
 
@@ -49,9 +51,12 @@ void Update(FrameBuffer &fb, Keyboard kb, int deltaTime) {
 	}
 
 	//CalcFPS(fb, deltaTime);
-	fb.Draw("Hello World!\n");
-	fb.Draw("I can d");
-	fb.Draw("raw WHATEVER I");
-	fb.Draw(" want!\n");
-	fb.Draw("Third Line!\n");
+	fb2.Draw("Hello World!\n");
+	fb2.Draw("I can d");
+	fb2.Draw("raw WHATEVER I");
+	fb2.Draw(" want!\n");
+	fb2.Draw("Third Line!\n");
+
+	fb2.Draw(fb, 0, 0);  // not ok
+	fb.Draw(fb2, 0, 0);  // ok
 }

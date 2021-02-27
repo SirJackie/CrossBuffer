@@ -127,3 +127,18 @@ FrameBuffer::~FrameBuffer() {
 		//system("mshta javascript:alert('externalBits==false.');window.close();");
 	// }
 }
+
+void FrameBuffer::Draw(const FrameBuffer& fb, int x, int y) {
+
+	if (x + fb.Width > this->Width) {
+		system("mshta javascript:alert('notok.');window.close();");
+		return;
+	}
+
+	if (y + fb.Height > this->Height) {
+		system("mshta javascript:alert('notok.');window.close();");
+		return;
+	}
+
+	system("mshta javascript:alert('ok.');window.close();");
+}
