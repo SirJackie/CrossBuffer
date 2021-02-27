@@ -68,6 +68,7 @@ public:
     int   Height;
     int   Pitch;
     void* pBits;
+    bool  externalBits;
 
     // Text Cursor
     int   CurX;
@@ -75,6 +76,7 @@ public:
 
     // Special Methods
     FrameBuffer(int Width_, int Height_, int Pitch_, Color* pBits_);
+    ~FrameBuffer();
 
     // Methods
 	void DrawChar          (int x, int y, Color color, char ch);

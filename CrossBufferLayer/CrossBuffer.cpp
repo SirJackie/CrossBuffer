@@ -1,4 +1,5 @@
 #include "CrossBuffer.h"
+#include <stdlib.h>
 
 void FrameBuffer::DrawChar(int x, int y, Color color, char ch)
 {
@@ -92,6 +93,15 @@ FrameBuffer::FrameBuffer(int Width_, int Height_, int Pitch_, Color* pBits_) {
 	Pitch = Pitch_;
 	pBits = pBits_;
 
+	externalBits = true;
+
 	CurX = INIT_CUR_X;
 	CurY = INIT_CUR_Y;
+}
+
+FrameBuffer::~FrameBuffer() {
+	if (externalBits == true) {
+		system("mshta javascript:alert('externalBits==true.');window.close();");
+		return;
+	}
 }
