@@ -45,7 +45,7 @@ void FrameBuffer::Draw(const char* stringPointer) {
 		CurX += TEXT_WIDTH;
 
 		// After
-		if (CurX >= this->Width) {
+		if (CurX + TEXT_WIDTH >= this->Width) {
 			CurY += TEXT_HEIGHT;
 			CurX = InitCurX;
 		}
