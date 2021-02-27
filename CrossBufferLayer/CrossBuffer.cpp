@@ -19,11 +19,6 @@ void FrameBuffer::DrawChar(int x, int y, Color color, char ch)
 
 void FrameBuffer::DrawString(Color color, const char* stringPointer)
 {
-	;
-}
-
-void FrameBuffer::Draw(const char* stringPointer) {
-
 	if (CurY + TEXT_HEIGHT > Height) {
 		return;
 	}
@@ -31,9 +26,6 @@ void FrameBuffer::Draw(const char* stringPointer) {
 	if (CurX + TEXT_WIDTH > Width) {
 		return;
 	}
-
-	Color White = CreateColor(255, 255, 255);
-	Color Black = CreateColor(  0,   0,   0);
 
 	for (; *stringPointer != 0x00; stringPointer++) {
 
@@ -45,8 +37,7 @@ void FrameBuffer::Draw(const char* stringPointer) {
 		}
 
 		// Drawing
-		this->DrawChar(CurX + 1, CurY + 1, Black, *stringPointer);  // Draw Black Shadow
-		this->DrawChar(CurX,     CurY,     White, *stringPointer);  // Draw White Cover
+		this->DrawChar(CurX, CurY, color, *stringPointer);  // Draw White Cover
 		CurX += TEXT_WIDTH;
 
 		// After
@@ -60,6 +51,26 @@ void FrameBuffer::Draw(const char* stringPointer) {
 
 	}
 	return;
+}
+
+void FrameBuffer::Draw(const char* stringPointer) {
+
+	Color White = CreateColor(255, 255, 255);
+	Color Black = CreateColor(0, 0, 0);
+
+	// Save Origin CurX and CurY
+	int originCurX = CurX;
+	int originCurY = CurY;
+
+	// Draw Black Shadow
+	CurX += 1;
+	CurY += 1;
+	this->DrawString(Black, stringPointer);
+
+	// Draw White Cover
+	CurX = originCurX;
+	CurY = originCurY;
+	this->DrawString(White, stringPointer);
 }
 
 //FrameBuffer::FrameBuffer() {
@@ -104,12 +115,12 @@ FrameBuffer::FrameBuffer(int Width_, int Height_) {
 }
 
 FrameBuffer::~FrameBuffer() {
-	if (externalBits == true) {
+	if (externalBits == true)  {
 		//system("mshta javascript:alert('externalBits==true.');window.close();");
 		return;
 	}
-	// (externalBits == false)
+	// (externalBits == false) {
 		delete[] pBits;
 		//system("mshta javascript:alert('externalBits==false.');window.close();");
-	// .
+	// }
 }
