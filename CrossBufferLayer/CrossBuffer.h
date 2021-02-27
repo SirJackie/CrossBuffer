@@ -73,9 +73,12 @@ public:
     // Text Cursor
     int   CurX;
     int   CurY;
+    int   InitCurX;
+    int   InitCurY;
 
     // Special Methods
     FrameBuffer(int Width_, int Height_, int Pitch_, Color* pBits_);
+    FrameBuffer(int Width_, int Height_);
     ~FrameBuffer();
 
     // Methods

@@ -89,19 +89,37 @@ void FrameBuffer::Draw(const char* stringPointer) {
 FrameBuffer::FrameBuffer(int Width_, int Height_, int Pitch_, Color* pBits_) {
 	Width = Width_;
 	Height = Height_;
-	
+
 	Pitch = Pitch_;
 	pBits = pBits_;
 
 	externalBits = true;
 
-	CurX = INIT_CUR_X;
-	CurY = INIT_CUR_Y;
+
+	InitCurX = CurX = INIT_CUR_X < (Width  - TEXT_WIDTH ) ? INIT_CUR_X : 0;
+	InitCurY = CurY = INIT_CUR_Y < (Height - TEXT_HEIGHT) ? INIT_CUR_Y : 0;
+}
+
+FrameBuffer::FrameBuffer(int Width_, int Height_) {
+	Width = Width_;
+	Height = Height_;
+
+	Pitch = Width_;
+	pBits = new Color[Pitch * Height];
+
+	externalBits = false;
+
+	InitCurX = CurX = INIT_CUR_X < (Width  - TEXT_WIDTH ) ? INIT_CUR_X : 0;
+	InitCurY = CurY = INIT_CUR_Y < (Height - TEXT_HEIGHT) ? INIT_CUR_Y : 0;
 }
 
 FrameBuffer::~FrameBuffer() {
 	if (externalBits == true) {
-		system("mshta javascript:alert('externalBits==true.');window.close();");
+		//system("mshta javascript:alert('externalBits==true.');window.close();");
 		return;
 	}
+	// (externalBits == false)
+		delete[] pBits;
+		system("mshta javascript:alert('externalBits==false.');window.close();");
+	// .
 }
