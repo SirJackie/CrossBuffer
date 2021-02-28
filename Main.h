@@ -8,6 +8,8 @@
 
 int StartX = 10;
 int StartY = 10;
+//int EndX   = 9;
+//int EndY   = 9;
 int EndX;
 int EndY;
 

@@ -35,7 +35,7 @@ FrameBuffer::FrameBuffer(int Width_, int Height_) {
 	Width   = Width_  > 1 ? Width_  : 1;
 	Height  = Height_ > 1 ? Height_ : 1;
 
-	Pitch   = Width_;
+	Pitch   = Width;
 	pBits   = new Color[Pitch * Height];
 
 	externalBits = false;
