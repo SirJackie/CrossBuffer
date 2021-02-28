@@ -150,6 +150,9 @@ void FrameBuffer::Draw(const FrameBuffer& fb, int PositionX, int PositionY) {
 				y + PositionY,
 				GetPixel(fb, x, y)
 			);
+			/*int tmpx;
+			int tmpy;
+			SetPixel((*this), x + PositionX, y + PositionY, CreateColor(255, 255, 255));*/
 		}
 	}
 }

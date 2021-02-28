@@ -3,13 +3,23 @@
 
 /* Define Window Class Properties */
 #define WindowClassName L"CrossBuffer Class"
-#define WindowTitle     L"CrossBuffer <Click Mouse Buttons or A and D to swap the color>"
+#define WindowTitle     L"CrossBuffer <Press WASD and IJKL to move the position>"
+
+
+int StartX = 10;
+int StartY = 10;
+int EndX;
+int EndY;
+
 
 /*
 ** Setup Callback Function
 */
 
 void Setup(FrameBuffer &fb, Keyboard kb, int deltaTime) {
+	EndX = fb.Width - 200;
+	EndY = fb.Height - 200;
+
 	/* Fill Red On The Screen */
 	for (int y = 0; y < fb.Height; y++) {
 		for (int x = 0; x < fb.Width; x++) {
@@ -17,11 +27,6 @@ void Setup(FrameBuffer &fb, Keyboard kb, int deltaTime) {
 		}
 	}
 }
-
-int StartX = 0;
-int StartY = 0;
-int EndX = 1024;
-int EndY = 500;
 
 
 /*

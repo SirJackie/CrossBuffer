@@ -39,10 +39,10 @@
 #define SetColorG(color, g)                  ( (color) = ( (color)  & 0xFFFF00FF) | ( ((g) & 0xff) <<  8) )
 #define SetColorB(color, b)                  ( (color) = ( (color)  & 0xFFFFFF00) | ( ((b) & 0xff)      ) )
 
-#define GetPixel(fb, x, y)                   (((Color*)fb.pBits)[x + (fb.Pitch) * y])
-#define SetPixel(fb, x, y, color)            (((Color*)fb.pBits)[x + (fb.Pitch) * y] = color)
-#define GetPixelLB(fb, height, x, y)         (((Color*)fb.pBits)[x + (fb.Pitch) * (height-y)])
-#define SetPixelLB(fb, height, x, y, color)  (((Color*)fb.pBits)[x + (fb.Pitch) * (height-y)] = color)
+#define GetPixel(fb, x, y)                   (((Color*)fb.pBits)[(x) + (fb.Pitch) * (y)])
+#define SetPixel(fb, x, y, color)            (((Color*)fb.pBits)[(x) + (fb.Pitch) * (y)] = color)
+#define GetPixelLB(fb, height, x, y)         (((Color*)fb.pBits)[(x) + (fb.Pitch) * (height-(y))])
+#define SetPixelLB(fb, height, x, y, color)  (((Color*)fb.pBits)[(x) + (fb.Pitch) * (height-(y))] = color)
 
 
 /*
