@@ -1,6 +1,69 @@
 #include "CrossBuffer.h"
 #include <stdlib.h>
 
+
+FrameBuffer::FrameBuffer() {
+	Width  = 1;
+	Height = 1;
+
+	Pitch  = Width;
+	pBits  = new Color[Pitch * Height];
+
+	externalBits = false;
+
+	// Clear the buffer
+	SetPixel((*this), 0, 0, CreateColor(0, 0, 0));
+
+	InitCurX = CurX = INIT_CUR_X < (Width  - TEXT_WIDTH ) ? INIT_CUR_X : 0;
+	InitCurY = CurY = INIT_CUR_Y < (Height - TEXT_HEIGHT) ? INIT_CUR_Y : 0;
+}
+
+FrameBuffer::FrameBuffer(int Width_, int Height_, int Pitch_, Color* pBits_) {
+	Width   = Width_  > 1 ? Width_  : 1;
+	Height  = Height_ > 1 ? Height_ : 1;
+
+	Pitch   = Pitch_;
+	pBits   = pBits_;
+
+	externalBits = true;
+
+	InitCurX = CurX = INIT_CUR_X < (Width  - TEXT_WIDTH ) ? INIT_CUR_X : 0;
+	InitCurY = CurY = INIT_CUR_Y < (Height - TEXT_HEIGHT) ? INIT_CUR_Y : 0;
+}
+
+FrameBuffer::FrameBuffer(int Width_, int Height_) {
+	Width   = Width_  > 1 ? Width_  : 1;
+	Height  = Height_ > 1 ? Height_ : 1;
+
+	Pitch   = Width_;
+	pBits   = new Color[Pitch * Height];
+
+	externalBits = false;
+
+	// Clear the buffer
+	for (int y = 0; y < Height - 1; y++) {
+		for (int x = 0; x < Width - 1; x++) {
+			SetPixel((*this), x, y, CreateColor(0, 0, 0));
+		}
+	}
+
+	InitCurX = CurX = INIT_CUR_X < (Width  - TEXT_WIDTH ) ? INIT_CUR_X : 0;
+	InitCurY = CurY = INIT_CUR_Y < (Height - TEXT_HEIGHT) ? INIT_CUR_Y : 0;
+}
+
+FrameBuffer::~FrameBuffer() {
+	if (externalBits == true)  {
+		// externalBits == true
+		// system("mshta javascript:alert('externalBits==true.');window.close();");
+		;  // Do Nothing
+	}
+	else {
+		// externalBits == false
+		// system("mshta javascript:alert('externalBits==false.');window.close();");
+		delete[] pBits;  // Release the buffer
+	}
+}
+
 void FrameBuffer::DrawChar(int x, int y, Color color, char ch)
 {
 	int* bitmapPointer;
@@ -97,61 +160,6 @@ void FrameBuffer::Draw(const char* stringPointer) {
 
 	}
 	return;
-}
-
-FrameBuffer::FrameBuffer() {
-	Width  = 0;
-	Height = 0;
-
-	Pitch  = 0;
-	pBits  = nullptr;
-
-	externalBits = false;
-
-	InitCurX = CurX = INIT_CUR_X < (Width  - TEXT_WIDTH ) ? INIT_CUR_X : 0;
-	InitCurY = CurY = INIT_CUR_Y < (Height - TEXT_HEIGHT) ? INIT_CUR_Y : 0;
-}
-
-FrameBuffer::FrameBuffer(int Width_, int Height_, int Pitch_, Color* pBits_) {
-	Width = Width_;
-	Height = Height_;
-
-	Pitch = Pitch_;
-	pBits = pBits_;
-
-	externalBits = true;
-
-	InitCurX = CurX = INIT_CUR_X < (Width  - TEXT_WIDTH ) ? INIT_CUR_X : 0;
-	InitCurY = CurY = INIT_CUR_Y < (Height - TEXT_HEIGHT) ? INIT_CUR_Y : 0;
-}
-
-FrameBuffer::FrameBuffer(int Width_, int Height_) {
-	Width = Width_;
-	Height = Height_;
-
-	Pitch = Width_;
-	pBits = new Color[Pitch * Height];
-	for (int y = 0; y < Height - 1; y++) {
-		for (int x = 0; x < Width - 1; x++) {
-			SetPixel((*this), x, y, CreateColor(0, 0, 0));
-		}
-	}
-
-	externalBits = false;
-
-	InitCurX = CurX = INIT_CUR_X < (Width  - TEXT_WIDTH ) ? INIT_CUR_X : 0;
-	InitCurY = CurY = INIT_CUR_Y < (Height - TEXT_HEIGHT) ? INIT_CUR_Y : 0;
-}
-
-FrameBuffer::~FrameBuffer() {
-	if (externalBits == true)  {
-		//system("mshta javascript:alert('externalBits==true.');window.close();");
-		return;
-	}
-	// (externalBits == false) {
-		delete[] pBits;
-		//system("mshta javascript:alert('externalBits==false.');window.close();");
-	// }
 }
 
 void FrameBuffer::Draw(const FrameBuffer& fb, int PositionX, int PositionY) {
