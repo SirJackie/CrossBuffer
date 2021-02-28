@@ -58,19 +58,45 @@ void FrameBuffer::Draw(const char* stringPointer) {
 	Color White = CreateColor(255, 255, 255);
 	Color Black = CreateColor(0, 0, 0);
 
-	// Save Origin CurX and CurY
-	int originCurX = CurX;
-	int originCurY = CurY;
+	if (CurY + TEXT_HEIGHT > Height) {
+		return;
+	}
 
-	// Draw Black Shadow
-	CurX += 1;
-	CurY += 1;
-	this->DrawString(Black, stringPointer);
+	if (CurX + TEXT_WIDTH > Width) {
+		return;
+	}
 
-	// Draw White Cover
-	CurX = originCurX;
-	CurY = originCurY;
-	this->DrawString(White, stringPointer);
+	for (; *stringPointer != 0x00; stringPointer++) {
+
+		// Before Drawing
+		if (*stringPointer == '\n') {
+			CurY += TEXT_HEIGHT;
+			CurX = InitCurX;
+			continue;
+		}
+
+		// Drawing
+		int CurXMinusOne = CurX - 1;
+		int CurYMinusOne = CurY - 1;
+		int TmpX = CurXMinusOne > 0 ? CurXMinusOne : 0;
+		int TmpY = CurYMinusOne > 0 ? CurYMinusOne : 0;
+
+		this->DrawChar(CurX, CurY, Black, *stringPointer);  // Draw Black Shadow
+		this->DrawChar(TmpX, TmpY, White, *stringPointer);  // Draw White Cover
+
+		CurX += TEXT_WIDTH;
+
+		// After
+		if (CurX + TEXT_WIDTH >= this->Width) {
+			CurY += TEXT_HEIGHT;
+			CurX = InitCurX;
+		}
+		if (CurY >= this->Height) {
+			return;
+		}
+
+	}
+	return;
 }
 
 FrameBuffer::FrameBuffer() {
