@@ -37,15 +37,6 @@ Color c = CreateColor(0, 144, 255);
 
 void Update(FrameBuffer &fb, Keyboard kb, int deltaTime) {
 
-	FrameBuffer fb2(EndX - StartX, EndY - StartY);
-
-	/* Fill Color On The Screen */
-	for (int y = 0; y < fb2.Height; y++) {
-		for (int x = 0; x < fb2.Width; x++) {
-			SetPixel(fb2, x, y, CreateColor(x/6, y/6, 128));
-		}
-	}
-
 	if (kb['A']) {
 		StartX -= 3;
 	}
@@ -70,6 +61,15 @@ void Update(FrameBuffer &fb, Keyboard kb, int deltaTime) {
 	}
 	if (kb['K']) {
 		EndY += 3;
+	}
+
+	FrameBuffer fb2(EndX - StartX, EndY - StartY);
+
+	/* Fill Color On The Screen */
+	for (int y = 0; y < fb2.Height; y++) {
+		for (int x = 0; x < fb2.Width; x++) {
+			SetPixel(fb2, x, y, CreateColor(x/6, y/6, 128));
+		}
 	}
 
 	//CalcFPS(fb, deltaTime);
