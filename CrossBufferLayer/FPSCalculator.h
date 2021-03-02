@@ -4,7 +4,7 @@
 #include "FrameBuffer.h"
 #include "IOSupport.h"
 #include <string>
-using std::string;
+using namespace std;
 
 /*
 ** FPS Calculating

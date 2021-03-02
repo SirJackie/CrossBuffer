@@ -1,4 +1,5 @@
 #include "FPSCalculator.h"
+using namespace std;
 
 FPSCalculator::FPSCalculator() {
 	FPS             = 0.0f;
@@ -19,18 +20,18 @@ void FPSCalculator::Count(int deltaTime) {
 }
 
 void FPSCalculator::ShowOnScreen(FrameBuffer& fb) {
-	//string str;
-	//str += "FPS: ";
-	////str += FPS;
-	//str += "; Width: ";
-	//str += fb.Width;
-	//str += "; Height: ";
-	//str += fb.Height;
-	//str += "; Pitch: ";
-	//str += fb.Pitch;
-	//str += "; pBits: ";
-	//str += (int)fb.pBits;
-	//str += "\n";
+	string str = "";
+	str += "FPS: ";
+	str += FPS;
+	str += "; Width: ";
+	str += fb.Width;
+	str += "; Height: ";
+	str += fb.Height;
+	str += "; Pitch: ";
+	str += fb.Pitch;
+	str += "; pBits: ";
+	str += (int)fb.pBits;
+	str += "\n";
 
-	//fb.Draw(str.c_str());
+	fb.Draw(str.c_str());
 }
