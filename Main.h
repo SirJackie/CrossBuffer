@@ -37,6 +37,8 @@ void Setup(FrameBuffer &fb, Keyboard kb, int deltaTime) {
 
 Color c = CreateColor(0, 144, 255);
 
+FPSCalculator fps;
+
 void Update(FrameBuffer &fb, Keyboard kb, int deltaTime) {
 
 	if (kb['A']) {
@@ -87,5 +89,7 @@ void Update(FrameBuffer &fb, Keyboard kb, int deltaTime) {
 	//fb2.DrawString(CreateColor(255, 255, 255), " want!\n");
 	//fb2.DrawString(CreateColor(255, 255, 255), "Third Line!\n");
 
+	fps.Count(deltaTime);
+	fps.ShowOnScreen(fb);
 	fb.Draw(fb2, StartX, StartY);  // ok
 }

@@ -64,6 +64,9 @@
     <ClInclude Include="..\CrossBufferLayer\IOSupport.h">
       <Filter>头文件\CrossBufferLayer</Filter>
     </ClInclude>
+    <ClInclude Include="..\CrossBufferLayer\FPSCalculator.h">
+      <Filter>头文件\CrossBufferLayer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CrossBufferForWindows.cpp">
@@ -79,6 +82,9 @@
       <Filter>源文件\CrossBufferLayer</Filter>
     </ClCompile>
     <ClCompile Include="..\CrossBufferLayer\CrossBuffer.cpp">
+      <Filter>源文件\CrossBufferLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CrossBufferLayer\FPSCalculator.cpp">
       <Filter>源文件\CrossBufferLayer</Filter>
     </ClCompile>
   </ItemGroup>
