@@ -75,10 +75,10 @@ void Update(FrameBuffer &fb, Keyboard kb, int deltaTime) {
 	}
 
 	//CalcFPS(fb, deltaTime);
-	fb2.DrawString(CreateColor(255, 255, 255), "Hello World!\n");
-	fb2.DrawString(CreateColor(255, 255, 255), "I can d");
-	fb2.DrawString(CreateColor(255, 255, 255), "raw WHATEVER I");
-	fb2.DrawString(CreateColor(255, 255, 255), " want!\n");
-	fb2.DrawString(CreateColor(255, 255, 255), "Third Line!\n");
+	fb2.Draw("Hello World!\n");
+	fb2.Draw("I can d");
+	fb2.Draw("raw WHATEVER I");
+	fb2.Draw(" want!\n");
+	fb2.Draw("Third Line!\n");
 	fb.Draw(fb2, StartX, StartY);  // ok
 }
