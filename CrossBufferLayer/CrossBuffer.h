@@ -80,6 +80,8 @@ public:
     FrameBuffer(int Width_, int Height_, int Pitch_, Color* pBits_);
     FrameBuffer(int Width_, int Height_);
     FrameBuffer();
+    FrameBuffer(const FrameBuffer& fb);
+    FrameBuffer& operator=(const FrameBuffer& fb);
     ~FrameBuffer();
 
     // Methods

@@ -8,10 +8,10 @@
 
 int StartX = 10;
 int StartY = 10;
-//int EndX   = 25;
-//int EndY   = 200;
-int EndX;
-int EndY;
+int EndX   = 25;
+int EndY   = 200;
+//int EndX;
+//int EndY;
 
 
 /*
@@ -19,8 +19,8 @@ int EndY;
 */
 
 void Setup(FrameBuffer &fb, Keyboard kb, int deltaTime) {
-	EndX = fb.Width - 200;
-	EndY = fb.Height - 200;
+	//EndX = fb.Width - 200;
+	//EndY = fb.Height - 200;
 
 	/* Fill Red On The Screen */
 	for (int y = 0; y < fb.Height; y++) {
