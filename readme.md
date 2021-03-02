@@ -70,33 +70,47 @@ Update()在显存建立后除了第一帧以外的每一帧被调用，参数：
 
 要获得一个FrameBuffer对象，你可以使用Start()或者Update()函数提供的fb参数，也可以创建一个：
 
+```c++
 FrameBuffer fb2(Width, Height);
+```
 
 你可以使用这行代码修改任意点的像素：
 
+```c++
 SetPixel(fb, x, y, color);
+```
 
 创建color颜色对象可以这样做：
 
+```c++
 Color color = CreateColor(0, 144, 255);
+```
 
 你也可以合在一起做：
 
+```c++
 SetPixel(fb2, x, y, CreateColor(0, 144, 255));
+```
 
 要获取宽和高，你可以这样做：
 
+```c++
 int width  = fb.Width;
 
 int height = fb.Height;
+```
 
 同时，你可以使用fb.Draw()来显示字符串：
 
+```c++
 fb.Draw("Hello World!\n");
+```
 
 还可以使用fb.Draw()来将另外一个fb绘制到这个fb上：
 
+```c++
 fb.Draw(fb2, StartX, StartY);
+```
 
 ## Keyboard对象
 
