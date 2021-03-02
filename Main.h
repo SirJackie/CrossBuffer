@@ -8,10 +8,10 @@
 
 int StartX = 10;
 int StartY = 10;
-int EndX   = 25;
-int EndY   = 200;
-//int EndX;
-//int EndY;
+//int EndX   = 25;
+//int EndY   = 200;
+int EndX;
+int EndY;
 
 
 /*
@@ -19,8 +19,8 @@ int EndY   = 200;
 */
 
 void Setup(FrameBuffer &fb, Keyboard kb, int deltaTime) {
-	//EndX = fb.Width - 200;
-	//EndY = fb.Height - 200;
+	EndX = fb.Width - 200;
+	EndY = fb.Height - 200;
 
 	/* Fill Red On The Screen */
 	for (int y = 0; y < fb.Height; y++) {
@@ -74,11 +74,11 @@ void Update(FrameBuffer &fb, Keyboard kb, int deltaTime) {
 		}
 	}
 
-	////CalcFPS(fb, deltaTime);
+	//CalcFPS(fb, deltaTime);
 	fb2.Draw("Hello World!\n");
-	//fb2.Draw("I can d");
-	//fb2.Draw("raw WHATEVER I");
-	//fb2.Draw(" want!\n");
-	//fb2.Draw("Third Line!\n");
+	fb2.Draw("I can d");
+	fb2.Draw("raw WHATEVER I");
+	fb2.Draw(" want!\n");
+	fb2.Draw("Third Line!\n");
 	fb.Draw(fb2, StartX, StartY);  // ok
 }

@@ -226,31 +226,37 @@ void FrameBuffer::Draw(const char* stringPointer) {
 	return;
 }
 
+int clamp(int min, int x, int max) {
+	int result = x;
+
+	if (min > result) {
+		result = min;
+	}
+
+	if (max < result) {
+		result = max;
+	}
+
+	return result;
+}
+
 void FrameBuffer::Draw(const FrameBuffer& fb, int PositionX, int PositionY) {
 
-	if (PositionX + fb.Width > this->Width) {
-		//system("mshta javascript:alert('notok.');window.close();");
-		return;
-	}
+	int StartX = clamp(0, PositionX,              this->Width  );
+	int StartY = clamp(0, PositionY,              this->Height );
+	int EndX   = clamp(0, PositionX + fb.Width,   this->Width  );
+	int EndY   = clamp(0, PositionY + fb.Height,  this->Height );
 
-	if (PositionY + fb.Height > this->Height) {
-		//system("mshta javascript:alert('notok.');window.close();");
-		return;
-	}
-
-	//system("mshta javascript:alert('ok.');window.close();");
-
-	for (int y = 0; y < fb.Height; y++) {
-		for (int x = 0; x < fb.Width; x++) {
+	for (int y = StartY; y < EndY; y++) {
+		for (int x = StartX; x < EndX; x++) {
 			SetPixel(
-				(*this),
-				x + PositionX,
-				y + PositionY,
-				GetPixel(fb, x, y)
+				(*this), x, y, 
+				GetPixel(
+					fb,
+					x - PositionX,
+					y - PositionY
+				)
 			);
-			/*int tmpx;
-			int tmpy;
-			SetPixel((*this), x + PositionX, y + PositionY, CreateColor(255, 255, 255));*/
 		}
 	}
 }
