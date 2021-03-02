@@ -6,10 +6,8 @@
 #define WindowTitle     L"CrossBuffer <Press WASD and IJKL to move the position>"
 
 
-int StartX = 10;
-int StartY = 10;
-//int EndX   = 15;
-//int EndY   = 218;
+int StartX = 8;
+int StartY = 30;
 int EndX;
 int EndY;
 
@@ -76,7 +74,6 @@ void Update(FrameBuffer &fb, Keyboard kb, int deltaTime) {
 		}
 	}
 
-	//CalcFPS(fb, deltaTime);
 	fb2.Draw("Hello World!\n");
 	fb2.Draw("I can d");
 	fb2.Draw("raw WHATEVER I");
