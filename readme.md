@@ -16,7 +16,7 @@ Gitee仓库:https://gitee.com/SirJackie/good-software-backup，clone下来后有
 
 ![dx1](./ReadmeDocumentImages/dx1.png)
 
-2.安装路径**<u>务必</u>**安装到到C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)，**<u>否则你就需要重新配置Visual Studio项目</u>**（重新配置的教程见ProjectConfigurations.md）。默认地址就是这个。
+2.安装路径**<u>务必</u>**安装到到C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)，**<u>否则你就需要重新配置Visual Studio项目</u>**（重新配置的教程见[ProjectConfigurations.md](./ProjectConfigurations.md)）。默认地址就是这个。
 
 ![dx2](./ReadmeDocumentImages/dx2.png)
 
