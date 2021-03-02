@@ -21,6 +21,13 @@
 
 
 /*
+** Define Mathematics Functions
+*/
+
+int clamp(int min, int x, int max);
+
+
+/*
 ** Define Color and Functions for Color
 ** -------------------------------------------------------------------
 ** You have to notice that in order to increase the speed of program,
@@ -77,12 +84,13 @@ public:
     int   InitCurY;
 
     // Special Methods
+    FrameBuffer();
     FrameBuffer(int Width_, int Height_, int Pitch_, Color* pBits_);
     FrameBuffer(int Width_, int Height_);
-    FrameBuffer();
     FrameBuffer(const FrameBuffer& fb);
     FrameBuffer& operator=(const FrameBuffer& fb);
     ~FrameBuffer();
+   
 
     // Methods
 	void DrawChar          (int x, int y, Color color, char ch);

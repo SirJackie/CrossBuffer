@@ -2,6 +2,20 @@
 #include <stdlib.h>
 
 
+int clamp(int min, int x, int max) {
+	int result = x;
+
+	if (min > result) {
+		result = min;
+	}
+
+	if (max < result) {
+		result = max;
+	}
+
+	return result;
+}
+
 FrameBuffer::FrameBuffer() {
 	Width  = 1;
 	Height = 1;
@@ -257,20 +271,6 @@ void FrameBuffer::Draw(const char* stringPointer) {
 
 	}
 	return;
-}
-
-int clamp(int min, int x, int max) {
-	int result = x;
-
-	if (min > result) {
-		result = min;
-	}
-
-	if (max < result) {
-		result = max;
-	}
-
-	return result;
 }
 
 void FrameBuffer::Draw(const FrameBuffer& fb, int PositionX, int PositionY) {
