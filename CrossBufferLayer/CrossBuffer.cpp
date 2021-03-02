@@ -119,6 +119,7 @@ FrameBuffer::~FrameBuffer() {
 	else {
 		// externalBits == false
 		// system("mshta javascript:alert('externalBits==false.');window.close();");
+		void* ptrShowerPointerHahaha = (void*)pBits;
 		delete[] pBits;  // Release the buffer
 	}
 }
