@@ -142,39 +142,47 @@ void FrameBuffer::DrawChar(int x, int y, Color color, char ch)
 
 void FrameBuffer::DrawString(Color color, const char* stringPointer)
 {
-	//if (CurY + TEXT_HEIGHT > Height) {
-	//	return;
-	//}
+	if (CurX + TEXT_WIDTH > Width) {
+		CurY += TEXT_HEIGHT;
+		CurX = InitCurX;
+	}
 
-	//if (CurX + TEXT_WIDTH > Width) {
-	//	return;
-	//}
+	if (CurY + TEXT_HEIGHT > Height) {
+		return;
+	}
 
-	//for (; *stringPointer != 0x00; stringPointer++) {
+	for (; *stringPointer != 0x00; stringPointer++) {
 
-	//	// Before Drawing
-	//	if (*stringPointer == '\n') {
-	//		CurY += TEXT_HEIGHT;
-	//		CurX = InitCurX;
-	//		continue;
-	//	}
+		// Before Drawing
+		if (*stringPointer == '\n') {
+			CurY += TEXT_HEIGHT;
+			CurX = InitCurX;
+			continue;
+		}
 
-	//	// Drawing
-	//	this->DrawChar(CurX, CurY, color, *stringPointer);  // Draw White Cover
-	//	CurX += TEXT_WIDTH;
+		// Drawing
+		int CurXMinusOne = CurX - 1;
+		int CurYMinusOne = CurY - 1;
+		int TmpX = CurXMinusOne > 0 ? CurXMinusOne : 0;
+		int TmpY = CurYMinusOne > 0 ? CurYMinusOne : 0;
 
-	//	// After
+		this->DrawChar(CurX, CurY, color, *stringPointer);
 
-	//	if (CurY + TEXT_HEIGHT > Height) {
-	//		return;
-	//	}
+		CurX += TEXT_WIDTH;
 
-	//	if (CurX + TEXT_WIDTH > Width) {
-	//		CurY += TEXT_HEIGHT;
-	//		CurX = InitCurX;
-	//	}
-	//}
-	//return;
+		// After
+
+		if (CurX + TEXT_WIDTH > Width) {
+			CurY += TEXT_HEIGHT;
+			CurX = InitCurX;
+		}
+
+		if (CurY + TEXT_HEIGHT > Height) {
+			return;
+		}
+
+	}
+	return;
 }
 
 void FrameBuffer::Draw(const char* stringPointer) {
