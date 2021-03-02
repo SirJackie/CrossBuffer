@@ -47,8 +47,8 @@ FrameBuffer::FrameBuffer(int Width_, int Height_) {
 		}
 	}
 
-	InitCurX = CurX = INIT_CUR_X < (Width  - TEXT_WIDTH * 10) ? INIT_CUR_X : 0;
-	InitCurY = CurY = INIT_CUR_Y < (Height - TEXT_HEIGHT * 5) ? INIT_CUR_Y : 0;
+	InitCurX = CurX = INIT_CUR_X < (Width  - TEXT_WIDTH  * 40) ? INIT_CUR_X : 0;
+	InitCurY = CurY = INIT_CUR_Y < (Height - TEXT_HEIGHT * 10) ? INIT_CUR_Y : 0;
 }
 
 FrameBuffer::FrameBuffer(const FrameBuffer& fb) {
@@ -72,8 +72,8 @@ FrameBuffer::FrameBuffer(const FrameBuffer& fb) {
 		}
 	}
 
-	InitCurX = CurX = INIT_CUR_X < (Width  - TEXT_WIDTH * 10) ? INIT_CUR_X : 0;
-	InitCurY = CurY = INIT_CUR_Y < (Height - TEXT_HEIGHT * 5) ? INIT_CUR_Y : 0;
+	InitCurX = CurX = INIT_CUR_X < (Width  - TEXT_WIDTH  * 40) ? INIT_CUR_X : 0;
+	InitCurY = CurY = INIT_CUR_Y < (Height - TEXT_HEIGHT * 10) ? INIT_CUR_Y : 0;
 }
 
 FrameBuffer& FrameBuffer::operator=(const FrameBuffer& fb) {
@@ -104,8 +104,8 @@ FrameBuffer& FrameBuffer::operator=(const FrameBuffer& fb) {
 		}
 	}
 
-	InitCurX = CurX = INIT_CUR_X < (Width  - TEXT_WIDTH * 10) ? INIT_CUR_X : 0;
-	InitCurY = CurY = INIT_CUR_Y < (Height - TEXT_HEIGHT * 5) ? INIT_CUR_Y : 0;
+	InitCurX = CurX = INIT_CUR_X < (Width  - TEXT_WIDTH  * 40) ? INIT_CUR_X : 0;
+	InitCurY = CurY = INIT_CUR_Y < (Height - TEXT_HEIGHT * 10) ? INIT_CUR_Y : 0;
 
 	return (*this);
 }
