@@ -142,31 +142,39 @@ void FrameBuffer::DrawChar(int x, int y, Color color, char ch)
 
 void FrameBuffer::DrawString(Color color, const char* stringPointer)
 {
-	for (; *stringPointer != 0x00; stringPointer++) {
+	//if (CurY + TEXT_HEIGHT > Height) {
+	//	return;
+	//}
 
-		// Before Drawing
-		if (*stringPointer == '\n') {
-			CurY += TEXT_HEIGHT;
-			CurX = InitCurX;
-			continue;
-		}
+	//if (CurX + TEXT_WIDTH > Width) {
+	//	return;
+	//}
 
-		// Drawing
-		this->DrawChar(CurX, CurY, color, *stringPointer);  // Draw White Cover
-		CurX += TEXT_WIDTH;
+	//for (; *stringPointer != 0x00; stringPointer++) {
 
-		// After
+	//	// Before Drawing
+	//	if (*stringPointer == '\n') {
+	//		CurY += TEXT_HEIGHT;
+	//		CurX = InitCurX;
+	//		continue;
+	//	}
 
-		if (CurY + TEXT_HEIGHT > Height) {
-			return;
-		}
+	//	// Drawing
+	//	this->DrawChar(CurX, CurY, color, *stringPointer);  // Draw White Cover
+	//	CurX += TEXT_WIDTH;
 
-		if (CurX + TEXT_WIDTH > Width) {
-			CurY += TEXT_HEIGHT;
-			CurX = InitCurX;
-		}
-	}
-	return;
+	//	// After
+
+	//	if (CurY + TEXT_HEIGHT > Height) {
+	//		return;
+	//	}
+
+	//	if (CurX + TEXT_WIDTH > Width) {
+	//		CurY += TEXT_HEIGHT;
+	//		CurX = InitCurX;
+	//	}
+	//}
+	//return;
 }
 
 void FrameBuffer::Draw(const char* stringPointer) {
@@ -174,11 +182,12 @@ void FrameBuffer::Draw(const char* stringPointer) {
 	Color White = CreateColor(255, 255, 255);
 	Color Black = CreateColor(0, 0, 0);
 
-	if (CurY + TEXT_HEIGHT > Height) {
-		return;
+	if (CurX + TEXT_WIDTH > Width) {
+		CurY += TEXT_HEIGHT;
+		CurX = InitCurX;
 	}
 
-	if (CurX + TEXT_WIDTH > Width) {
+	if (CurY + TEXT_HEIGHT > Height) {
 		return;
 	}
 
@@ -203,11 +212,13 @@ void FrameBuffer::Draw(const char* stringPointer) {
 		CurX += TEXT_WIDTH;
 
 		// After
-		if (CurX + TEXT_WIDTH >= this->Width) {
+
+		if (CurX + TEXT_WIDTH > Width) {
 			CurY += TEXT_HEIGHT;
 			CurX = InitCurX;
 		}
-		if (CurY >= this->Height) {
+
+		if (CurY + TEXT_HEIGHT > Height) {
 			return;
 		}
 

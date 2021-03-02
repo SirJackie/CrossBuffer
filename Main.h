@@ -75,7 +75,7 @@ void Update(FrameBuffer &fb, Keyboard kb, int deltaTime) {
 	}
 
 	////CalcFPS(fb, deltaTime);
-	//fb2.Draw("Hello World!\n");
+	fb2.Draw("Hello World!\n");
 	//fb2.Draw("I can d");
 	//fb2.Draw("raw WHATEVER I");
 	//fb2.Draw(" want!\n");
