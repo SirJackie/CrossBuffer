@@ -142,47 +142,49 @@ void FrameBuffer::DrawChar(int x, int y, Color color, char ch)
 
 void FrameBuffer::DrawString(Color color, const char* stringPointer)
 {
-	if (CurX + TEXT_WIDTH > Width) {
-		CurY += TEXT_HEIGHT;
-		CurX = InitCurX;
-	}
+	//
+	//if (CurX + TEXT_WIDTH > Width) {
+	//	CurY += TEXT_HEIGHT;
+	//	CurX = InitCurX;
+	//	return;
+	//}
 
-	if (CurY + TEXT_HEIGHT > Height) {
-		return;
-	}
+	//if (CurY + TEXT_HEIGHT > Height) {
+	//	return;
+	//}
 
-	for (; *stringPointer != 0x00; stringPointer++) {
+	//for (; *stringPointer != 0x00; stringPointer++) {
 
-		// Before Drawing
-		if (*stringPointer == '\n') {
-			CurY += TEXT_HEIGHT;
-			CurX = InitCurX;
-			continue;
-		}
+	//	// Before Drawing
+	//	if (*stringPointer == '\n') {
+	//		CurY += TEXT_HEIGHT;
+	//		CurX = InitCurX;
+	//		continue;
+	//	}
 
-		// Drawing
-		int CurXMinusOne = CurX - 1;
-		int CurYMinusOne = CurY - 1;
-		int TmpX = CurXMinusOne > 0 ? CurXMinusOne : 0;
-		int TmpY = CurYMinusOne > 0 ? CurYMinusOne : 0;
+	//	// Drawing
+	//	int CurXMinusOne = CurX - 1;
+	//	int CurYMinusOne = CurY - 1;
+	//	int TmpX = CurXMinusOne > 0 ? CurXMinusOne : 0;
+	//	int TmpY = CurYMinusOne > 0 ? CurYMinusOne : 0;
 
-		this->DrawChar(CurX, CurY, color, *stringPointer);
+	//	this->DrawChar(CurX, CurY, color, *stringPointer);
 
-		CurX += TEXT_WIDTH;
+	//	CurX += TEXT_WIDTH;
 
-		// After
+	//	// After
 
-		if (CurX + TEXT_WIDTH > Width) {
-			CurY += TEXT_HEIGHT;
-			CurX = InitCurX;
-		}
+	//	if (CurX + TEXT_WIDTH > Width) {
+	//		CurY += TEXT_HEIGHT;
+	//		CurX = InitCurX;
+	//	}
 
-		if (CurY + TEXT_HEIGHT > Height) {
-			return;
-		}
+	//	if (CurY + TEXT_HEIGHT > Height) {
+	//		return;
+	//	}
 
-	}
-	return;
+	//}
+	//return;
 }
 
 void FrameBuffer::Draw(const char* stringPointer) {
@@ -190,14 +192,29 @@ void FrameBuffer::Draw(const char* stringPointer) {
 	Color White = CreateColor(255, 255, 255);
 	Color Black = CreateColor(0, 0, 0);
 
-	if (CurX + TEXT_WIDTH > Width) {
-		CurY += TEXT_HEIGHT;
-		CurX = InitCurX;
-	}
+	int a = CurX + TEXT_WIDTH;
 
-	if (CurY + TEXT_HEIGHT > Height) {
-		return;
+
+	// Use a while loop to prevent the
+	// Interlocking "CurX + TEXT_WIDTH > Width"
+	// ----------------------------------------
+	// This will only happens on the first time
+	// checking, so the checking below will not
+	// do this.
+	bool XAvailableFlag = false;
+	while (XAvailableFlag == false) {
+		if (CurX + TEXT_WIDTH > Width) {
+			CurY += TEXT_HEIGHT;
+			CurX = InitCurX;
+		}
+		else{
+			XAvailableFlag = true;
+		}
+		if (CurY + TEXT_HEIGHT > Height) {
+			return;
+		}
 	}
+	
 
 	for (; *stringPointer != 0x00; stringPointer++) {
 

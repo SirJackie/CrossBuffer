@@ -8,8 +8,8 @@
 
 int StartX = 10;
 int StartY = 10;
-int EndX   = 10;
-int EndY   = 200;
+int EndX   = 100;
+int EndY   = 218;
 //int EndX;
 //int EndY;
 
