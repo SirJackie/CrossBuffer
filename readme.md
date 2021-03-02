@@ -8,9 +8,9 @@
 
 1.下载并运行DirectX9.0 SDK安装包（DXSDK_Jun10.exe，2010年6月发布），由于时间久远，安装包比较难找，在这里放两个链接：
 
-Gitee仓库:https://gitee.com/SirJackie/good-software-backup，clone下来后有一个DXSDK_Jun10文件夹，里面有分块的压缩包(DXSDK_Jun10.part01.rar到DXSDK_Jun10.part14.rar)，用WinRAR可以解压，得到一个大小571.7MB的DXSDK_Jun10.exe。
+Gitee仓库:[https://gitee.com/SirJackie/good-software-backup](https://gitee.com/SirJackie/good-software-backup) ，clone下来后有一个DXSDK_Jun10文件夹，里面有分块的压缩包(DXSDK_Jun10.part01.rar到DXSDK_Jun10.part14.rar)，用WinRAR可以解压，得到一个大小571.7MB的DXSDK_Jun10.exe。
 
-还有百度网盘的下载链接，只要你不嫌慢的话。侵删，链接: http://pan.baidu.com/s/1gfkqSMZ 密码: r6my
+还有百度网盘的下载链接，只要你不嫌慢的话。侵删，链接: [http://pan.baidu.com/s/1gfkqSMZ](http://pan.baidu.com/s/1gfkqSMZ) 密码: r6my
 
 得到DXSDK_Jun10.exe之后，双击运行：
 
