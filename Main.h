@@ -86,7 +86,7 @@ void Update(FrameBuffer &fb, Keyboard kb, int deltaTime) {
 	//fb2.DrawString(CreateColor(255, 255, 255), " want!\n");
 	//fb2.DrawString(CreateColor(255, 255, 255), "Third Line!\n");
 
-	fb.Draw(fb2, StartX, StartY);  // ok
+	fb.DrawBuffer(fb2, StartX, StartY);  // ok
 	fps.Count(deltaTime);
 	fps.ShowOnScreen(fb);
 }

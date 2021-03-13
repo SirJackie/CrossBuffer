@@ -210,6 +210,27 @@ void FrameBuffer::DrawString(Color color, const char* stringPointer)
 	return;
 }
 
+void FrameBuffer::DrawBuffer(const FrameBuffer& fb, int PositionX, int PositionY) {
+
+	int StartX = clamp(0, PositionX, this->Width);
+	int StartY = clamp(0, PositionY, this->Height);
+	int EndX = clamp(0, PositionX + fb.Width, this->Width);
+	int EndY = clamp(0, PositionY + fb.Height, this->Height);
+
+	for (int y = StartY; y < EndY; y++) {
+		for (int x = StartX; x < EndX; x++) {
+			SetPixel(
+				(*this), x, y,
+				GetPixel(
+					fb,
+					x - PositionX,
+					y - PositionY
+				)
+			);
+		}
+	}
+}
+
 void FrameBuffer::Draw(const char* stringPointer) {
 
 	Color White = CreateColor(255, 255, 255);
@@ -269,25 +290,4 @@ void FrameBuffer::Draw(const char* stringPointer) {
 
 	}
 	return;
-}
-
-void FrameBuffer::Draw(const FrameBuffer& fb, int PositionX, int PositionY) {
-
-	int StartX = clamp(0, PositionX,              this->Width  );
-	int StartY = clamp(0, PositionY,              this->Height );
-	int EndX   = clamp(0, PositionX + fb.Width,   this->Width  );
-	int EndY   = clamp(0, PositionY + fb.Height,  this->Height );
-
-	for (int y = StartY; y < EndY; y++) {
-		for (int x = StartX; x < EndX; x++) {
-			SetPixel(
-				(*this), x, y, 
-				GetPixel(
-					fb,
-					x - PositionX,
-					y - PositionY
-				)
-			);
-		}
-	}
 }

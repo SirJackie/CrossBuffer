@@ -95,8 +95,8 @@ public:
     // Methods
 	void DrawChar          (int x, int y, Color color, char ch);
     void DrawString        (Color color, const char* stringPointer);
+    void DrawBuffer(const FrameBuffer& fb, int PositionX, int PositionY);
     void Draw              (const char* stringPointer);
-    void Draw              (const FrameBuffer& fb, int PositionX, int PositionY);
 
 };
 
