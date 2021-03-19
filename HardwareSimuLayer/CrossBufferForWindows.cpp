@@ -100,27 +100,19 @@ void ReadBitmapToFrameBuffer(const char* bmpAddress, FrameBuffer& fb) {
 	// Create FrameBuffer
 	fb.DisAllocateBuffer();
 	fb.AllocateBuffer(bmpWidth, bmpHeight);
+	int bmpHeightNegOne = bmpHeight - 1;
 
 	for (int i = 0; i < bmpHeight; i++)
 	{
 		int realPitch = i * pitch;
 		for (int j = 0; j < bmpWidth; j++)
 		{
-			
-			/*dc.SetPixel(j, i, RGB(
-				pBmpBuf[(i * bmpWidth + j) * 3 + 2 + realPitch],
-				pBmpBuf[(i * bmpWidth + j) * 3 + 1 + realPitch],
-				pBmpBuf[(i * bmpWidth + j) * 3 + realPitch]));*/
-			/*cout << "i: " << i << "j: " << j << "r: "
-				<< (int)pBmpBuf[(i * bmpWidth + j) * 3 + 2 + realPitch] << "g: "
-				<< (int)pBmpBuf[(i * bmpWidth + j) * 3 + 1 + realPitch] << "b: "
-				<< (int)pBmpBuf[(i * bmpWidth + j) * 3 + realPitch] << endl;*/
 			SetPixel(
 				fb, j, i,
 				CreateColor(
-					pBmpBuf[(i * bmpWidth + j) * 3 + 2 + realPitch],
-					pBmpBuf[(i * bmpWidth + j) * 3 + 1 + realPitch],
-					pBmpBuf[(i * bmpWidth + j) * 3 + realPitch]
+					pBmpBuf[((bmpHeightNegOne - i) * bmpWidth + j) * 3 + 2 + realPitch],
+					pBmpBuf[((bmpHeightNegOne - i) * bmpWidth + j) * 3 + 1 + realPitch],
+					pBmpBuf[((bmpHeightNegOne - i) * bmpWidth + j) * 3 + realPitch]
 				)
 			);
 		}
