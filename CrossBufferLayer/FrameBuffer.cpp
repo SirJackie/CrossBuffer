@@ -243,3 +243,10 @@ void FrameBuffer::Draw(const char* stringPointer) {
 	}
 	return;
 }
+
+void FrameBuffer::Draw(const FrameBuffer& fb) {
+	CurX += 3;
+	DrawBuffer(fb, CurX, CurY);
+	CurY += fb.Height - 16;
+	CurX += fb.Width  + 4;
+}

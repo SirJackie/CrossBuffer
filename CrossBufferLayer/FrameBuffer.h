@@ -96,6 +96,7 @@ public:
     void DrawString        (Color color, const char* stringPointer);
     void DrawBuffer        (const FrameBuffer& fb, int PositionX, int PositionY);
     void Draw              (const char* stringPointer);
+    void Draw              (const FrameBuffer& fb);
     void AllocateBuffer    (int width, int height);
     void DisAllocateBuffer ();
     void InitCursor        ();

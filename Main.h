@@ -83,7 +83,7 @@ void Update(FrameBuffer &fb, Keyboard kb, int deltaTime, vector<FrameBuffer*>& f
 	fb2.Draw("I can d");
 	fb2.Draw("raw WHATEVER I");
 	fb2.Draw(" want!\n");
-	fb2.Draw("Third Line!\n");
+	fb2.Draw("Third Line!");
 
 	//fb2.DrawString(CreateColor(255, 255, 255), "Hello World!\n");
 	//fb2.DrawString(CreateColor(255, 255, 255), "I can d");
@@ -91,7 +91,9 @@ void Update(FrameBuffer &fb, Keyboard kb, int deltaTime, vector<FrameBuffer*>& f
 	//fb2.DrawString(CreateColor(255, 255, 255), " want!\n");
 	//fb2.DrawString(CreateColor(255, 255, 255), "Third Line!\n");
 
-	fb2.DrawBuffer(*(fbList[0]), 10, 68);
+	fb2.Draw(*(fbList[0]));
+	fb2.Draw("Still Third Line!");
+
 	fb.DrawBuffer(fb2, StartX, StartY);  // ok
 	fps.Count(deltaTime);
 	fps.ShowOnScreen(fb);
