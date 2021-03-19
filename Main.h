@@ -6,8 +6,9 @@ using std::stringstream;
 
 
 /* Define Window Class Properties */
-#define WindowClassName L"CrossBuffer Class"
-#define WindowTitle     L"CrossBuffer <Press WASD and IJKL to move the position>"
+#define WindowClassName    L"CrossBuffer Class"
+#define WindowTitle        L"CrossBuffer <Press WASD and IJKL to move the position>"
+#define BitmapRootAddress  "..\\"
 
 
 int StartX = 8;
@@ -90,11 +91,12 @@ void Update(FrameBuffer &fb, Keyboard kb, int deltaTime, vector<FrameBuffer*>& f
 	//fb2.DrawString(CreateColor(255, 255, 255), " want!\n");
 	//fb2.DrawString(CreateColor(255, 255, 255), "Third Line!\n");
 
+	fb2.DrawBuffer(*(fbList[0]), 10, 68);
 	fb.DrawBuffer(fb2, StartX, StartY);  // ok
 	fps.Count(deltaTime);
 	fps.ShowOnScreen(fb);
 
-	fbList.push_back(&fb2);
+	//fbList.push_back(&fb2);
 	stringstream ss;
 	ss << fbList.size();
 	fb.Draw(ss.str().c_str());
