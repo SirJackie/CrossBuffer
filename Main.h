@@ -32,7 +32,7 @@ void Setup(FrameBuffer &fb, Keyboard kb, int deltaTime, vector<FrameBuffer*>& fb
 		}
 	}
 
-	//bitmapFb.LoadBMP("TestingBitmap.bmp", fbLoadingQueue);
+	bitmapFb.LoadBMP("TestingBitmap.bmp", fbLoadingQueue);
 }
 
 
@@ -93,7 +93,7 @@ void Update(FrameBuffer &fb, Keyboard kb, int deltaTime, vector<FrameBuffer*>& f
 	//fb2.DrawString(CreateColor(255, 255, 255), " want!\n");
 	//fb2.DrawString(CreateColor(255, 255, 255), "Third Line!\n");
 
-	fb2.Draw(*(fbLoadingQueue[0]));
+	fb2.Draw(bitmapFb);
 	fb2.Draw("Still Third Line!");
 
 	fb.DrawBuffer(fb2, StartX, StartY);  // ok

@@ -285,14 +285,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 				Update(fb, kb, thisTime - lastTime, fbLoadingQueue);   /* Call the Update() in Main.h */
 			}
 
-			/*for (unsigned int i = 0; i < fbLoadingQueue.size(); i++) {
+			for (unsigned int i = 0; i < fbLoadingQueue.size(); i++) {
 				FrameBuffer& fb = *(fbLoadingQueue[i]);
 				if (fb.wannaLoadBitmap == true) {
 					ReadBitmapToFrameBuffer(fb.bitmapAddress.c_str(), fb);
 					fb.wannaLoadBitmap = false;
 				}
-			}*/
-			//fbLoadingQueue.clear();
+			}
+			fbLoadingQueue.clear();
 
 			// Release Back Buffer and Swap it to Front
 			pBackBuffer->UnlockRect();
