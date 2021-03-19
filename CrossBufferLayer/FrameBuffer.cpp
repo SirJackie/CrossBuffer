@@ -51,12 +51,14 @@ FrameBuffer::FrameBuffer() {
 	AllocateBuffer(1, 1);
 	ClearBuffer();
 	InitCursor();
+	wannaLoadBitmap = false;
 }
 
 FrameBuffer::FrameBuffer(int Width_, int Height_) {
 	AllocateBuffer(Width_, Height_);
 	ClearBuffer();
 	InitCursor();
+	wannaLoadBitmap = false;
 }
 
 FrameBuffer::FrameBuffer(int Width_, int Height_, int Pitch_, Color* pBits_) {
@@ -67,12 +69,20 @@ FrameBuffer::FrameBuffer(int Width_, int Height_, int Pitch_, Color* pBits_) {
 	externalBits = true;
 	// External Buffer should be cleared.
 	InitCursor();
+	wannaLoadBitmap = false;
 }
 
 FrameBuffer::FrameBuffer(const FrameBuffer& fb) {
 	AllocateBuffer(fb.Width, fb.Height);
 	DrawBuffer(fb, 0, 0);                 // Draw fb to this buffer
 	InitCursor();
+	wannaLoadBitmap = false;
+}
+
+void FrameBuffer::LoadBMP(string bitmapAddress_, vector<FrameBuffer*>& fbLoadingQueue) {
+	this->wannaLoadBitmap = true;
+	this->bitmapAddress = bitmapAddress_;
+	fbLoadingQueue.push_back(this);
 }
 
 FrameBuffer& FrameBuffer::operator=(const FrameBuffer& fb) {
@@ -80,6 +90,7 @@ FrameBuffer& FrameBuffer::operator=(const FrameBuffer& fb) {
 	AllocateBuffer(fb.Width, fb.Height);  // Then allocate a new one
 	DrawBuffer(fb, 0, 0);                 // Draw fb to this buffer
 	InitCursor();                         // Init Cursor
+	wannaLoadBitmap = false;
 
 	return (*this);                       // Support a = b = c
 }

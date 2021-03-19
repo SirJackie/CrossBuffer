@@ -35,7 +35,7 @@ clock_t lastTime = clock();
 clock_t thisTime = clock();
 Window win;
 Keyboard kb = (Keyboard)malloc(256 * sizeof(int));
-vector<FrameBuffer*> fbList;
+vector<FrameBuffer*> fbLoadingQueue;
 
 /* Define Functions */
 void GetScreenResolution(int* resultX, int* resultY) {
@@ -239,9 +239,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		&d3dpp, &pDevice
 	);
 
-	ReadBitmapToFrameBuffer("TestingBitmap.bmp", bitmapbuffer);
-	fbList.push_back(&bitmapbuffer);
-
 	// Process Messages From Windows
 	MSG msg;
 	ZeroMemory(&msg, sizeof(msg));
@@ -279,14 +276,23 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 			// If it is the First Time Running
 			if (FirstTimeRunning) {
-				Setup(fb, kb, 0, fbList);                      /* Call the Setup() in Main.h */
+				Setup(fb, kb, 0, fbLoadingQueue);                      /* Call the Setup() in Main.h */
 				FirstTimeRunning = FALSE;
 			}
 
 			// If it is not the First Time Running
 			else {
-				Update(fb, kb, thisTime - lastTime, fbList);   /* Call the Update() in Main.h */
+				Update(fb, kb, thisTime - lastTime, fbLoadingQueue);   /* Call the Update() in Main.h */
 			}
+
+			/*for (unsigned int i = 0; i < fbLoadingQueue.size(); i++) {
+				FrameBuffer& fb = *(fbLoadingQueue[i]);
+				if (fb.wannaLoadBitmap == true) {
+					ReadBitmapToFrameBuffer(fb.bitmapAddress.c_str(), fb);
+					fb.wannaLoadBitmap = false;
+				}
+			}*/
+			//fbLoadingQueue.clear();
 
 			// Release Back Buffer and Swap it to Front
 			pBackBuffer->UnlockRect();

@@ -2,6 +2,10 @@
 #define __CSBF_FrameBuffer__
 
 #include "FontSupport.h"
+#include <string>
+#include <vector>
+using std::string;
+using std::vector;
 
 /*
 ** Define Cross Platform Types
@@ -82,6 +86,10 @@ public:
     int   InitCurX;
     int   InitCurY;
 
+    // Bitmap Loading Require
+    bool wannaLoadBitmap;
+    string bitmapAddress;
+
     // Special Methods
     FrameBuffer();
     FrameBuffer(int Width_, int Height_, int Pitch_, Color* pBits_);
@@ -101,6 +109,7 @@ public:
     void DisAllocateBuffer ();
     void InitCursor        ();
     void ClearBuffer       ();
+    void LoadBMP           (string bitmapAddress_, vector<FrameBuffer*>& fbLoadingQueue);
 };
 
 #endif

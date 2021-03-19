@@ -15,13 +15,13 @@ int StartX = 8;
 int StartY = 30;
 int EndX;
 int EndY;
-
+FrameBuffer bitmapFb;
 
 /*
 ** Setup Callback Function
 */
 
-void Setup(FrameBuffer &fb, Keyboard kb, int deltaTime, vector<FrameBuffer*>& fbList) {
+void Setup(FrameBuffer &fb, Keyboard kb, int deltaTime, vector<FrameBuffer*>& fbLoadingQueue) {
 	EndX = fb.Width - 200;
 	EndY = fb.Height - 200;
 
@@ -31,6 +31,8 @@ void Setup(FrameBuffer &fb, Keyboard kb, int deltaTime, vector<FrameBuffer*>& fb
 			SetPixel(fb, x, y, CreateColor(255, 0, 0));
 		}
 	}
+
+	//bitmapFb.LoadBMP("TestingBitmap.bmp", fbLoadingQueue);
 }
 
 
@@ -42,7 +44,7 @@ Color c = CreateColor(0, 144, 255);
 
 FPSCalculator fps;
 
-void Update(FrameBuffer &fb, Keyboard kb, int deltaTime, vector<FrameBuffer*>& fbList) {
+void Update(FrameBuffer &fb, Keyboard kb, int deltaTime, vector<FrameBuffer*>& fbLoadingQueue) {
 
 	if (kb['A']) {
 		StartX -= 3;
@@ -91,7 +93,7 @@ void Update(FrameBuffer &fb, Keyboard kb, int deltaTime, vector<FrameBuffer*>& f
 	//fb2.DrawString(CreateColor(255, 255, 255), " want!\n");
 	//fb2.DrawString(CreateColor(255, 255, 255), "Third Line!\n");
 
-	fb2.Draw(*(fbList[0]));
+	fb2.Draw(*(fbLoadingQueue[0]));
 	fb2.Draw("Still Third Line!");
 
 	fb.DrawBuffer(fb2, StartX, StartY);  // ok
@@ -100,6 +102,6 @@ void Update(FrameBuffer &fb, Keyboard kb, int deltaTime, vector<FrameBuffer*>& f
 
 	//fbList.push_back(&fb2);
 	stringstream ss;
-	ss << fbList.size();
+	ss << fbLoadingQueue.size();
 	fb.Draw(ss.str().c_str());
 }
