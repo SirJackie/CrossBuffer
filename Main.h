@@ -1,4 +1,8 @@
 #include "./CrossBufferLayer/CrossBuffer.h"
+#include <vector>
+#include <sstream>
+using std::vector;
+using std::stringstream;
 
 
 /* Define Window Class Properties */
@@ -16,7 +20,7 @@ int EndY;
 ** Setup Callback Function
 */
 
-void Setup(FrameBuffer &fb, Keyboard kb, int deltaTime) {
+void Setup(FrameBuffer &fb, Keyboard kb, int deltaTime, vector<FrameBuffer*>& fbList) {
 	EndX = fb.Width - 200;
 	EndY = fb.Height - 200;
 
@@ -37,7 +41,7 @@ Color c = CreateColor(0, 144, 255);
 
 FPSCalculator fps;
 
-void Update(FrameBuffer &fb, Keyboard kb, int deltaTime) {
+void Update(FrameBuffer &fb, Keyboard kb, int deltaTime, vector<FrameBuffer*>& fbList) {
 
 	if (kb['A']) {
 		StartX -= 3;
@@ -89,4 +93,9 @@ void Update(FrameBuffer &fb, Keyboard kb, int deltaTime) {
 	fb.DrawBuffer(fb2, StartX, StartY);  // ok
 	fps.Count(deltaTime);
 	fps.ShowOnScreen(fb);
+
+	fbList.push_back(&fb2);
+	stringstream ss;
+	ss << fbList.size();
+	fb.Draw(ss.str().c_str());
 }

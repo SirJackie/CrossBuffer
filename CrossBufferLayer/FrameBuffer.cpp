@@ -1,4 +1,6 @@
 #include "FrameBuffer.h"
+#include <vector>
+using std::vector;
 
 int clamp(int min, int x, int max) {
 	int result = x;

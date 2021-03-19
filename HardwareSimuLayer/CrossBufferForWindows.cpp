@@ -33,6 +33,7 @@ clock_t lastTime = clock();
 clock_t thisTime = clock();
 Window win;
 Keyboard kb = (Keyboard)malloc(256 * sizeof(int));
+vector<FrameBuffer*> fbList;
 
 /* Define Functions */
 void GetScreenResolution(int* resultX, int* resultY) {
@@ -96,7 +97,6 @@ LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		return DefWindowProc(hWnd, msg, wParam, lParam);
 	}
 }
-
 
 /*
 ** Main Function
@@ -200,13 +200,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 			// If it is the First Time Running
 			if (FirstTimeRunning) {
-				Setup(fb, kb, 0);                      /* Call the Setup() in Main.h */
+				Setup(fb, kb, 0, fbList);                      /* Call the Setup() in Main.h */
 				FirstTimeRunning = FALSE;
 			}
 
 			// If it is not the First Time Running
 			else {
-				Update(fb, kb, thisTime - lastTime);   /* Call the Update() in Main.h */
+				Update(fb, kb, thisTime - lastTime, fbList);   /* Call the Update() in Main.h */
 			}
 
 			// Release Back Buffer and Swap it to Front
