@@ -14,126 +14,76 @@ int clamp(int min, int x, int max) {
 	return result;
 }
 
-FrameBuffer::FrameBuffer() {
-	Width  = 1;
-	Height = 1;
-
-	Pitch  = Width;
-	pBits  = new Color[Pitch * Height];
-
+void FrameBuffer::AllocateBuffer(int width, int height) {
+	Width        = width  > 1 ? width  : 1;
+	Height       = height > 1 ? height : 1;
+	Pitch        = Width;
+	pBits        = new Color[Pitch * Height];
 	externalBits = false;
-
-	// Clear the buffer
-	SetPixel((*this), 0, 0, CreateColor(0, 0, 0));
-
-	InitCurX = CurX = INIT_CUR_X < (Width  - TEXT_WIDTH ) ? INIT_CUR_X : 0;
-	InitCurY = CurY = INIT_CUR_Y < (Height - TEXT_HEIGHT) ? INIT_CUR_Y : 0;
 }
 
-FrameBuffer::FrameBuffer(int Width_, int Height_, int Pitch_, Color* pBits_) {
-	Width   = Width_  > 1 ? Width_  : 1;
-	Height  = Height_ > 1 ? Height_ : 1;
-
-	Pitch   = Pitch_;
-	pBits   = pBits_;
-
-	externalBits = true;
-
-	InitCurX = CurX = INIT_CUR_X < (Width  - TEXT_WIDTH ) ? INIT_CUR_X : 0;
-	InitCurY = CurY = INIT_CUR_Y < (Height - TEXT_HEIGHT) ? INIT_CUR_Y : 0;
+void FrameBuffer::DisAllocateBuffer() {
+	if (externalBits == true) {
+		;                // Do Nothing
+	}
+	else {
+		delete[] pBits;  // Release the buffer
+	}
 }
 
-FrameBuffer::FrameBuffer(int Width_, int Height_) {
-	Width   = Width_  > 1 ? Width_  : 1;
-	Height  = Height_ > 1 ? Height_ : 1;
-
-	Pitch   = Width;
-	pBits   = new Color[Pitch * Height];
-
-	externalBits = false;
-
+void FrameBuffer::ClearBuffer() {
 	// Clear the buffer
 	for (int y = 0; y < Height - 1; y++) {
 		for (int x = 0; x < Width - 1; x++) {
 			SetPixel((*this), x, y, CreateColor(0, 0, 0));
 		}
 	}
+}
 
-	InitCurX = CurX = INIT_CUR_X < (Width  - TEXT_WIDTH  * 40) ? INIT_CUR_X : 0;
-	InitCurY = CurY = INIT_CUR_Y < (Height - TEXT_HEIGHT * 10) ? INIT_CUR_Y : 0;
+void FrameBuffer::InitCursor() {
+	InitCurX = CurX = INIT_CUR_X < (Width  - TEXT_WIDTH ) ? INIT_CUR_X : 0;
+	InitCurY = CurY = INIT_CUR_Y < (Height - TEXT_HEIGHT) ? INIT_CUR_Y : 0;
+}
+
+FrameBuffer::FrameBuffer() {
+	AllocateBuffer(1, 1);
+	ClearBuffer();
+	InitCursor();
+}
+
+FrameBuffer::FrameBuffer(int Width_, int Height_) {
+	AllocateBuffer(Width_, Height_);
+	ClearBuffer();
+	InitCursor();
+}
+
+FrameBuffer::FrameBuffer(int Width_, int Height_, int Pitch_, Color* pBits_) {
+	Width        = Width_  > 1 ? Width_  : 1;
+	Height       = Height_ > 1 ? Height_ : 1;
+	Pitch        = Pitch_;
+	pBits        = pBits_;
+	externalBits = true;
+	// External Buffer should be cleared.
+	InitCursor();
 }
 
 FrameBuffer::FrameBuffer(const FrameBuffer& fb) {
-	Width   = fb.Width;
-	Height  = fb.Height;
-
-	Pitch   = Width;
-	pBits   = new Color[Pitch * Height];
-
-	externalBits = false;
-
-	// Clear the buffer
-	for (int y = 0; y < Height - 1; y++) {
-		for (int x = 0; x < Width - 1; x++) {
-			SetPixel(
-				(*this),
-				x,
-				y,
-				GetPixel(fb, x, y)
-			);
-		}
-	}
-
-	InitCurX = CurX = INIT_CUR_X < (Width  - TEXT_WIDTH  * 40) ? INIT_CUR_X : 0;
-	InitCurY = CurY = INIT_CUR_Y < (Height - TEXT_HEIGHT * 10) ? INIT_CUR_Y : 0;
+	AllocateBuffer(fb.Width, fb.Height);
+	DrawBuffer(fb, 0, 0);                 // Draw fb to this buffer
+	InitCursor();
 }
 
 FrameBuffer& FrameBuffer::operator=(const FrameBuffer& fb) {
-	Width   = fb.Width;
-	Height  = fb.Height;
+	DisAllocateBuffer();                  // Disallocate old buffer first
+	AllocateBuffer(fb.Width, fb.Height);  // Then allocate a new one
+	DrawBuffer(fb, 0, 0);                 // Draw fb to this buffer
+	InitCursor();                         // Init Cursor
 
-	if (externalBits == true) {
-		;  // Do Nothing
-	}
-	else {
-		delete[] pBits;  // Release the buffer
-	}
-
-	Pitch   = Width;
-	pBits   = new Color[Pitch * Height];
-
-	externalBits = false;
-
-	// Clear the buffer
-	for (int y = 0; y < Height - 1; y++) {
-		for (int x = 0; x < Width - 1; x++) {
-			SetPixel(
-				(*this),
-				x,
-				y,
-				GetPixel(fb, x, y)
-			);
-		}
-	}
-
-	InitCurX = CurX = INIT_CUR_X < (Width  - TEXT_WIDTH  * 40) ? INIT_CUR_X : 0;
-	InitCurY = CurY = INIT_CUR_Y < (Height - TEXT_HEIGHT * 10) ? INIT_CUR_Y : 0;
-
-	return (*this);
+	return (*this);                       // Support a = b = c
 }
 
 FrameBuffer::~FrameBuffer() {
-	if (externalBits == true)  {
-		// externalBits == true
-		// system("mshta javascript:alert('externalBits==true.');window.close();");
-		;  // Do Nothing
-	}
-	else {
-		// externalBits == false
-		// system("mshta javascript:alert('externalBits==false.');window.close();");
-		void* ptrShowerPointerHahaha = (void*)pBits;
-		delete[] pBits;  // Release the buffer
-	}
+	DisAllocateBuffer();
 }
 
 void FrameBuffer::DrawChar(int x, int y, Color color, char ch)

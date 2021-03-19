@@ -69,7 +69,6 @@ int clamp(int min, int x, int max);
 class FrameBuffer
 {
 public:
-
     // Basic Informations
     int   Width;
     int   Height;
@@ -95,9 +94,12 @@ public:
     // Methods
 	void DrawChar          (int x, int y, Color color, char ch);
     void DrawString        (Color color, const char* stringPointer);
-    void DrawBuffer(const FrameBuffer& fb, int PositionX, int PositionY);
+    void DrawBuffer        (const FrameBuffer& fb, int PositionX, int PositionY);
     void Draw              (const char* stringPointer);
-
+    void AllocateBuffer    (int width, int height);
+    void DisAllocateBuffer ();
+    void InitCursor        ();
+    void ClearBuffer       ();
 };
 
 #endif
