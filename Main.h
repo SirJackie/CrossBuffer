@@ -21,7 +21,7 @@ FrameBuffer bitmapFb;
 ** Setup Callback Function
 */
 
-void Setup(FrameBuffer &fb, Keyboard kb, int deltaTime, vector<FrameBuffer*>& fbLoadingQueue) {
+void Setup(FrameBuffer &fb, Keyboard kb, int deltaTime) {
 	//EndX = fb.Width - 200;
 	//EndY = fb.Height - 200;
 
@@ -44,7 +44,7 @@ void Setup(FrameBuffer &fb, Keyboard kb, int deltaTime, vector<FrameBuffer*>& fb
 
 FPSCalculator fps;
 
-void Update(FrameBuffer &fb, Keyboard kb, int deltaTime, vector<FrameBuffer*>& fbLoadingQueue) {
+void Update(FrameBuffer &fb, Keyboard kb, int deltaTime) {
 
 	//if (kb.IsKeyPressed('A')) {
 	//	StartX -= 3;

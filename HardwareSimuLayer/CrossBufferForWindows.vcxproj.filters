@@ -61,6 +61,15 @@
     <ClInclude Include="..\CrossBufferLayer\KeyboardSupport.h">
       <Filter>头文件\CrossBufferLayer</Filter>
     </ClInclude>
+    <ClInclude Include="D3DParts.h">
+      <Filter>头文件\HardwareSimuLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="Win32Parts.h">
+      <Filter>头文件\HardwareSimuLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="DeclarationParts.h">
+      <Filter>头文件\HardwareSimuLayer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CrossBufferForWindows.cpp">
