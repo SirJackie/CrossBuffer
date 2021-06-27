@@ -19,20 +19,3 @@ void FPSCalculator::Count(int deltaTime) {
 		FrameCount = 0;
 	}
 }
-
-void FPSCalculator::ShowOnScreen(FrameBuffer& fb) {
-	stringstream ss;
-	ss << "FPS: ";
-	ss << (float)FPS;
-	ss << "; Width: ";
-	ss << fb.Width;
-	ss << "; Height: ";
-	ss << fb.Height;
-	ss << "; Pitch: ";
-	ss << fb.Pitch;
-	ss << "; pBits: ";
-	ss << (int)fb.pBits;
-	ss << "\n";
-
-	fb.Draw(ss.str().c_str());
-}

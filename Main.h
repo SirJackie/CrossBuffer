@@ -98,7 +98,7 @@ void Update(FrameBuffer &fb, Keyboard kb, int deltaTime, vector<FrameBuffer*>& f
 
 	fb.DrawBuffer(fb2, StartX, StartY);  // ok
 	fps.Count(deltaTime);
-	fps.ShowOnScreen(fb);
+	//fps.ShowOnScreen(fb);
 
 	//fbList.push_back(&fb2);
 	stringstream ss;
