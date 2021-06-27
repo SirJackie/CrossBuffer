@@ -107,14 +107,14 @@ void ReadBitmapToFrameBuffer(const char* bmpAddress, FrameBuffer& fb) {
 		int realPitch = i * pitch;
 		for (int j = 0; j < bmpWidth; j++)
 		{
-			SetPixel(
+			/*SetPixel(
 				fb, j, i,
 				CreateColor(
 					pBmpBuf[((bmpHeightNegOne - i) * bmpWidth + j) * 3 + 2 + realPitch],
 					pBmpBuf[((bmpHeightNegOne - i) * bmpWidth + j) * 3 + 1 + realPitch],
 					pBmpBuf[((bmpHeightNegOne - i) * bmpWidth + j) * 3 + realPitch]
 				)
-			);
+			);*/
 		}
 	}
 	delete[] pBmpBuf;
@@ -270,7 +270,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			pBackBuffer->LockRect(&rect, NULL, NULL);
 
 			// Init FrameBuffer Object
-			FrameBuffer fb(win.Width, win.Height, (rect.Pitch) >> 2, (Color*)rect.pBits);
+			//FrameBuffer fb(win.Width, win.Height, (rect.Pitch) >> 2, (Color*)rect.pBits);
+			FrameBuffer fb;
 
 			// If it is the First Time Running
 			if (FirstTimeRunning) {
@@ -285,10 +286,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 			for (unsigned int i = 0; i < fbLoadingQueue.size(); i++) {
 				FrameBuffer& fb = *(fbLoadingQueue[i]);
-				if (fb.wannaLoadBitmap == true) {
+				/*if (fb.wannaLoadBitmap == true) {
 					ReadBitmapToFrameBuffer(fb.bitmapAddress.c_str(), fb);
 					fb.wannaLoadBitmap = false;
-				}
+				}*/
 			}
 			fbLoadingQueue.clear();
 

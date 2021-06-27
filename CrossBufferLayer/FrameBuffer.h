@@ -1,46 +1,12 @@
 #ifndef __CSBF_FrameBuffer__
 #define __CSBF_FrameBuffer__
 
+#include "BasicDataTypeDeclarations.h"
 #include "FontSupport.h"
 #include <string>
 #include <vector>
 using std::string;
 using std::vector;
-
-
-/*
-** Define Color and Functions for Color
-** -------------------------------------------------------------------
-** You have to notice that in order to increase the speed of program,
-** The type 'Color' is not defined by Class and Object
-** We just use #define to process color before running
-*/
-
-#define Color                                ui32
-#define CreateColor(r, g, b)                 ((Color) (( (0xff) << 24)  |  (((r)&0xff) << 16)  |  (((g)&0xff) << 8)  |  ((b) & 0xff) ))
-
-#define GetColorR(color)                     ( ( (color) >> 16) & 0xff)
-#define GetColorG(color)                     ( ( (color) >> 8 ) & 0xff)
-#define GetColorB(color)                     ( ( (color)      ) & 0xff)
-
-#define SetColorR(color, r)                  ( (color) = ( (color)  & 0xFF00FFFF) | ( ((r) & 0xff) << 16) )
-#define SetColorG(color, g)                  ( (color) = ( (color)  & 0xFFFF00FF) | ( ((g) & 0xff) <<  8) )
-#define SetColorB(color, b)                  ( (color) = ( (color)  & 0xFFFFFF00) | ( ((b) & 0xff)      ) )
-
-#define GetPixel(fb, x, y)                   (((Color*)(fb).pBits)[(x) + (fb.Pitch) * (y)])
-#define SetPixel(fb, x, y, color)            (((Color*)(fb).pBits)[(x) + (fb.Pitch) * (y)] = color)
-#define GetPixelLB(fb, height, x, y)         (((Color*)(fb).pBits)[(x) + (fb.Pitch) * (height-(y))])
-#define SetPixelLB(fb, height, x, y, color)  (((Color*)(fb).pBits)[(x) + (fb.Pitch) * (height-(y))] = color)
-
-
-/*
-** Define FrameBuffer
-** -------------------------------------------------------------------
-** FrameBuffer is the object for controling the screen
-** You can draw whatever you want on FrameBuffer,
-** Then the HardwareSimuLayer will automatically help you
-** to draw it on the screen.
-*/
 
 #define INIT_CUR_X   10
 #define INIT_CUR_Y   10
@@ -50,43 +16,49 @@ using std::vector;
 class FrameBuffer
 {
 public:
-    // Basic Informations
-    int   Width;
-    int   Height;
-    int   Pitch;
-    void* pBits;
-    bool  externalBits;
 
-    // Text Cursor
-    int   CurX;
-    int   CurY;
-    int   InitCurX;
-    int   InitCurY;
+    // Properties
+    i32 width;
+    i32 height;
 
-    // Bitmap Loading Require
-    bool wannaLoadBitmap;
-    string bitmapAddress;
+    i8* redBuffer;
+    i8* greenBuffer;
+    i8* blueBuffer;
 
-    // Special Methods
+    i32 curX;
+    i32 curY;
+    i32 initCurX;
+    i32 initCurY;
+
+
+    // Methods
+    void AllocateBuffer
+         (i32 width, i32 height);
+    void DisAllocateBuffer
+         ();
+    void CopySameSizeBuffer
+         (const FrameBuffer& from, FrameBuffer& to);
+
     FrameBuffer();
-    FrameBuffer(int Width_, int Height_, int Pitch_, Color* pBits_);
-    FrameBuffer(int Width_, int Height_);
+    FrameBuffer(i32 Width_, i32 Height_);
     FrameBuffer(const FrameBuffer& fb);
     FrameBuffer& operator=(const FrameBuffer& fb);
     ~FrameBuffer();
    
-
-    // Methods
-	void DrawChar          (int x, int y, Color color, char ch);
-    void DrawString        (Color color, const char* stringPointer);
-    void DrawBuffer        (const FrameBuffer& fb, int PositionX, int PositionY);
-    void Draw              (const char* stringPointer);
-    void Draw              (const FrameBuffer& fb);
-    void AllocateBuffer    (int width, int height);
-    void DisAllocateBuffer ();
-    void InitCursor        ();
-    void ClearBuffer       ();
-    void LoadBMP           (string bitmapAddress_, vector<FrameBuffer*>& fbLoadingQueue);
+	void DrawChar
+         (i32 x, i32 y, i8 r, i8 g, i8 b, char ch);
+    void DrawString
+         (i8 r, i8 g, i8 b, const i8* stringPointer);
+    void DrawBuffer
+         (const FrameBuffer& fb, i32 PositionX, i32 PositionY);
+    void Draw
+         (const char* stringPointer);
+    void Draw
+         (const FrameBuffer& fb);
+    void InitCursor
+         ();
+    void ClearBuffer
+         ();
 };
 
 #endif

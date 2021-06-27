@@ -166,9 +166,6 @@
     <ClInclude Include="..\CrossBufferLayer\FrameBuffer.h" />
     <ClInclude Include="..\CrossBufferLayer\KeyboardSupport.h" />
     <ClInclude Include="..\Main.h" />
-    <ClInclude Include="framework.h" />
-    <ClInclude Include="Resource.h" />
-    <ClInclude Include="targetver.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
