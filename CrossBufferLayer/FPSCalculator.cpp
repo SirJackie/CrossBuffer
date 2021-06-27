@@ -8,7 +8,8 @@ FPSCalculator::FPSCalculator() {
 	FrameCount      = 0;
 }
 
-void FPSCalculator::Count(int deltaTime) {
+void FPSCalculator::Count(i32 deltaTime)
+{
 	/* Calculate FPS */
 	DeltaTimeCount += deltaTime;
 	FrameCount += 1;
