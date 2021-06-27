@@ -2,20 +2,6 @@
 #include <vector>
 using std::vector;
 
-int clamp(int min, int x, int max) {
-	int result = x;
-
-	if (min > result) {
-		result = min;
-	}
-
-	if (max < result) {
-		result = max;
-	}
-
-	return result;
-}
-
 void FrameBuffer::AllocateBuffer(int width, int height) {
 	Width        = width  > 1 ? width  : 1;
 	Height       = height > 1 ? height : 1;
@@ -103,7 +89,7 @@ void FrameBuffer::DrawChar(int x, int y, Color color, char ch)
 {
 	int* bitmapPointer;
 	for (int deltaY = 0; deltaY < 16; deltaY++) {
-		bitmapPointer = (int*)(Font + ((int)ch * 16 * 8) + (8 * deltaY));
+		bitmapPointer = (int*)(CS_font + ((int)ch * 16 * 8) + (8 * deltaY));
 		if (bitmapPointer[0] == 255) { SetPixel((*this), (x + 0), (y + deltaY), color); }
 		if (bitmapPointer[1] == 255) { SetPixel((*this), (x + 1), (y + deltaY), color); }
 		if (bitmapPointer[2] == 255) { SetPixel((*this), (x + 2), (y + deltaY), color); }
@@ -175,10 +161,10 @@ void FrameBuffer::DrawString(Color color, const char* stringPointer)
 
 void FrameBuffer::DrawBuffer(const FrameBuffer& fb, int PositionX, int PositionY) {
 
-	int StartX = clamp(0, PositionX, this->Width);
-	int StartY = clamp(0, PositionY, this->Height);
-	int EndX = clamp(0, PositionX + fb.Width, this->Width);
-	int EndY = clamp(0, PositionY + fb.Height, this->Height);
+	int StartX = CS_iclamp(0, PositionX, this->Width);
+	int StartY = CS_iclamp(0, PositionY, this->Height);
+	int EndX = CS_iclamp(0, PositionX + fb.Width, this->Width);
+	int EndY = CS_iclamp(0, PositionY + fb.Height, this->Height);
 
 	for (int y = StartY; y < EndY; y++) {
 		for (int x = StartX; x < EndX; x++) {

@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\CrossBufferLayer\BasicDataTypeDeclarations.cpp" />
     <ClCompile Include="..\CrossBufferLayer\CrossBuffer.cpp" />
     <ClCompile Include="..\CrossBufferLayer\FontSupport.cpp" />
     <ClCompile Include="..\CrossBufferLayer\FPSCalculator.cpp" />
@@ -158,6 +159,7 @@
     <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\CrossBufferLayer\BasicDataTypeDeclarations.h" />
     <ClInclude Include="..\CrossBufferLayer\CrossBuffer.h" />
     <ClInclude Include="..\CrossBufferLayer\FontSupport.h" />
     <ClInclude Include="..\CrossBufferLayer\FPSCalculator.h" />

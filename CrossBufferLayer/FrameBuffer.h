@@ -7,29 +7,6 @@
 using std::string;
 using std::vector;
 
-/*
-** Define Cross Platform Types
-*/
-
-#define ui32                                 unsigned int    // Should be 32-bit 4-byte no sign
-#define i32                                  signed   int    // Should be 32-bit 4-byte have sign
-
-#define ui16                                 unsigned short  // Should be 16-bit 2-byte no sign
-#define i16                                  signed   short  // Should be 16-bit 2-byte have sign
-
-#define ui8                                  unsigned char   // Should be 16-bit 2-byte no sign
-#define i8                                   signed   char   // Should be 16-bit 2-byte have sign
-
-#define f64                                  double          // Should be 64-bit 8-byte float
-#define f32                                  float           // Should be 32-bit 4-byte float
-
-
-/*
-** Define Mathematics Functions
-*/
-
-int clamp(int min, int x, int max);
-
 
 /*
 ** Define Color and Functions for Color

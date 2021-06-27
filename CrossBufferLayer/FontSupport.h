@@ -1,8 +1,9 @@
 #ifndef __CSBF_FontSupport__
 #define __CSBF_FontSupport__
 
+#include "BasicDataTypeDeclarations.h"
 
-const int Font[8 * 16 * 256] = {
+const i32 CS_font[8 * 16 * 256] = {
 
 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  ,
 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  ,
