@@ -61,13 +61,13 @@
     <ClInclude Include="..\CrossBufferLayer\FrameBuffer.h">
       <Filter>头文件\CrossBufferLayer</Filter>
     </ClInclude>
-    <ClInclude Include="..\CrossBufferLayer\IOSupport.h">
-      <Filter>头文件\CrossBufferLayer</Filter>
-    </ClInclude>
     <ClInclude Include="..\CrossBufferLayer\FPSCalculator.h">
       <Filter>头文件\CrossBufferLayer</Filter>
     </ClInclude>
     <ClInclude Include="..\CrossBufferLayer\BasicDataTypeDeclarations.h">
+      <Filter>头文件\CrossBufferLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CrossBufferLayer\KeyboardSupport.h">
       <Filter>头文件\CrossBufferLayer</Filter>
     </ClInclude>
   </ItemGroup>
@@ -76,9 +76,6 @@
       <Filter>源文件\HardwareSimuLayer</Filter>
     </ClCompile>
     <ClCompile Include="..\CrossBufferLayer\FrameBuffer.cpp">
-      <Filter>源文件\CrossBufferLayer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\CrossBufferLayer\IOSupport.cpp">
       <Filter>源文件\CrossBufferLayer</Filter>
     </ClCompile>
     <ClCompile Include="..\CrossBufferLayer\FontSupport.cpp">
@@ -91,6 +88,9 @@
       <Filter>源文件\CrossBufferLayer</Filter>
     </ClCompile>
     <ClCompile Include="..\CrossBufferLayer\BasicDataTypeDeclarations.cpp">
+      <Filter>源文件\CrossBufferLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CrossBufferLayer\KeyboardSupport.cpp">
       <Filter>源文件\CrossBufferLayer</Filter>
     </ClCompile>
   </ItemGroup>

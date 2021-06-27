@@ -1,5 +1,5 @@
-#ifndef __CSBF_IOSupport__
-#define __CSBF_IOSupport__
+#ifndef __CSBF_KeyboardSupport__
+#define __CSBF_KeyboardSupport__
 
 #include "BasicDataTypeDeclarations.h"
 
