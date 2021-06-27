@@ -34,7 +34,7 @@ BOOL FirstTimeRunning = TRUE;
 clock_t lastTime = clock();
 clock_t thisTime = clock();
 Window win;
-Keyboard kb = (Keyboard)malloc(256 * sizeof(int));
+Keyboard kb;
 vector<FrameBuffer*> fbLoadingQueue;
 
 /* Define Functions */
@@ -135,30 +135,30 @@ LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		return 0;
 
 	case WM_KEYDOWN:
-		kb[wParam] = 1;
+		kb.HardwareSimuSetKeyIsPressed(wParam);
 		if (wParam == KEY_ESCAPE) {
 			PostQuitMessage(0);
 		}
 		return DefWindowProc(hWnd, msg, wParam, lParam);
 
 	case WM_KEYUP:
-		kb[wParam] = 0;
+		kb.HardwareSimuSetKeyIsReleased(wParam);
 		return DefWindowProc(hWnd, msg, wParam, lParam);
 
 	case WM_LBUTTONDOWN:
-		kb[KEY_MOUSE_LBTN] = 1;
+		kb.HardwareSimuSetKeyIsPressed(KEY_MOUSE_LBTN);
 		return DefWindowProc(hWnd, msg, wParam, lParam);
 
 	case WM_LBUTTONUP:
-		kb[KEY_MOUSE_LBTN] = 0;
+		kb.HardwareSimuSetKeyIsReleased(KEY_MOUSE_LBTN);
 		return DefWindowProc(hWnd, msg, wParam, lParam);
 
 	case WM_RBUTTONDOWN:
-		kb[KEY_MOUSE_RBTN] = 1;
+		kb.HardwareSimuSetKeyIsPressed(KEY_MOUSE_RBTN);
 		return DefWindowProc(hWnd, msg, wParam, lParam);
 
 	case WM_RBUTTONUP:
-		kb[KEY_MOUSE_RBTN] = 0;
+		kb.HardwareSimuSetKeyIsReleased(KEY_MOUSE_RBTN);
 		return DefWindowProc(hWnd, msg, wParam, lParam);
 
 	case WM_MOUSEMOVE:
@@ -183,8 +183,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	_In_ LPWSTR    lpCmdLine,
 	_In_ int       nCmdShow)
 {
-	// Zeromemory the kb
-	memset(kb, 0, 256 * sizeof(int));
 
 	// Get Present Time
 	thisTime = clock();

@@ -46,29 +46,29 @@ FPSCalculator fps;
 
 void Update(FrameBuffer &fb, Keyboard kb, int deltaTime, vector<FrameBuffer*>& fbLoadingQueue) {
 
-	if (kb['A']) {
+	if (kb.IsKeyPressed('A')) {
 		StartX -= 3;
 	}
-	if (kb['D']) {
+	if (kb.IsKeyPressed('D')) {
 		StartX += 3;
 	}
-	if (kb['W']) {
+	if (kb.IsKeyPressed('W')) {
 		StartY -= 3;
 	}
-	if (kb['S']) {
+	if (kb.IsKeyPressed('S')) {
 		StartY += 3;
 	}
 
-	if (kb['J']) {
+	if (kb.IsKeyPressed('J')) {
 		EndX -= 3;
 	}
-	if (kb['L']) {
+	if (kb.IsKeyPressed('L')) {
 		EndX += 3;
 	}
-	if (kb['I']) {
+	if (kb.IsKeyPressed('I')) {
 		EndY -= 3;
 	}
-	if (kb['K']) {
+	if (kb.IsKeyPressed('K')) {
 		EndY += 3;
 	}
 

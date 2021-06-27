@@ -1,11 +1,12 @@
 #ifndef __CSBF_IOSupport__
 #define __CSBF_IOSupport__
 
+#include "BasicDataTypeDeclarations.h"
+
+
 /*
 ** Define Things for Input Processing
 */
-
-#define    Keyboard                int*    // Keyboard Object
 
 #define    KEY_LBUTTON             0x01    // 鼠标左键（控制台不使用）
 #define    KEY_RBUTTON             0x02    // 鼠标右键（控制台不使用）
@@ -170,5 +171,16 @@
 #define    KEY_NONAME              0xFC    // 未用
 #define    KEY_PA1                 0xFD    // PA1键
 #define    KEY_OEM_CLEAR           0xFE    // Clear键
+
+class Keyboard {
+private:
+	csbool keyBuffer[256];
+public:
+	Keyboard();
+	csbool IsKeyPressed(i8 key);
+	void   HardwareSimuSetKeyIsPressed(i8 key);
+	void   HardwareSimuSetKeyIsReleased(i8 key);
+};
+
 
 #endif

@@ -18,6 +18,10 @@ typedef    signed   char     i8;      // Should be 16-bit 2-byte sign-ful
 typedef    double            f64;     // Should be 64-bit 8-byte float
 typedef    float             f32;     // Should be 32-bit 4-byte float
 
+typedef    char              csbool;  // Boolean value, no matter what
+#define    csTrue            1;
+#define    csFalse           0;
+
 
 /*
 ** Define Mathematics Functions
