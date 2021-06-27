@@ -36,6 +36,8 @@ public:
          (i32 width, i32 height);
     void DisAllocateBuffer
          ();
+    void ClearSelfBuffer
+         ();
     void CopySameSizeBuffer
          (const FrameBuffer& from, FrameBuffer& to);
 
@@ -44,7 +46,8 @@ public:
     FrameBuffer(const FrameBuffer& fb);
     FrameBuffer& operator=(const FrameBuffer& fb);
     ~FrameBuffer();
-   
+
+   /*
 	void DrawChar
          (i32 x, i32 y, i8 r, i8 g, i8 b, char ch);
     void DrawString
@@ -57,8 +60,7 @@ public:
          (const FrameBuffer& fb);
     void InitCursor
          ();
-    void ClearBuffer
-         ();
+   */
 };
 
 #endif

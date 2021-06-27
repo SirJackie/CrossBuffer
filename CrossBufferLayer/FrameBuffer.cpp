@@ -17,6 +17,17 @@ void FrameBuffer::DisAllocateBuffer()
     delete[] blueBuffer;
 }
 
+void FrameBuffer::ClearSelfBuffer()
+{
+    for (i32 y = 0; y < height; y++) {
+        for (i32 x = 0; x < width; x++) {
+            redBuffer[y * width + x] = 0;
+            greenBuffer[y * width + x] = 0;
+            blueBuffer[y * width + x] = 0;
+        }
+    }
+}
+
 void FrameBuffer::CopySameSizeBuffer(const FrameBuffer& from, FrameBuffer& to)
 {
     for (i32 y = 0; y < height; y++) {
@@ -36,6 +47,7 @@ FrameBuffer::FrameBuffer()
     width = height = 1;
 
     AllocateBuffer(1, 1);
+    ClearSelfBuffer();
 }
 
 FrameBuffer::FrameBuffer(i32 Width_, i32 Height_)
@@ -47,6 +59,7 @@ FrameBuffer::FrameBuffer(i32 Width_, i32 Height_)
     height = Height_;
 
     AllocateBuffer(width, height);
+    ClearSelfBuffer();
 }
 
 FrameBuffer::FrameBuffer(const FrameBuffer& fb)
@@ -84,32 +97,4 @@ FrameBuffer& FrameBuffer::operator=(const FrameBuffer& fb)
 FrameBuffer::~FrameBuffer()
 {
     DisAllocateBuffer();
-}
-
-void FrameBuffer::DrawChar(i32 x, i32 y, i8 r, i8 g, i8 b, char ch)
-{
-}
-
-void FrameBuffer::DrawString(i8 r, i8 g, i8 b, const i8* stringPointer)
-{
-}
-
-void FrameBuffer::DrawBuffer(const FrameBuffer& fb, i32 PositionX, i32 PositionY)
-{
-}
-
-void FrameBuffer::Draw(const char* stringPointer)
-{
-}
-
-void FrameBuffer::Draw(const FrameBuffer& fb)
-{
-}
-
-void FrameBuffer::InitCursor()
-{
-}
-
-void FrameBuffer::ClearBuffer()
-{
 }
