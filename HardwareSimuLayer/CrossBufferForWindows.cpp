@@ -1,7 +1,6 @@
 ﻿// Include Hardware Simulation Parts
 #include "Win32Parts.h"
 #include "D3DParts.h"
-#include "DeclarationParts.h"
 
 // Include Standard Libraries
 #include <time.h>
@@ -16,11 +15,12 @@
 ** Define Global Variables
 */
 
-D3DHelper d3dHelper;
+WindowsHelper windowsHelper;
+D3DHelper     d3dHelper;
 BOOL FirstTimeRunning = TRUE;
 clock_t lastTime = clock();
 clock_t thisTime = clock();
-Window win;
+
 Keyboard kb;
 
 LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -46,7 +46,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// Create Window
 	RECT wr;
 	HWND hWnd;
-	CreateWindowRectUsingWindow(win, WindowClassName, WindowTitle, wc, wr, hWnd);
+	CreateWindowRectUsingWindow(windowsHelper, WindowClassName, WindowTitle, wc, wr, hWnd);
 
 	d3dHelper = D3DHelper(hWnd);
 
@@ -76,7 +76,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 			// Init FrameBuffer Object
 			//FrameBuffer fb(win.Width, win.Height, (rect.Pitch) >> 2, (Color*)rect.pBits);
-			FrameBuffer fb(win.windowWidth, win.windowHeight);
+			FrameBuffer fb(windowsHelper.windowWidth, windowsHelper.windowHeight);
 
 			// If it is the First Time Running
 			if (FirstTimeRunning) {

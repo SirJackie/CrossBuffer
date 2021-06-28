@@ -17,7 +17,7 @@ WNDCLASSEX GetRegistedWindowClass
 	return wc;
 }
 
-void CreateWindowRectUsingWindow(Window& win, const wchar_t* WindowClassName, const wchar_t* WindowTitle, WNDCLASSEX& wc, RECT& resultRect, HWND& resultHwnd)
+void CreateWindowRectUsingWindow(WindowsHelper& win, const wchar_t* WindowClassName, const wchar_t* WindowTitle, WNDCLASSEX& wc, RECT& resultRect, HWND& resultHwnd)
 {
 	RECT wr;
 	wr.left = win.leftMargin;
@@ -38,7 +38,7 @@ void CreateWindowRectUsingWindow(Window& win, const wchar_t* WindowClassName, co
 	resultRect = wr;
 }
 
-void Window::GetScreenResolution(i32& resultWidth, i32& resultHeight)
+void WindowsHelper::GetScreenResolution(i32& resultWidth, i32& resultHeight)
 {
 	// Get Screen HDC
 	HDC hdcScreen;
@@ -52,7 +52,7 @@ void Window::GetScreenResolution(i32& resultWidth, i32& resultHeight)
 	}
 }
 
-Window::Window()
+WindowsHelper::WindowsHelper()
 {
 	GetScreenResolution(screenWidth, screenHeight);
 	unit = screenHeight / 30;

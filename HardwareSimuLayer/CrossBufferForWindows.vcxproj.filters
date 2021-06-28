@@ -67,9 +67,6 @@
     <ClInclude Include="Win32Parts.h">
       <Filter>头文件\HardwareSimuLayer</Filter>
     </ClInclude>
-    <ClInclude Include="DeclarationParts.h">
-      <Filter>头文件\HardwareSimuLayer</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CrossBufferForWindows.cpp">
@@ -97,9 +94,6 @@
       <Filter>源文件\HardwareSimuLayer</Filter>
     </ClCompile>
     <ClCompile Include="D3DParts.cpp">
-      <Filter>源文件\HardwareSimuLayer</Filter>
-    </ClCompile>
-    <ClCompile Include="DeclarationParts.cpp">
       <Filter>源文件\HardwareSimuLayer</Filter>
     </ClCompile>
   </ItemGroup>

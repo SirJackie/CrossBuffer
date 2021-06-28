@@ -4,10 +4,9 @@
 #include <Windows.h>
 #include "Resource.h"
 #include "../CrossBufferLayer/BasicDataTypeDeclarations.h"
-#include "DeclarationParts.h"
 
 
-class Window {
+class WindowsHelper {
 public:
 	i32 screenWidth;
 	i32 screenHeight;
@@ -19,7 +18,7 @@ public:
 
 	void GetScreenResolution(i32& resultWidth, i32& resultHeight);
 
-	Window();
+	WindowsHelper();
 };
 
 
@@ -28,6 +27,6 @@ typedef LRESULT(*MsgProcType) (HWND, UINT, WPARAM, LPARAM);
 WNDCLASSEX GetRegistedWindowClass
 	       (const wchar_t* WindowClassName, WNDPROC& MsgProc, HINSTANCE& hInstance);
 
-void CreateWindowRectUsingWindow(Window& win, const wchar_t* WindowClassName, const wchar_t* WindowTitle, WNDCLASSEX& wc, RECT& resultRect, HWND& resultHwnd);
+void CreateWindowRectUsingWindow(WindowsHelper& win, const wchar_t* WindowClassName, const wchar_t* WindowTitle, WNDCLASSEX& wc, RECT& resultRect, HWND& resultHwnd);
 
 #endif
