@@ -5,13 +5,13 @@
 
 class Window {
 public:
-	int ScreenWidth;
-	int ScreenHeight;
-	int Unit;
-	int WindowWidth;
-	int WindowHeight;
-	int LeftMargin;
-	int TopMargin;
+	int screenWidth;
+	int screenHeight;
+	int unit;
+	int windowWidth;
+	int windowHeight;
+	int leftMargin;
+	int topMargin;
 
 	Window();
 	Window(i32 ScreenWidth_, i32 ScreenHeight_);

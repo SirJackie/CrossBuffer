@@ -73,10 +73,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	// Create Window
 	RECT wr;
-	wr.left   = win.LeftMargin;
-	wr.right  = win.WindowWidth  + wr.left;
-	wr.top    = win.TopMargin;
-	wr.bottom = win.WindowHeight + wr.top;
+	wr.left   = win.leftMargin;
+	wr.right  = win.windowWidth  + wr.left;
+	wr.top    = win.topMargin;
+	wr.bottom = win.windowHeight + wr.top;
 	AdjustWindowRect(&wr, WS_OVERLAPPEDWINDOW, FALSE);
 	HWND hWnd = CreateWindowW(
 		WindowClassName, WindowTitle,
