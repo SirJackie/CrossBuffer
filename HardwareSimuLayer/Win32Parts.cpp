@@ -1,17 +1,5 @@
 #include "Win32Parts.h"
 
-void GetScreenResolution(i32& resultWidth, i32& resultHeight)
-{
-	// Get Screen HDC
-	HDC hdcScreen;
-	hdcScreen = CreateDC(L"DISPLAY", NULL, NULL, NULL);
-	// Get X and Y
-	resultWidth = GetDeviceCaps(hdcScreen, HORZRES);
-	resultHeight = GetDeviceCaps(hdcScreen, VERTRES);
-	// Release HDC
-	if (NULL != hdcScreen) DeleteDC(hdcScreen);
-}
-
 WNDCLASSEX GetRegistedWindowClass
 (
 	const wchar_t* WindowClassName, WNDPROC& MsgProc, HINSTANCE& hInstance
@@ -48,4 +36,30 @@ void CreateWindowRectUsingWindow(Window& win, const wchar_t* WindowClassName, co
 
 	resultHwnd = hWnd;
 	resultRect = wr;
+}
+
+void Window::GetScreenResolution(i32& resultWidth, i32& resultHeight)
+{
+	// Get Screen HDC
+	HDC hdcScreen;
+	hdcScreen = CreateDC(L"DISPLAY", NULL, NULL, NULL);
+	// Get X and Y
+	resultWidth = GetDeviceCaps(hdcScreen, HORZRES);
+	resultHeight = GetDeviceCaps(hdcScreen, VERTRES);
+	// Release HDC
+	if (csNull != hdcScreen) {
+		DeleteDC(hdcScreen);
+	}
+}
+
+Window::Window()
+{
+	GetScreenResolution(screenWidth, screenHeight);
+	unit = screenHeight / 30;
+
+	windowHeight = 26 * unit;
+	windowWidth = CS_iclamp(0, windowHeight / 9 * 16, screenWidth - 10);
+
+	leftMargin = (screenWidth - windowWidth) / 2;
+	topMargin = (screenHeight - windowHeight) / 2;
 }

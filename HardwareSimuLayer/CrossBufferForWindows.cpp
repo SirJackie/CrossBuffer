@@ -39,11 +39,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	thisTime = clock();
 	lastTime = thisTime;
 
-	// Calculate Window Size
-	i32 screenWidth, screenHeight;
-	GetScreenResolution(screenWidth, screenHeight);
-	win = Window(screenWidth, screenHeight);
-
 	// Regist Window Class
 	WNDPROC wpMsgProc = MsgProc;
 	WNDCLASSEX wc = GetRegistedWindowClass(WindowClassName, wpMsgProc, hInstance);

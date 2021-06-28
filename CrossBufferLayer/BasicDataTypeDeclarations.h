@@ -19,12 +19,11 @@ typedef    double            f64;     // Should be 64-bit 8-byte float
 typedef    float             f32;     // Should be 32-bit 4-byte float
 
 typedef    char              csbool;  // Boolean value, no matter what
-#define    csTrue            1;
-#define    csFalse           0;
+#define    csTrue            1
+#define    csFalse           0
 
-#define    csNull            0;
-#define    csNullPtr         nullptr;
-
+#define    csNull            NULL
+#define    csNullPtr         nullptr
 
 /*
 ** Define Mathematics Functions

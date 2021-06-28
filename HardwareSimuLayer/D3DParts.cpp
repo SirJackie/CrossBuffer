@@ -1,10 +1,5 @@
 #include "D3DParts.h"
 
-void InitializeD3DThings(HWND& hWnd, D3DHelper& d3dHelper)
-{
-	
-}
-
 D3DHelper::D3DHelper()
 {
 	pDirect3D   = csNullPtr;
