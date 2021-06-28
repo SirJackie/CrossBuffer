@@ -150,6 +150,7 @@
     <ClCompile Include="..\CrossBufferLayer\FrameBuffer.cpp" />
     <ClCompile Include="..\CrossBufferLayer\KeyboardSupport.cpp" />
     <ClCompile Include="CrossBufferForWindows.cpp" />
+    <ClCompile Include="D3DParts.cpp" />
     <ClCompile Include="DeclarationParts.cpp" />
     <ClCompile Include="Win32Parts.cpp" />
   </ItemGroup>

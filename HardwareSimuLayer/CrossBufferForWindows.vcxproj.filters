@@ -94,10 +94,13 @@
       <Filter>源文件\CrossBufferLayer</Filter>
     </ClCompile>
     <ClCompile Include="Win32Parts.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\HardwareSimuLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="D3DParts.cpp">
+      <Filter>源文件\HardwareSimuLayer</Filter>
     </ClCompile>
     <ClCompile Include="DeclarationParts.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\HardwareSimuLayer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

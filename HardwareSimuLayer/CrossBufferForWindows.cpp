@@ -16,10 +16,7 @@
 ** Define Global Variables
 */
 
-IDirect3D9* pDirect3D;
-IDirect3DDevice9* pDevice;
-IDirect3DSurface9* pBackBuffer;
-D3DLOCKED_RECT rect;
+D3DHelper d3dHelper;
 BOOL FirstTimeRunning = TRUE;
 clock_t lastTime = clock();
 clock_t thisTime = clock();
@@ -56,20 +53,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	HWND hWnd;
 	CreateWindowRectUsingWindow(win, WindowClassName, WindowTitle, wc, wr, hWnd);
 
-	// Initialize Direct3D Objects
-	pDirect3D = Direct3DCreate9(D3D_SDK_VERSION);
-	D3DPRESENT_PARAMETERS d3dpp;
-	ZeroMemory(&d3dpp, sizeof(d3dpp));
-	d3dpp.Windowed = TRUE;
-	d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
-	d3dpp.BackBufferFormat = D3DFMT_UNKNOWN;
-	d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_ONE;
-	d3dpp.Flags = D3DPRESENTFLAG_LOCKABLE_BACKBUFFER;
-	pDirect3D->CreateDevice(
-		D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd,
-		D3DCREATE_HARDWARE_VERTEXPROCESSING | D3DCREATE_PUREDEVICE,
-		&d3dpp, &pDevice
-	);
+	InitializeD3DThings(hWnd, d3dHelper);
 
 	// Process Messages From Windows
 	MSG msg;
@@ -93,15 +77,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			thisTime = clock();
 
 			// Clear & Get Back Buffer
-			pDevice->Clear(
+			d3dHelper.pDevice->Clear(
 				0, NULL, D3DCLEAR_TARGET,
 				D3DCOLOR_XRGB(0, 0, 0), 0.0f, 0
 			);
-			pBackBuffer = NULL;
-			pDevice->GetBackBuffer(
-				0, 0, D3DBACKBUFFER_TYPE_MONO, &pBackBuffer
+			d3dHelper.pBackBuffer = NULL;
+			d3dHelper.pDevice->GetBackBuffer(
+				0, 0, D3DBACKBUFFER_TYPE_MONO, &(d3dHelper.pBackBuffer)
 			);
-			pBackBuffer->LockRect(&rect, NULL, NULL);
+			d3dHelper.pBackBuffer->LockRect(&(d3dHelper.rect), NULL, NULL);
 
 			// Init FrameBuffer Object
 			//FrameBuffer fb(win.Width, win.Height, (rect.Pitch) >> 2, (Color*)rect.pBits);
@@ -128,9 +112,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			//fbLoadingQueue.clear();
 
 			// Release Back Buffer and Swap it to Front
-			pBackBuffer->UnlockRect();
-			pBackBuffer->Release();
-			pDevice->Present(NULL, NULL, NULL, NULL);
+			d3dHelper.pBackBuffer->UnlockRect();
+			d3dHelper.pBackBuffer->Release();
+			d3dHelper.pDevice->Present(NULL, NULL, NULL, NULL);
 
 			// Calculate the Delta Time
 			// lastTime in next frame = thisTime in this frame
@@ -145,15 +129,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	// Release All the Variables
 	UnregisterClass(WindowClassName, wc.hInstance);
-	if (pDevice)
+	if (d3dHelper.pDevice)
 	{
-		pDevice->Release();
-		pDevice = NULL;
+		d3dHelper.pDevice->Release();
+		d3dHelper.pDevice = NULL;
 	}
-	if (pDirect3D)
+	if (d3dHelper.pDirect3D)
 	{
-		pDirect3D->Release();
-		pDirect3D = NULL;
+		d3dHelper.pDirect3D->Release();
+		d3dHelper.pDirect3D = NULL;
 	}
 	return 0;
 }
