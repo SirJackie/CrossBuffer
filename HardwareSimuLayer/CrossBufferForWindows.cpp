@@ -35,12 +35,6 @@ Keyboard kb;
 
 LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
-
-
-
-
-FrameBuffer bitmapbuffer;
-
 /*
 ** Main Function
 */
@@ -62,14 +56,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 
 	// Regist Window Class
-	WNDCLASSEX wc = {
-		sizeof(WNDCLASSEX), CS_CLASSDC, MsgProc, 0, 0,
-		GetModuleHandle(NULL), NULL, NULL, NULL, NULL,
-		WindowClassName, NULL
-	};
-	wc.hIconSm = LoadIcon(wc.hInstance, MAKEINTRESOURCE(IDI_SMALL));
-	wc.hIcon   = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_CROSSBUFFERFORWINDOWS));
-	RegisterClassEx(&wc);
+	WNDPROC wpMsgProc = MsgProc;
+	WNDCLASSEX wc = GetRegistedWindowClass(WindowClassName, wpMsgProc, hInstance);
 
 	// Create Window
 	RECT wr;

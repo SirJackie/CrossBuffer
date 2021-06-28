@@ -2,6 +2,13 @@
 
 Window::Window()
 {
+	screenWidth  = 0;
+	screenHeight = 0;
+	unit         = 0;
+	windowHeight = 0;
+	windowWidth  = 0;
+	leftMargin   = 0;
+	topMargin    = 0;
 }
 
 Window::Window(i32 ScreenWidth_, i32 ScreenHeight_)
