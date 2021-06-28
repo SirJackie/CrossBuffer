@@ -50,10 +50,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	lastTime = thisTime;
 
 	// Calculate Window Size
-	i32 a, b;
-	GetScreenResolution(&a, &b);
-	win = Window(a, b);
-
+	i32 screenWidth, screenHeight;
+	GetScreenResolution(screenWidth, screenHeight);
+	win = Window(screenWidth, screenHeight);
 
 	// Regist Window Class
 	WNDPROC wpMsgProc = MsgProc;
@@ -61,19 +60,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	// Create Window
 	RECT wr;
-	wr.left   = win.leftMargin;
-	wr.right  = win.windowWidth  + wr.left;
-	wr.top    = win.topMargin;
-	wr.bottom = win.windowHeight + wr.top;
-	AdjustWindowRect(&wr, WS_OVERLAPPEDWINDOW, FALSE);
-	HWND hWnd = CreateWindowW(
-		WindowClassName, WindowTitle,
-		WS_OVERLAPPEDWINDOW,
-		wr.left, wr.top, wr.right - wr.left, wr.bottom - wr.top,
-		NULL, NULL, wc.hInstance, NULL
-	);
-	ShowWindow(hWnd, SW_SHOWDEFAULT);
-	UpdateWindow(hWnd);
+	HWND hWnd;
+	CreateWindowRectUsingWindow(win, WindowClassName, WindowTitle, wc, wr, hWnd);
 
 	// Initialize Direct3D Objects
 	pDirect3D = Direct3DCreate9(D3D_SDK_VERSION);

@@ -1,18 +1,16 @@
 #include "Win32Parts.h"
 
-void GetScreenResolution(int* resultX, int* resultY)
+void GetScreenResolution(i32& resultWidth, i32& resultHeight)
 {
 	// Get Screen HDC
 	HDC hdcScreen;
 	hdcScreen = CreateDC(L"DISPLAY", NULL, NULL, NULL);
 	// Get X and Y
-	*resultX = GetDeviceCaps(hdcScreen, HORZRES);
-	*resultY = GetDeviceCaps(hdcScreen, VERTRES);
+	resultWidth = GetDeviceCaps(hdcScreen, HORZRES);
+	resultHeight = GetDeviceCaps(hdcScreen, VERTRES);
 	// Release HDC
 	if (NULL != hdcScreen) DeleteDC(hdcScreen);
 }
-
-typedef LRESULT (*MsgProcType) (HWND, UINT, WPARAM, LPARAM);
 
 WNDCLASSEX GetRegistedWindowClass
 (
@@ -29,4 +27,25 @@ WNDCLASSEX GetRegistedWindowClass
 	RegisterClassEx(&wc);
 
 	return wc;
+}
+
+void CreateWindowRectUsingWindow(Window& win, const wchar_t* WindowClassName, const wchar_t* WindowTitle, WNDCLASSEX& wc, RECT& resultRect, HWND& resultHwnd)
+{
+	RECT wr;
+	wr.left = win.leftMargin;
+	wr.right = win.windowWidth + wr.left;
+	wr.top = win.topMargin;
+	wr.bottom = win.windowHeight + wr.top;
+	AdjustWindowRect(&wr, WS_OVERLAPPEDWINDOW, FALSE);
+	HWND hWnd = CreateWindowW(
+		WindowClassName, WindowTitle,
+		WS_OVERLAPPEDWINDOW,
+		wr.left, wr.top, wr.right - wr.left, wr.bottom - wr.top,
+		NULL, NULL, wc.hInstance, NULL
+	);
+	ShowWindow(hWnd, SW_SHOWDEFAULT);
+	UpdateWindow(hWnd);
+
+	resultHwnd = hWnd;
+	resultRect = wr;
 }
