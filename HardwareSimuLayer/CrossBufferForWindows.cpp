@@ -56,12 +56,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	lastTime = thisTime;
 
 	// Calculate Window Size
-	GetScreenResolution(&(win.ScreenWidth), &(win.ScreenHeight));
-	win.Unit    = win.ScreenHeight / 30;
-	win.WindowHeight  = 26 * win.Unit;
-	win.WindowWidth   = win.WindowHeight / 9 * 16;
-	win.LeftMargin = (win.ScreenWidth - win.WindowWidth)  / 2;
-	win.TopMargin  = (win.ScreenHeight - win.WindowHeight) / 2;
+	i32 a, b;
+	GetScreenResolution(&a, &b);
+	win = Window(a, b);
+
 
 	// Regist Window Class
 	WNDCLASSEX wc = {
