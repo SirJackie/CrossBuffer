@@ -1,26 +1,5 @@
 #include "Win32Parts.h"
 
-void CreateWindowRectUsingWindow(WindowsHelper& win, const wchar_t* WindowClassName, const wchar_t* WindowTitle, WNDCLASSEX& wc, RECT& resultRect, HWND& resultHwnd)
-{
-	RECT wr;
-	wr.left = win.leftMargin;
-	wr.right = win.windowWidth + wr.left;
-	wr.top = win.topMargin;
-	wr.bottom = win.windowHeight + wr.top;
-	AdjustWindowRect(&wr, WS_OVERLAPPEDWINDOW, FALSE);
-	HWND hWnd = CreateWindowW(
-		WindowClassName, WindowTitle,
-		WS_OVERLAPPEDWINDOW,
-		wr.left, wr.top, wr.right - wr.left, wr.bottom - wr.top,
-		NULL, NULL, wc.hInstance, NULL
-	);
-	ShowWindow(hWnd, SW_SHOWDEFAULT);
-	UpdateWindow(hWnd);
-
-	resultHwnd = hWnd;
-	resultRect = wr;
-}
-
 void WindowsHelper::GetScreenResolution(i32& resultWidth, i32& resultHeight)
 {
 	// Get Screen HDC
@@ -47,7 +26,26 @@ WindowsHelper::WindowsHelper()
 	topMargin = (screenHeight - windowHeight) / 2;
 }
 
-void WindowsHelper::regist
+void WindowsHelper::CreateWindowsWindow(const wchar_t* WindowClassName, const wchar_t* WindowTitle)
+{
+	wr.left = leftMargin;
+	wr.right = windowWidth + wr.left;
+	wr.top = topMargin;
+	wr.bottom = windowHeight + wr.top;
+	AdjustWindowRect(&wr, WS_OVERLAPPEDWINDOW, FALSE);
+
+	hWnd = CreateWindowW(
+		WindowClassName, WindowTitle,
+		WS_OVERLAPPEDWINDOW,
+		wr.left, wr.top, wr.right - wr.left, wr.bottom - wr.top,
+		NULL, NULL, wc.hInstance, NULL
+	);
+
+	ShowWindow(hWnd, SW_SHOWDEFAULT);
+	UpdateWindow(hWnd);
+}
+
+void WindowsHelper::RegisterWindowsClass
 (
 	WNDPROC MsgProc, const wchar_t* WindowClassName,
 	HINSTANCE& hInstance

@@ -39,14 +39,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	thisTime = clock();
 	lastTime = thisTime;
 
-	windowsHelper.regist(MsgProc, WindowClassName, hInstance);
+	windowsHelper.RegisterWindowsClass(MsgProc, WindowClassName, hInstance);
 
 	// Create Window
-	RECT wr;
-	HWND hWnd;
-	CreateWindowRectUsingWindow(windowsHelper, WindowClassName, WindowTitle, windowsHelper.wc, wr, hWnd);
+	
+	windowsHelper.CreateWindowsWindow(WindowClassName, WindowTitle);
 
-	d3dHelper = D3DHelper(hWnd);
+	d3dHelper = D3DHelper(windowsHelper.hWnd);
 
 	// Process Messages From Windows
 	MSG msg;

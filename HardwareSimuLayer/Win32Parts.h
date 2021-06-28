@@ -19,18 +19,19 @@ public:
 	i32 topMargin;
 
 	WNDCLASSEX wc;
+	RECT wr;
+	HWND hWnd;
 
 	void GetScreenResolution(i32& resultWidth, i32& resultHeight);
 
 	WindowsHelper();
-	void regist
+	void RegisterWindowsClass
 	(
 		WNDPROC MsgProc, const wchar_t* WindowClassName,
 		HINSTANCE& hInstance
 	);
+	void CreateWindowsWindow(const wchar_t* WindowClassName, const wchar_t* WindowTitle);
 };
 
-
-void CreateWindowRectUsingWindow(WindowsHelper& win, const wchar_t* WindowClassName, const wchar_t* WindowTitle, WNDCLASSEX& wc, RECT& resultRect, HWND& resultHwnd);
 
 #endif
