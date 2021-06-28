@@ -12,11 +12,11 @@ public:
 	IDirect3DSurface9* pBackBuffer;
 	D3DLOCKED_RECT rect;
 
+	D3DHelper();
+	D3DHelper(HWND& hWnd);
 	void LockBuffer();
 	void UnlockBuffer();
 	void PaintFrameBufferHere(const FrameBuffer& fb);
 };
-
-void InitializeD3DThings(HWND& hWnd, D3DHelper& d3dHelper);
 
 #endif

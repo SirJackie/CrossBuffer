@@ -53,7 +53,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	HWND hWnd;
 	CreateWindowRectUsingWindow(win, WindowClassName, WindowTitle, wc, wr, hWnd);
 
-	InitializeD3DThings(hWnd, d3dHelper);
+	d3dHelper = D3DHelper(hWnd);
 
 	// Process Messages From Windows
 	MSG msg;

@@ -22,6 +22,9 @@ typedef    char              csbool;  // Boolean value, no matter what
 #define    csTrue            1;
 #define    csFalse           0;
 
+#define    csNull            0;
+#define    csNullPtr         nullptr;
+
 
 /*
 ** Define Mathematics Functions
