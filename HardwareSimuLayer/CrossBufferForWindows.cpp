@@ -39,11 +39,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	thisTime = clock();
 	lastTime = thisTime;
 
-	windowsHelper.RegisterWindowsClass(MsgProc, WindowClassName, hInstance);
-
-	// Create Window
-	
-	windowsHelper.CreateWindowsWindow(WindowClassName, WindowTitle);
+	// Register and Create Window
+	windowsHelper.RegisterAndCreateWindow(MsgProc, hInstance, WindowClassName, WindowTitle);
 
 	d3dHelper = D3DHelper(windowsHelper.hWnd);
 

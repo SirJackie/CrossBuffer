@@ -25,12 +25,11 @@ public:
 	void GetScreenResolution(i32& resultWidth, i32& resultHeight);
 
 	WindowsHelper();
-	void RegisterWindowsClass
+	void RegisterAndCreateWindow
 	(
-		WNDPROC MsgProc, const wchar_t* WindowClassName,
-		HINSTANCE& hInstance
+		WNDPROC MsgProc, HINSTANCE& hInstance,
+		const wchar_t* WindowClassName, const wchar_t* WindowTitle
 	);
-	void CreateWindowsWindow(const wchar_t* WindowClassName, const wchar_t* WindowTitle);
 };
 
 

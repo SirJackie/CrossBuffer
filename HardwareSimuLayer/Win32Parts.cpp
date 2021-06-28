@@ -26,8 +26,23 @@ WindowsHelper::WindowsHelper()
 	topMargin = (screenHeight - windowHeight) / 2;
 }
 
-void WindowsHelper::CreateWindowsWindow(const wchar_t* WindowClassName, const wchar_t* WindowTitle)
+void WindowsHelper::RegisterAndCreateWindow
+(
+	WNDPROC MsgProc, HINSTANCE& hInstance,
+	const wchar_t* WindowClassName, const wchar_t* WindowTitle
+)
 {
+	// Register Window
+	wc = {
+		sizeof(WNDCLASSEX), CS_CLASSDC, MsgProc, 0, 0,
+		GetModuleHandle(NULL), NULL, NULL, NULL, NULL,
+		WindowClassName, NULL
+	};
+	wc.hIconSm = LoadIcon(wc.hInstance, MAKEINTRESOURCE(IDI_SMALL));
+	wc.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_CROSSBUFFERFORWINDOWS));
+	RegisterClassEx(&wc);
+
+	// Create Window
 	wr.left = leftMargin;
 	wr.right = windowWidth + wr.left;
 	wr.top = topMargin;
@@ -43,20 +58,4 @@ void WindowsHelper::CreateWindowsWindow(const wchar_t* WindowClassName, const wc
 
 	ShowWindow(hWnd, SW_SHOWDEFAULT);
 	UpdateWindow(hWnd);
-}
-
-void WindowsHelper::RegisterWindowsClass
-(
-	WNDPROC MsgProc, const wchar_t* WindowClassName,
-	HINSTANCE& hInstance
-)
-{
-	wc = {
-		sizeof(WNDCLASSEX), CS_CLASSDC, MsgProc, 0, 0,
-		GetModuleHandle(NULL), NULL, NULL, NULL, NULL,
-		WindowClassName, NULL
-	};
-	wc.hIconSm = LoadIcon(wc.hInstance, MAKEINTRESOURCE(IDI_SMALL));
-	wc.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_CROSSBUFFERFORWINDOWS));
-	RegisterClassEx(&wc);
 }
