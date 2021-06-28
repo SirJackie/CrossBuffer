@@ -77,15 +77,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			thisTime = clock();
 
 			// Clear & Get Back Buffer
-			d3dHelper.pDevice->Clear(
-				0, NULL, D3DCLEAR_TARGET,
-				D3DCOLOR_XRGB(0, 0, 0), 0.0f, 0
-			);
-			d3dHelper.pBackBuffer = NULL;
-			d3dHelper.pDevice->GetBackBuffer(
-				0, 0, D3DBACKBUFFER_TYPE_MONO, &(d3dHelper.pBackBuffer)
-			);
-			d3dHelper.pBackBuffer->LockRect(&(d3dHelper.rect), NULL, NULL);
+			d3dHelper.LockBuffer();
 
 			// Init FrameBuffer Object
 			//FrameBuffer fb(win.Width, win.Height, (rect.Pitch) >> 2, (Color*)rect.pBits);
@@ -102,34 +94,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 				Update(fb, kb, thisTime - lastTime);   /* Call the Update() in Main.h */
 			}
 
-			i32* pBits = (i32*)d3dHelper.rect.pBits;
-			i32  bufferPitch = (d3dHelper.rect.Pitch)>>2;
-			i8* pRed = fb.redBuffer;
-			i8* pGreen = fb.greenBuffer;
-			i8* pBlue = fb.blueBuffer;
-
-			for (i32 y = 0; y < fb.height; y++) {
-				for (i32 x = 0; x < fb.width; x++) {
-					pBits[y * bufferPitch + x] = 
-					(i32)
-					(
-						(     0xff                << 24) |
-						(  (  (*pRed  ) & 0xff  ) << 16) |
-						(  (  (*pGreen) & 0xff  ) <<  8) |
-						(     (*pBlue) & 0xff          )
-					);
-					pRed++;
-					pGreen++;
-					pBlue++;
-				}
-			}
-
-			
+			// Paint FrameBuffer Here
+			d3dHelper.PaintFrameBufferHere(fb);
 
 			// Release Back Buffer and Swap it to Front
-			d3dHelper.pBackBuffer->UnlockRect();
-			d3dHelper.pBackBuffer->Release();
-			d3dHelper.pDevice->Present(NULL, NULL, NULL, NULL);
+			d3dHelper.UnlockBuffer();
 
 			// Calculate the Delta Time
 			// lastTime in next frame = thisTime in this frame
