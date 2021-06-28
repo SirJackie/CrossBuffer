@@ -1,22 +1,5 @@
 #include "Win32Parts.h"
 
-WNDCLASSEX GetRegistedWindowClass
-(
-	const wchar_t* WindowClassName, WNDPROC& MsgProc, HINSTANCE& hInstance
-)
-{
-	WNDCLASSEX wc = {
-		sizeof(WNDCLASSEX), CS_CLASSDC, MsgProc, 0, 0,
-		GetModuleHandle(NULL), NULL, NULL, NULL, NULL,
-		WindowClassName, NULL
-	};
-	wc.hIconSm = LoadIcon(wc.hInstance, MAKEINTRESOURCE(IDI_SMALL));
-	wc.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_CROSSBUFFERFORWINDOWS));
-	RegisterClassEx(&wc);
-
-	return wc;
-}
-
 void CreateWindowRectUsingWindow(WindowsHelper& win, const wchar_t* WindowClassName, const wchar_t* WindowTitle, WNDCLASSEX& wc, RECT& resultRect, HWND& resultHwnd)
 {
 	RECT wr;
@@ -62,4 +45,20 @@ WindowsHelper::WindowsHelper()
 
 	leftMargin = (screenWidth - windowWidth) / 2;
 	topMargin = (screenHeight - windowHeight) / 2;
+}
+
+void WindowsHelper::regist
+(
+	WNDPROC MsgProc, const wchar_t* WindowClassName,
+	HINSTANCE& hInstance
+)
+{
+	wc = {
+		sizeof(WNDCLASSEX), CS_CLASSDC, MsgProc, 0, 0,
+		GetModuleHandle(NULL), NULL, NULL, NULL, NULL,
+		WindowClassName, NULL
+	};
+	wc.hIconSm = LoadIcon(wc.hInstance, MAKEINTRESOURCE(IDI_SMALL));
+	wc.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_CROSSBUFFERFORWINDOWS));
+	RegisterClassEx(&wc);
 }

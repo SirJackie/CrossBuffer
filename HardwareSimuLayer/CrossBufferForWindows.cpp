@@ -39,14 +39,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	thisTime = clock();
 	lastTime = thisTime;
 
-	// Regist Window Class
-	WNDPROC wpMsgProc = MsgProc;
-	WNDCLASSEX wc = GetRegistedWindowClass(WindowClassName, wpMsgProc, hInstance);
+	windowsHelper.regist(MsgProc, WindowClassName, hInstance);
 
 	// Create Window
 	RECT wr;
 	HWND hWnd;
-	CreateWindowRectUsingWindow(windowsHelper, WindowClassName, WindowTitle, wc, wr, hWnd);
+	CreateWindowRectUsingWindow(windowsHelper, WindowClassName, WindowTitle, windowsHelper.wc, wr, hWnd);
 
 	d3dHelper = D3DHelper(hWnd);
 
@@ -107,7 +105,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	*/
 
 	// Release All the Variables
-	UnregisterClass(WindowClassName, wc.hInstance);
+	UnregisterClass(WindowClassName, windowsHelper.wc.hInstance);
 	if (d3dHelper.pDevice)
 	{
 		d3dHelper.pDevice->Release();
