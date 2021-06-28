@@ -44,7 +44,21 @@ void Setup(FrameBuffer &fb, Keyboard kb, int deltaTime) {
 
 FPSCalculator fps;
 
+int deltaColor = 0;
+
 void Update(FrameBuffer &fb, Keyboard kb, int deltaTime) {
+
+	if (deltaColor == 255) {
+		deltaColor = 0;
+	}
+
+	for (i32 i = 0; i < fb.width * fb.height; i++) {
+		fb.redBuffer[i] = deltaColor;
+		fb.greenBuffer[i] = deltaColor;
+		fb.blueBuffer[i] = deltaColor;
+	}
+
+	deltaColor += 1;
 
 	//if (kb.IsKeyPressed('A')) {
 	//	StartX -= 3;

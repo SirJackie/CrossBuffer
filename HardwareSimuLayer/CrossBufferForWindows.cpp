@@ -89,7 +89,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 			// Init FrameBuffer Object
 			//FrameBuffer fb(win.Width, win.Height, (rect.Pitch) >> 2, (Color*)rect.pBits);
-			FrameBuffer fb;
+			FrameBuffer fb(win.windowWidth, win.windowHeight);
 
 			// If it is the First Time Running
 			if (FirstTimeRunning) {
@@ -102,14 +102,29 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 				Update(fb, kb, thisTime - lastTime);   /* Call the Update() in Main.h */
 			}
 
-			//for (unsigned int i = 0; i < fbLoadingQueue.size(); i++) {
-			//	FrameBuffer& fb = *(fbLoadingQueue[i]);
-			//	/*if (fb.wannaLoadBitmap == true) {
-			//		ReadBitmapToFrameBuffer(fb.bitmapAddress.c_str(), fb);
-			//		fb.wannaLoadBitmap = false;
-			//	}*/
-			//}
-			//fbLoadingQueue.clear();
+			i32* pBits = (i32*)d3dHelper.rect.pBits;
+			i32  bufferPitch = (d3dHelper.rect.Pitch)>>2;
+			i8* pRed = fb.redBuffer;
+			i8* pGreen = fb.greenBuffer;
+			i8* pBlue = fb.blueBuffer;
+
+			for (i32 y = 0; y < fb.height; y++) {
+				for (i32 x = 0; x < fb.width; x++) {
+					pBits[y * bufferPitch + x] = 
+					(i32)
+					(
+						(     0xff                << 24) |
+						(  (  (*pRed  ) & 0xff  ) << 16) |
+						(  (  (*pGreen) & 0xff  ) <<  8) |
+						(     (*pBlue) & 0xff          )
+					);
+					pRed++;
+					pGreen++;
+					pBlue++;
+				}
+			}
+
+			
 
 			// Release Back Buffer and Swap it to Front
 			d3dHelper.pBackBuffer->UnlockRect();
