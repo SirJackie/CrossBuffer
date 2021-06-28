@@ -5,13 +5,6 @@
 
 // Include Standard Libraries
 #include <time.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string>
-using std::string;
-
-// Include VS Compiling Shit
-#include "resource.h"
 
 // Include the CrossBufferLayer
 #include "../Main.h"
