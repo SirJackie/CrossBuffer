@@ -33,59 +33,11 @@ clock_t thisTime = clock();
 Window win;
 Keyboard kb;
 
+LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 
 
 
-/*
-** Message Loop
-*/
-
-LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
-{
-	switch (msg)
-	{
-	case WM_DESTROY:
-		PostQuitMessage(0);
-		return 0;
-
-	case WM_KEYDOWN:
-		kb.HardwareSimuSetKeyIsPressed(wParam);
-		if (wParam == KEY_ESCAPE) {
-			PostQuitMessage(0);
-		}
-		return DefWindowProc(hWnd, msg, wParam, lParam);
-
-	case WM_KEYUP:
-		kb.HardwareSimuSetKeyIsReleased(wParam);
-		return DefWindowProc(hWnd, msg, wParam, lParam);
-
-	case WM_LBUTTONDOWN:
-		kb.HardwareSimuSetKeyIsPressed(KEY_MOUSE_LBTN);
-		return DefWindowProc(hWnd, msg, wParam, lParam);
-
-	case WM_LBUTTONUP:
-		kb.HardwareSimuSetKeyIsReleased(KEY_MOUSE_LBTN);
-		return DefWindowProc(hWnd, msg, wParam, lParam);
-
-	case WM_RBUTTONDOWN:
-		kb.HardwareSimuSetKeyIsPressed(KEY_MOUSE_RBTN);
-		return DefWindowProc(hWnd, msg, wParam, lParam);
-
-	case WM_RBUTTONUP:
-		kb.HardwareSimuSetKeyIsReleased(KEY_MOUSE_RBTN);
-		return DefWindowProc(hWnd, msg, wParam, lParam);
-
-	case WM_MOUSEMOVE:
-		/* Get Mouse Position */
-		LOWORD(lParam);  // MouseX
-		HIWORD(lParam);  // MouseY
-		return DefWindowProc(hWnd, msg, wParam, lParam);
-
-	default:
-		return DefWindowProc(hWnd, msg, wParam, lParam);
-	}
-}
 
 FrameBuffer bitmapbuffer;
 
@@ -104,12 +56,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	lastTime = thisTime;
 
 	// Calculate Window Size
-	GetScreenResolution(&(win.ScreenX), &(win.ScreenY));
-	win.Unit    = win.ScreenY / 30;
-	win.Height  = 26 * win.Unit;
-	win.Width   = win.Height / 9 * 16;
-	win.LeftMargin = (win.ScreenX - win.Width)  / 2;
-	win.TopMargin  = (win.ScreenY - win.Height) / 2;
+	GetScreenResolution(&(win.ScreenWidth), &(win.ScreenHeight));
+	win.Unit    = win.ScreenHeight / 30;
+	win.WindowHeight  = 26 * win.Unit;
+	win.WindowWidth   = win.WindowHeight / 9 * 16;
+	win.LeftMargin = (win.ScreenWidth - win.WindowWidth)  / 2;
+	win.TopMargin  = (win.ScreenHeight - win.WindowHeight) / 2;
 
 	// Regist Window Class
 	WNDCLASSEX wc = {
@@ -124,9 +76,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// Create Window
 	RECT wr;
 	wr.left   = win.LeftMargin;
-	wr.right  = win.Width  + wr.left;
+	wr.right  = win.WindowWidth  + wr.left;
 	wr.top    = win.TopMargin;
-	wr.bottom = win.Height + wr.top;
+	wr.bottom = win.WindowHeight + wr.top;
 	AdjustWindowRect(&wr, WS_OVERLAPPEDWINDOW, FALSE);
 	HWND hWnd = CreateWindowW(
 		WindowClassName, WindowTitle,
@@ -237,4 +189,56 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		pDirect3D = NULL;
 	}
 	return 0;
+}
+
+
+
+/*
+** Message Loop
+*/
+
+LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+	switch (msg)
+	{
+	case WM_DESTROY:
+		PostQuitMessage(0);
+		return 0;
+
+	case WM_KEYDOWN:
+		kb.HardwareSimuSetKeyIsPressed(wParam);
+		if (wParam == KEY_ESCAPE) {
+			PostQuitMessage(0);
+		}
+		return DefWindowProc(hWnd, msg, wParam, lParam);
+
+	case WM_KEYUP:
+		kb.HardwareSimuSetKeyIsReleased(wParam);
+		return DefWindowProc(hWnd, msg, wParam, lParam);
+
+	case WM_LBUTTONDOWN:
+		kb.HardwareSimuSetKeyIsPressed(KEY_MOUSE_LBTN);
+		return DefWindowProc(hWnd, msg, wParam, lParam);
+
+	case WM_LBUTTONUP:
+		kb.HardwareSimuSetKeyIsReleased(KEY_MOUSE_LBTN);
+		return DefWindowProc(hWnd, msg, wParam, lParam);
+
+	case WM_RBUTTONDOWN:
+		kb.HardwareSimuSetKeyIsPressed(KEY_MOUSE_RBTN);
+		return DefWindowProc(hWnd, msg, wParam, lParam);
+
+	case WM_RBUTTONUP:
+		kb.HardwareSimuSetKeyIsReleased(KEY_MOUSE_RBTN);
+		return DefWindowProc(hWnd, msg, wParam, lParam);
+
+	case WM_MOUSEMOVE:
+		/* Get Mouse Position */
+		LOWORD(lParam);  // MouseX
+		HIWORD(lParam);  // MouseY
+		return DefWindowProc(hWnd, msg, wParam, lParam);
+
+	default:
+		return DefWindowProc(hWnd, msg, wParam, lParam);
+	}
 }
