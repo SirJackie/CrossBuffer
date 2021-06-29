@@ -29,14 +29,14 @@ WSL_WindowsHelper::WSL_WindowsHelper()
 void WSL_WindowsHelper::RegisterAndCreateWindow
 (
 	WNDPROC MsgProc, HINSTANCE& hInstance,
-	const wchar_t* WindowClassName, const wchar_t* WindowTitle
+	const wchar_t* WindowClassName_, const wchar_t* WindowTitle_
 )
 {
 	// Register Window
 	wc = {
 		sizeof(WNDCLASSEX), CS_CLASSDC, MsgProc, 0, 0,
 		GetModuleHandle(NULL), NULL, NULL, NULL, NULL,
-		WindowClassName, NULL
+		WindowClassName_, NULL
 	};
 	wc.hIconSm = LoadIcon(wc.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 	wc.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_CROSSBUFFERFORWINDOWS));
@@ -50,7 +50,7 @@ void WSL_WindowsHelper::RegisterAndCreateWindow
 	AdjustWindowRect(&wr, WS_OVERLAPPEDWINDOW, FALSE);
 
 	hWnd = CreateWindowW(
-		WindowClassName, WindowTitle,
+		WindowClassName_, WindowTitle_,
 		WS_OVERLAPPEDWINDOW,
 		wr.left, wr.top, wr.right - wr.left, wr.bottom - wr.top,
 		NULL, NULL, wc.hInstance, NULL
@@ -58,4 +58,9 @@ void WSL_WindowsHelper::RegisterAndCreateWindow
 
 	ShowWindow(hWnd, SW_SHOWDEFAULT);
 	UpdateWindow(hWnd);
+}
+
+void WSL_WindowsHelper::Unregister(const wchar_t* WindowClassName_)
+{
+	UnregisterClass(WindowClassName_, wc.hInstance);
 }

@@ -101,7 +101,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	*/
 
 	// Release All the Variables
-	UnregisterClass(WindowClassName, windowsHelper.wc.hInstance);
+	windowsHelper.Unregister(WindowClassName);
 	if (d3dHelper.pDevice)
 	{
 		d3dHelper.pDevice->Release();

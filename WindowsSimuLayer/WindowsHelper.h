@@ -28,8 +28,9 @@ public:
 	void RegisterAndCreateWindow
 	(
 		WNDPROC MsgProc, HINSTANCE& hInstance,
-		const wchar_t* WindowClassName, const wchar_t* WindowTitle
+		const wchar_t* WindowClassName_, const wchar_t* WindowTitle_
 	);
+	void Unregister(const wchar_t* WindowClassName_);
 };
 
 
