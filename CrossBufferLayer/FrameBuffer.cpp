@@ -19,13 +19,9 @@ void CS_FrameBuffer::DisAllocateBuffer()
 
 void CS_FrameBuffer::ClearSelfBuffer()
 {
-    for (i32 y = 0; y < height; y++) {
-        for (i32 x = 0; x < width; x++) {
-            redBuffer[y * width + x] = 0;
-            greenBuffer[y * width + x] = 0;
-            blueBuffer[y * width + x] = 0;
-        }
-    }
+    CS_Memset(redBuffer, 0, width * height);
+    CS_Memset(greenBuffer, 0, width * height);
+    CS_Memset(blueBuffer, 0, width * height);
 }
 
 void CS_FrameBuffer::CopySameSizeBuffer(const CS_FrameBuffer& from, CS_FrameBuffer& to)

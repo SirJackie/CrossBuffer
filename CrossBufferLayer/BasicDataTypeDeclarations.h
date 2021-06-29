@@ -1,6 +1,7 @@
 #ifndef __CSBF_BasicDataTypeDeclarations__
 #define __CSBF_BasicDataTypeDeclarations__
 
+#include <cstring>
 
 /*
 ** Define Cross Platform Types
@@ -32,5 +33,7 @@ typedef    char              csbool;  // Boolean value, no matter what
 i32 CS_iclamp(i32 min, i32 x, i32 max);
 f32 CS_fclamp(f32 min, f32 x, f32 max);
 
+using std::memset;
+void CS_Memset(void* ptr, i8 fillingContent, i32 length);
 
 #endif
