@@ -11,7 +11,6 @@ using std::stringstream;
 /* Define Window Class Properties */
 #define WindowClassName    L"CrossBuffer Class"
 #define WindowTitle        L"CrossBuffer <Press WASD and IJKL to move the position>"
-#define BitmapRootAddress  "..\\"
 
 void Setup(CS_FrameBuffer &fb, CS_Keyboard kb, i32 deltaTime) {
 	;
