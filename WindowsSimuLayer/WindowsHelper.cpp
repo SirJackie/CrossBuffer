@@ -26,12 +26,21 @@ WSL_WindowsHelper::WSL_WindowsHelper()
 	topMargin = (screenHeight - windowHeight) / 2;
 }
 
-void WSL_WindowsHelper::RegisterAndCreateWindow
+WSL_WindowsHelper::WSL_WindowsHelper
 (
 	WNDPROC MsgProc, HINSTANCE& hInstance,
 	const wchar_t* WindowClassName_, const wchar_t* WindowTitle_
 )
 {
+	GetScreenResolution(screenWidth, screenHeight);
+	unit = screenHeight / 30;
+
+	windowHeight = 26 * unit;
+	windowWidth = CS_iclamp(0, windowHeight / 9 * 16, screenWidth - 10);
+
+	leftMargin = (screenWidth - windowWidth) / 2;
+	topMargin = (screenHeight - windowHeight) / 2;
+
 	// Register Window
 	wc = {
 		sizeof(WNDCLASSEX), CS_CLASSDC, MsgProc, 0, 0,

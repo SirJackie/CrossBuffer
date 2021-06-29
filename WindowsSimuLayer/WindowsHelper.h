@@ -6,8 +6,6 @@
 #include "../CrossBufferLayer/BasicDataTypeDeclarations.h"
 
 
-typedef LRESULT(*MsgProcType) (HWND, UINT, WPARAM, LPARAM);
-
 class WSL_WindowsHelper {
 public:
 	i32 screenWidth;
@@ -25,7 +23,7 @@ public:
 	void GetScreenResolution(i32& resultWidth, i32& resultHeight);
 
 	WSL_WindowsHelper();
-	void RegisterAndCreateWindow
+	WSL_WindowsHelper
 	(
 		WNDPROC MsgProc, HINSTANCE& hInstance,
 		const wchar_t* WindowClassName_, const wchar_t* WindowTitle_

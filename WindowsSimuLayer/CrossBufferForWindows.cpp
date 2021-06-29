@@ -9,21 +9,27 @@
 #include "../Main.h"
 #include "../CrossBufferLayer/CrossBuffer.h"
 
-
-
-/*
-** Define Global Variables
-*/
-
+// WindowsSimuLayer Variables
 WSL_WindowsHelper windowsHelper;
 WSL_D3DHelper     d3dHelper;
-BOOL FirstTimeRunning = TRUE;
-clock_t lastTime = clock();
-clock_t thisTime = clock();
 
-CS_Keyboard kb;
+// CrossBufferLayer Variables
+CS_FrameBuffer fb;
+CS_Keyboard    kb;
 
+// Time Counting Variables
+csbool FirstTimeRunning;
+clock_t lastTime;
+clock_t thisTime;
+
+// Windows.h Loop Message Variable
+MSG msg;
+
+// Message Processing Function Declaration
 LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
+
+
 
 /*
 ** Main Function
@@ -35,84 +41,76 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	_In_ int       nCmdShow)
 {
 
-	// Get Present Time
-	thisTime = clock();
-	lastTime = thisTime;
+	// Initialize CrossBufferLayer and WIndowsSimuLayer Objects
+	windowsHelper = WSL_WindowsHelper(MsgProc, hInstance, WindowClassName, WindowTitle);
+	d3dHelper     = WSL_D3DHelper(windowsHelper.hWnd);
+	fb            = CS_FrameBuffer(windowsHelper.windowWidth, windowsHelper.windowHeight);
+	kb            = CS_Keyboard();
 
-	// Register and Create Window
-	windowsHelper.RegisterAndCreateWindow(MsgProc, hInstance, WindowClassName, WindowTitle);
+	// Initialize Time Counting Variables
+	FirstTimeRunning = csTrue;
 
-	d3dHelper = WSL_D3DHelper(windowsHelper.hWnd);
-
-	// Process Messages From Windows
-	MSG msg;
+	// Initialize Windows.h Loop Message Variable
 	ZeroMemory(&msg, sizeof(msg));
+
+
+	/* Main Loop */
 	while (msg.message != WM_QUIT)
 	{
 		// If there is a Message
 		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
 		{
+			/* Process it */
+
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
-		/* Else, Process the Game Loop */
+		// Else
 		else
 		{
-			/*
-			** Main Loop
-			*/
+			/* Process our Game Loop */
 			
-			// Get Present Time
+			// Update Time Counting Variables
 			thisTime = clock();
 
-			// Clear & Get Back Buffer
-			d3dHelper.LockBuffer();
-
-			// Init FrameBuffer Object
-			//FrameBuffer fb(win.Width, win.Height, (rect.Pitch) >> 2, (Color*)rect.pBits);
-			CS_FrameBuffer fb(windowsHelper.windowWidth, windowsHelper.windowHeight);
+			// Lock System BackBuffer and Clear the FrameBuffer
+			d3dHelper.LockBuffer();  
+			fb = CS_FrameBuffer
+			(
+				windowsHelper.windowWidth, windowsHelper.windowHeight
+			);
 
 			// If it is the First Time Running
 			if (FirstTimeRunning) {
-				Setup(fb, kb, 0);                      /* Call the Setup() in Main.h */
+				Setup(fb, kb, 0);                     // Call the Setup()  in Main.h
 				FirstTimeRunning = FALSE;
 			}
 
 			// If it is not the First Time Running
 			else {
-				Update(fb, kb, thisTime - lastTime);   /* Call the Update() in Main.h */
+				Update(fb, kb, thisTime - lastTime);  // Call the Update() in Main.h
 			}
 
-			// Paint FrameBuffer Here
+			// Paint Our FrameBuffer to System BackBuffer
 			d3dHelper.PaintFrameBufferHere(fb);
 
-			// Release Back Buffer and Swap it to Front
+			// Release Back Buffer and Swap it as the FrontBuffer
 			d3dHelper.UnlockBuffer();
 
-			// Calculate the Delta Time
+			// Update Time Counting Variables
 			// lastTime in next frame = thisTime in this frame
 			lastTime = thisTime;
 		}
 	}
 
-
-	/*
-	** After the Main Loop
-	*/
-
-	// Release All the Variables
-	windowsHelper.Unregister(WindowClassName);
-	if (d3dHelper.pDevice)
+	/* After the Main Loop */
 	{
-		d3dHelper.pDevice->Release();
-		d3dHelper.pDevice = NULL;
+		// Release All the Variables
+		windowsHelper.Unregister(WindowClassName);
+		d3dHelper.Release();
+		return 0;
 	}
-	if (d3dHelper.pDirect3D)
-	{
-		d3dHelper.pDirect3D->Release();
-		d3dHelper.pDirect3D = NULL;
-	}
-	return 0;
+
 }
 
 
@@ -130,37 +128,34 @@ LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		return 0;
 
 	case WM_KEYDOWN:
-		kb.HardwareSimuSetKeyIsPressed(wParam);
-		if (wParam == KEY_ESCAPE) {
-			PostQuitMessage(0);
-		}
+		kb.SimuLayerSetKeyIsPressed(wParam);
 		return DefWindowProc(hWnd, msg, wParam, lParam);
 
 	case WM_KEYUP:
-		kb.HardwareSimuSetKeyIsReleased(wParam);
+		kb.SimuLayerSetKeyIsReleased(wParam);
 		return DefWindowProc(hWnd, msg, wParam, lParam);
 
-	case WM_LBUTTONDOWN:
-		kb.HardwareSimuSetKeyIsPressed((i8)KEY_MOUSE_LBTN);
-		return DefWindowProc(hWnd, msg, wParam, lParam);
+	//case WM_LBUTTONDOWN:
+	//	//kb.SimuLayerSetKeyIsPressed((i8)KEY_MOUSE_LBTN);
+	//	return DefWindowProc(hWnd, msg, wParam, lParam);
 
-	case WM_LBUTTONUP:
-		kb.HardwareSimuSetKeyIsReleased((i8)KEY_MOUSE_LBTN);
-		return DefWindowProc(hWnd, msg, wParam, lParam);
+	//case WM_LBUTTONUP:
+	//	//kb.SimuLayerSetKeyIsReleased((i8)KEY_MOUSE_LBTN);
+	//	return DefWindowProc(hWnd, msg, wParam, lParam);
 
-	case WM_RBUTTONDOWN:
-		kb.HardwareSimuSetKeyIsPressed((i8)KEY_MOUSE_RBTN);
-		return DefWindowProc(hWnd, msg, wParam, lParam);
+	//case WM_RBUTTONDOWN:
+	//	//kb.SimuLayerSetKeyIsPressed((i8)KEY_MOUSE_RBTN);
+	//	return DefWindowProc(hWnd, msg, wParam, lParam);
 
-	case WM_RBUTTONUP:
-		kb.HardwareSimuSetKeyIsReleased((i8)KEY_MOUSE_RBTN);
-		return DefWindowProc(hWnd, msg, wParam, lParam);
+	//case WM_RBUTTONUP:
+	//	//kb.SimuLayerSetKeyIsReleased((i8)KEY_MOUSE_RBTN);
+	//	return DefWindowProc(hWnd, msg, wParam, lParam);
 
-	case WM_MOUSEMOVE:
-		/* Get Mouse Position */
-		LOWORD(lParam);  // MouseX
-		HIWORD(lParam);  // MouseY
-		return DefWindowProc(hWnd, msg, wParam, lParam);
+	//case WM_MOUSEMOVE:
+	//	/* Get Mouse Position */
+	//	LOWORD(lParam);  // MouseX
+	//	HIWORD(lParam);  // MouseY
+	//	return DefWindowProc(hWnd, msg, wParam, lParam);
 
 	default:
 		return DefWindowProc(hWnd, msg, wParam, lParam);

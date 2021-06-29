@@ -76,3 +76,17 @@ void WSL_D3DHelper::PaintFrameBufferHere(const CS_FrameBuffer& fb)
 		pBitsNow += bufferPitch - fb.width;
 	}
 }
+
+void WSL_D3DHelper::Release()
+{
+	if (pDevice)
+	{
+		pDevice->Release();
+		pDevice = NULL;
+	}
+	if (pDirect3D)
+	{
+		pDirect3D->Release();
+		pDirect3D = NULL;
+	}
+}

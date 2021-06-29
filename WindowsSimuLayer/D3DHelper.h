@@ -17,6 +17,7 @@ public:
 	void LockBuffer();
 	void UnlockBuffer();
 	void PaintFrameBufferHere(const CS_FrameBuffer& fb);
+	void Release();
 };
 
 #endif
