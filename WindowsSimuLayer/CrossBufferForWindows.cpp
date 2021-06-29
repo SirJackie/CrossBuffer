@@ -141,19 +141,19 @@ LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		return DefWindowProc(hWnd, msg, wParam, lParam);
 
 	case WM_LBUTTONDOWN:
-		kb.HardwareSimuSetKeyIsPressed(KEY_MOUSE_LBTN);
+		kb.HardwareSimuSetKeyIsPressed((i8)KEY_MOUSE_LBTN);
 		return DefWindowProc(hWnd, msg, wParam, lParam);
 
 	case WM_LBUTTONUP:
-		kb.HardwareSimuSetKeyIsReleased(KEY_MOUSE_LBTN);
+		kb.HardwareSimuSetKeyIsReleased((i8)KEY_MOUSE_LBTN);
 		return DefWindowProc(hWnd, msg, wParam, lParam);
 
 	case WM_RBUTTONDOWN:
-		kb.HardwareSimuSetKeyIsPressed(KEY_MOUSE_RBTN);
+		kb.HardwareSimuSetKeyIsPressed((i8)KEY_MOUSE_RBTN);
 		return DefWindowProc(hWnd, msg, wParam, lParam);
 
 	case WM_RBUTTONUP:
-		kb.HardwareSimuSetKeyIsReleased(KEY_MOUSE_RBTN);
+		kb.HardwareSimuSetKeyIsReleased((i8)KEY_MOUSE_RBTN);
 		return DefWindowProc(hWnd, msg, wParam, lParam);
 
 	case WM_MOUSEMOVE:
