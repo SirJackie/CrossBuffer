@@ -26,12 +26,30 @@ void CS_FrameBuffer::ClearSelfBuffer()
 
 void CS_FrameBuffer::CopySameSizeBuffer(const CS_FrameBuffer& from, CS_FrameBuffer& to)
 {
-    for (i32 y = 0; y < height; y++) {
-        for (i32 x = 0; x < width; x++) {
-            to.redBuffer[y * width + x] = from.redBuffer[y * width + x];
-            to.greenBuffer[y * width + x] = from.greenBuffer[y * width + x];
-            to.blueBuffer[y * width + x] = from.blueBuffer[y * width + x];
-        }
+    if(  (from.width * from.height)  <  (to.width * to.height)  ){
+        return;  // Too small to copy
+    }
+
+    i8* toRedBuffPtr = to.redBuffer;
+    i8* toGreenBuffPtr = to.greenBuffer;
+    i8* toBlueBuffPtr = to.blueBuffer;
+
+    i8* fromRedBuffPtr = from.redBuffer;
+    i8* fromGreenBuffPtr = from.greenBuffer;
+    i8* fromBlueBuffPtr = from.blueBuffer;
+
+    for (i32 i = 0; i < width * height; i++) {
+        *toRedBuffPtr = *fromRedBuffPtr;
+        *toGreenBuffPtr = *fromGreenBuffPtr;
+        *toBlueBuffPtr = *fromBlueBuffPtr;
+
+        toRedBuffPtr++;
+        toGreenBuffPtr++;
+        toBlueBuffPtr++;
+
+        fromRedBuffPtr++;
+        fromGreenBuffPtr++;
+        fromBlueBuffPtr++;
     }
 }
 
