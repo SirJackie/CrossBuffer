@@ -159,9 +159,6 @@
 #define    KEY_OEM_AUTO            0xF3    // 诺基亚、爱立信使用的
 #define    KEY_OEM_ENLW            0xF4    // 诺基亚、爱立信使用的
 #define    KEY_OEM_BACKTAB         0xF5    // 诺基亚、爱立信使用的
-#define    KEY_MOUSE_LBTN          0xF0    // 鼠标左键
-#define    KEY_MOUSE_RBTN          0xF1    // 鼠标右键
-#define    KEY_MOUSE_CBTN          0xF2    // 鼠标中键
 #define    KEY_ATTN                0xF6    // Attn键
 #define    KEY_CRSEL               0xF7    // CrSel键
 #define    KEY_EXSEL               0xF8    // ExSel键
@@ -178,8 +175,8 @@ private:
 public:
 	CS_Keyboard();
 	csbool IsKeyPressed(i8 key);
-	void   HardwareSimuSetKeyIsPressed(i8 key);
-	void   HardwareSimuSetKeyIsReleased(i8 key);
+	void   SimuLayerSetKeyIsPressed(i8 key);
+	void   SimuLayerSetKeyIsReleased(i8 key);
 };
 
 

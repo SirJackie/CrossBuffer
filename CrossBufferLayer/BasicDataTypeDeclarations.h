@@ -30,6 +30,7 @@ typedef    char              csbool;  // Boolean value, no matter what
 */
 
 i32 CS_iclamp(i32 min, i32 x, i32 max);
+f32 CS_fclamp(f32 min, f32 x, f32 max);
 
 
 #endif
