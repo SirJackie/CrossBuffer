@@ -172,11 +172,11 @@
 #define    KEY_PA1                 0xFD    // PA1¼ü
 #define    KEY_OEM_CLEAR           0xFE    // Clear¼ü
 
-class Keyboard {
+class CS_Keyboard {
 private:
 	csbool keyBuffer[256];
 public:
-	Keyboard();
+	CS_Keyboard();
 	csbool IsKeyPressed(i8 key);
 	void   HardwareSimuSetKeyIsPressed(i8 key);
 	void   HardwareSimuSetKeyIsReleased(i8 key);

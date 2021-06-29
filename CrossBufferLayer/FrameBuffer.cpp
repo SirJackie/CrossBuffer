@@ -3,21 +3,21 @@
 using std::vector;
 
 
-void FrameBuffer::AllocateBuffer(i32 width, i32 height)
+void CS_FrameBuffer::AllocateBuffer(i32 width, i32 height)
 {
     redBuffer   = new i8[width * height];
     greenBuffer = new i8[width * height];
     blueBuffer  = new i8[width * height];
 }
 
-void FrameBuffer::DisAllocateBuffer()
+void CS_FrameBuffer::DisAllocateBuffer()
 {
     delete[] redBuffer;
     delete[] greenBuffer;
     delete[] blueBuffer;
 }
 
-void FrameBuffer::ClearSelfBuffer()
+void CS_FrameBuffer::ClearSelfBuffer()
 {
     for (i32 y = 0; y < height; y++) {
         for (i32 x = 0; x < width; x++) {
@@ -28,7 +28,7 @@ void FrameBuffer::ClearSelfBuffer()
     }
 }
 
-void FrameBuffer::CopySameSizeBuffer(const FrameBuffer& from, FrameBuffer& to)
+void CS_FrameBuffer::CopySameSizeBuffer(const CS_FrameBuffer& from, CS_FrameBuffer& to)
 {
     for (i32 y = 0; y < height; y++) {
         for (i32 x = 0; x < width; x++) {
@@ -39,10 +39,10 @@ void FrameBuffer::CopySameSizeBuffer(const FrameBuffer& from, FrameBuffer& to)
     }
 }
 
-FrameBuffer::FrameBuffer()
+CS_FrameBuffer::CS_FrameBuffer()
 {
-    curX = initCurX = INIT_CUR_X;
-    curY = initCurY = INIT_CUR_Y;
+    curX = initCurX = CS_FONT_INIT_CUR_X;
+    curY = initCurY = CS_FONT_INIT_CUR_Y;
 
     width = height = 1;
 
@@ -50,10 +50,10 @@ FrameBuffer::FrameBuffer()
     ClearSelfBuffer();
 }
 
-FrameBuffer::FrameBuffer(i32 Width_, i32 Height_)
+CS_FrameBuffer::CS_FrameBuffer(i32 Width_, i32 Height_)
 {
-    curX = initCurX = INIT_CUR_X;
-    curY = initCurY = INIT_CUR_Y;
+    curX = initCurX = CS_FONT_INIT_CUR_X;
+    curY = initCurY = CS_FONT_INIT_CUR_Y;
 
     width  = Width_;
     height = Height_;
@@ -62,7 +62,7 @@ FrameBuffer::FrameBuffer(i32 Width_, i32 Height_)
     ClearSelfBuffer();
 }
 
-FrameBuffer::FrameBuffer(const FrameBuffer& fb)
+CS_FrameBuffer::CS_FrameBuffer(const CS_FrameBuffer& fb)
 {
     width  = fb.width;
     height = fb.height;
@@ -76,7 +76,7 @@ FrameBuffer::FrameBuffer(const FrameBuffer& fb)
     CopySameSizeBuffer(fb, (*this));
 }
 
-FrameBuffer& FrameBuffer::operator=(const FrameBuffer& fb)
+CS_FrameBuffer& CS_FrameBuffer::operator=(const CS_FrameBuffer& fb)
 {
     DisAllocateBuffer();
 
@@ -94,7 +94,7 @@ FrameBuffer& FrameBuffer::operator=(const FrameBuffer& fb)
     return (*this);  // Support a = b = c
 }
 
-FrameBuffer::~FrameBuffer()
+CS_FrameBuffer::~CS_FrameBuffer()
 {
     DisAllocateBuffer();
 }

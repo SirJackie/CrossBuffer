@@ -21,7 +21,7 @@ BOOL FirstTimeRunning = TRUE;
 clock_t lastTime = clock();
 clock_t thisTime = clock();
 
-Keyboard kb;
+CS_Keyboard kb;
 
 LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
@@ -70,7 +70,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 			// Init FrameBuffer Object
 			//FrameBuffer fb(win.Width, win.Height, (rect.Pitch) >> 2, (Color*)rect.pBits);
-			FrameBuffer fb(windowsHelper.windowWidth, windowsHelper.windowHeight);
+			CS_FrameBuffer fb(windowsHelper.windowWidth, windowsHelper.windowHeight);
 
 			// If it is the First Time Running
 			if (FirstTimeRunning) {

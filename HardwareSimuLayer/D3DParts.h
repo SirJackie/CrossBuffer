@@ -16,7 +16,7 @@ public:
 	D3DHelper(HWND& hWnd);
 	void LockBuffer();
 	void UnlockBuffer();
-	void PaintFrameBufferHere(const FrameBuffer& fb);
+	void PaintFrameBufferHere(const CS_FrameBuffer& fb);
 };
 
 #endif

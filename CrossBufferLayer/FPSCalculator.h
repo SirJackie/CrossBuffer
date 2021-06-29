@@ -7,14 +7,15 @@
 ** FPS Calculating
 */
 
-class FPSCalculator {
+class CS_FPSCalculator {
 private:
-	f32 FPS;
-	i32 DeltaTimeCount;
-	i32 FrameCount;
+	f32 fps;
+	i32 deltaTimeCount;
+	i32 frameCount;
 public:
-	FPSCalculator();
+	CS_FPSCalculator();
 	void Count(i32 deltaTime);
+	f32  GetCurrentFPS();
 };
 
 #endif

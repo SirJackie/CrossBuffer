@@ -3,17 +3,13 @@
 
 #include "BasicDataTypeDeclarations.h"
 #include "FontSupport.h"
-#include <string>
-#include <vector>
-using std::string;
-using std::vector;
 
-#define INIT_CUR_X   10
-#define INIT_CUR_Y   10
-#define TEXT_WIDTH   8
-#define TEXT_HEIGHT  16
+#define CS_FONT_INIT_CUR_X   10
+#define CS_FONT_INIT_CUR_Y   10
+#define CS_FONT_TEXT_WIDTH   8
+#define CS_FONT_TEXT_HEIGHT  16
 
-class FrameBuffer
+class CS_FrameBuffer
 {
 public:
 
@@ -39,28 +35,13 @@ public:
     void ClearSelfBuffer
          ();
     void CopySameSizeBuffer
-         (const FrameBuffer& from, FrameBuffer& to);
+         (const CS_FrameBuffer& from, CS_FrameBuffer& to);
 
-    FrameBuffer();
-    FrameBuffer(i32 Width_, i32 Height_);
-    FrameBuffer(const FrameBuffer& fb);
-    FrameBuffer& operator=(const FrameBuffer& fb);
-    ~FrameBuffer();
-
-   /*
-	void DrawChar
-         (i32 x, i32 y, i8 r, i8 g, i8 b, char ch);
-    void DrawString
-         (i8 r, i8 g, i8 b, const i8* stringPointer);
-    void DrawBuffer
-         (const FrameBuffer& fb, i32 PositionX, i32 PositionY);
-    void Draw
-         (const char* stringPointer);
-    void Draw
-         (const FrameBuffer& fb);
-    void InitCursor
-         ();
-   */
+    CS_FrameBuffer();
+    CS_FrameBuffer(i32 Width_, i32 Height_);
+    CS_FrameBuffer(const CS_FrameBuffer& fb);
+    CS_FrameBuffer& operator=(const CS_FrameBuffer& fb);
+    ~CS_FrameBuffer();
 };
 
 #endif

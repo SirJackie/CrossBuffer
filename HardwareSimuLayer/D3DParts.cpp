@@ -50,7 +50,7 @@ void D3DHelper::UnlockBuffer()
 	pDevice->Present(NULL, NULL, NULL, NULL);
 }
 
-void D3DHelper::PaintFrameBufferHere(const FrameBuffer& fb)
+void D3DHelper::PaintFrameBufferHere(const CS_FrameBuffer& fb)
 {
 	i32* pBitsNow = (i32*)(rect.pBits);
 	i32  bufferPitch = (rect.Pitch) >> 2;
