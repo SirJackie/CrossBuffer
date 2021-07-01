@@ -149,6 +149,7 @@
     <ClCompile Include="..\CrossBufferLayer\FPSCalculator.cpp" />
     <ClCompile Include="..\CrossBufferLayer\FrameBuffer.cpp" />
     <ClCompile Include="..\CrossBufferLayer\KeyboardSupport.cpp" />
+    <ClCompile Include="..\Main.cpp" />
     <ClCompile Include="CrossBufferForWindows.cpp" />
     <ClCompile Include="D3DHelper.cpp" />
     <ClCompile Include="WindowsHelper.cpp" />
