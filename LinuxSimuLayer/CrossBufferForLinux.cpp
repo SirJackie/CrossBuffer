@@ -29,7 +29,7 @@ clock_t thisTime;
 int main( int argc, char* args[] )
 {
     // sdlHelper = LSM_SDLHelper();
-    sdlHelper.CreateWindow((const i32*)WindowTitle);
+    sdlHelper.CreateWindow(WindowTitle);
 
     // While it's not the time to quit
     while(!quit)
