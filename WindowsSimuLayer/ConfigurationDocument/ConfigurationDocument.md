@@ -33,8 +33,8 @@
 
 ![vs1](vs1.png)
 
-![vs2](/vs2.png)
+![vs2](vs2.png)
 
-![vs3](/vs3.png)
+![vs3](vs3.png)
 
 3.设置完成后就可以使用了。如果有什么问题，请Issue我，我会尽快解答！
