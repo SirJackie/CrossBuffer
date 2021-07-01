@@ -2,7 +2,7 @@
 
 一个跨平台的多媒体开发库，提供最简单的API，帮助你编写基于软渲染的图形界面。
 
-![Demo](.\Resources\Demo.png)
+![Demo](./Resources/Demo.png)
 
 目前支持的平台有：
 
