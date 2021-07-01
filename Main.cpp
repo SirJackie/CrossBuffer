@@ -64,7 +64,7 @@ void Update(CS_FrameBuffer& fb, CS_Keyboard kb, i32 deltaTime) {
 	fb.Print("Hello world!");
 	fb.Print("Hello world!");
 	fb.Print("Hello world!\n");
-	fb.Print("Hello world!");
+	fb.PrintLn("Hello world!");
 	fb.Print("Hello world!");
 	fb.Print("Hello world!");
 	fb.Print("Hello world!");

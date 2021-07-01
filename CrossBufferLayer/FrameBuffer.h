@@ -51,6 +51,10 @@ public:
         const ui8 r, const ui8 g, const ui8 b
     );
     void Print(const i8* str);
+    template <class T> void PrintLn(T thing) {
+        Print(thing);
+        Print("\n");
+    }
 };
 
 #endif
