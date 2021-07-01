@@ -28,7 +28,7 @@ $(Target):$(Objects)
 
 .PHONY:
 generateMyself:
-	python GenerateMakefile.py
+	python3 GenerateMakefile.py
 
 clear_o:
 	$(RMRF) $(Target) $(Objects)
@@ -47,6 +47,7 @@ run:
 	make run_o
 
 installDependencies:
+	sudo apt-get install python3
 	sudo apt-get install g++
 	sudo apt-get install libsdl2-2.0
 	sudo apt-get install libsdl2-dev
