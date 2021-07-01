@@ -14,7 +14,7 @@
 不同的平台需要使用不同的方式编译，点击下方超链接查看具体方法：
 
 - [Windows](./WindowsSimuLayer/ConfigurationDocument/ConfigurationDocument.md)
-- Linux
+- [Linux](./LinuxSimuLayer/ConfigurationDocument/ConfigurationDocument.md)
 
 # 关于开源协议
 
