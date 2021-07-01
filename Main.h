@@ -5,8 +5,7 @@
 
 
 /* Define Window Class Properties */
-#define WindowClassName    L"CrossBuffer Class"
-#define WindowTitle        L"CrossBuffer <Press WASD and IJKL to move the position>"
+#define WindowTitle L"CrossBuffer <Press WASD and IJKL to move the position>"
 
 void Setup  (CS_FrameBuffer& fb, CS_Keyboard kb, i32 deltaTime);
 void Update (CS_FrameBuffer& fb, CS_Keyboard kb, i32 deltaTime);

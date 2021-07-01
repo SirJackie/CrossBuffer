@@ -42,7 +42,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 {
 
 	// Initialize CrossBufferLayer and WIndowsSimuLayer Objects
-	windowsHelper = WSL_WindowsHelper(MsgProc, hInstance, WindowClassName, WindowTitle);
+	windowsHelper = WSL_WindowsHelper(MsgProc, hInstance, WindowTitle, WindowTitle);
 	d3dHelper     = WSL_D3DHelper(windowsHelper.hWnd);
 	fb            = CS_FrameBuffer(windowsHelper.windowWidth, windowsHelper.windowHeight);
 	kb            = CS_Keyboard();
@@ -106,7 +106,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	/* After the Main Loop */
 	{
 		// Release All the Variables
-		windowsHelper.Unregister(WindowClassName);
+		windowsHelper.Unregister(WindowTitle);
 		d3dHelper.Release();
 		return 0;
 	}
