@@ -58,7 +58,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	while (msg.message != WM_QUIT)
 	{
 		// If there is a Message
-		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+		if (PeekMessage(&msg, csNull, 0, 0, PM_REMOVE))
 		{
 			/* Process it */
 
@@ -83,7 +83,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			// If it is the First Time Running
 			if (FirstTimeRunning) {
 				Setup(fb, kb, 0);                     // Call the Setup()  in Main.h
-				FirstTimeRunning = FALSE;
+				FirstTimeRunning = csFalse;
 			}
 
 			// If it is not the First Time Running
