@@ -28,6 +28,9 @@ void Update(CS_FrameBuffer& fb, CS_Keyboard kb, i32 deltaTime) {
 		}
 	}
 
+	fb.DrawString("Alphabet", startX + 11, startY + 11, 0, 0, 0);
+	fb.DrawString("Alphabet", startX + 10, startY + 10, 255, 255, 255);
+
 	if (kb.IsKeyPressed('W')) {
 		startY -= (i32)(deltaTime * step);
 	}
@@ -61,6 +64,4 @@ void Update(CS_FrameBuffer& fb, CS_Keyboard kb, i32 deltaTime) {
 	}
 
 	deltaColor += 1;
-
-	fb.DrawString("Alphabet", startX, startY);
 }

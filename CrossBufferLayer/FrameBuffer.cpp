@@ -114,7 +114,11 @@ CS_FrameBuffer::~CS_FrameBuffer()
     DisAllocateBuffer();
 }
 
-void CS_FrameBuffer::DrawChar(const char& ch, i32 xStart, i32 yStart)
+void CS_FrameBuffer::DrawChar
+(
+    const char& ch, const i32 xStart, const i32 yStart,
+    const ui8 r, const ui8 g, const ui8 b
+)
 {
     ui8* chBmStartPtr = ((ui8*)CS_font + 16 * 8 * ch);
     ui8* redBufStartPtr = redBuffer;
@@ -140,9 +144,9 @@ void CS_FrameBuffer::DrawChar(const char& ch, i32 xStart, i32 yStart)
         bluBufPtr = bluBufStartPtr + y * width + xMin;
 
         for (i32 x = xMin; x < xMax; x++) {
-            if (*chBmPtr != 0) *redBufPtr = *chBmPtr;
-            if (*chBmPtr != 0) *grnBufPtr = *chBmPtr;
-            if (*chBmPtr != 0) *bluBufPtr = *chBmPtr;
+            if (*chBmPtr != 0) *redBufPtr = r;
+            if (*chBmPtr != 0) *grnBufPtr = g;
+            if (*chBmPtr != 0) *bluBufPtr = b;
 
             chBmPtr++;
             redBufPtr++;
@@ -152,12 +156,16 @@ void CS_FrameBuffer::DrawChar(const char& ch, i32 xStart, i32 yStart)
     }
 }
 
-void CS_FrameBuffer::DrawString(const i8* str, const i32 x, const i32 y)
+void CS_FrameBuffer::DrawString
+(
+    const i8* str, const i32 x, const i32 y,
+    const ui8 r, const ui8 g, const ui8 b
+)
 {
     i32 xNow = x, yNow = y;
     i8* charNow = (i8*)str;
     while (*charNow != 0) {
-        DrawChar(*charNow, xNow, yNow);
+        DrawChar(*charNow, xNow, yNow, r, g, b);
         charNow++;
         if ((xNow + CS_FONT_WIDTH) > width) {
             yNow += CS_FONT_HEIGHT;

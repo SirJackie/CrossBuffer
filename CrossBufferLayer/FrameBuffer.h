@@ -43,8 +43,16 @@ public:
     CS_FrameBuffer& operator=(const CS_FrameBuffer& fb);
     ~CS_FrameBuffer();
 
-    void DrawChar(const char& ch, i32 x, i32 y);
-    void DrawString(const i8* str, const i32 x, const i32 y);
+    void DrawChar
+    (
+        const char& ch, const i32 xStart, const i32 yStart,
+        const ui8 r, const ui8 g, const ui8 b
+    );
+    void DrawString
+    (
+        const i8* str, const i32 x, const i32 y,
+        const ui8 r, const ui8 g, const ui8 b
+    );
 };
 
 #endif
