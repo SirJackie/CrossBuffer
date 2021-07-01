@@ -56,8 +56,8 @@ void CS_FrameBuffer::CopySameSizeBuffer(const CS_FrameBuffer& from, CS_FrameBuff
 
 CS_FrameBuffer::CS_FrameBuffer()
 {
-    curX = initCurX = CS_FONT_INIT_CUR_X;
-    curY = initCurY = CS_FONT_INIT_CUR_Y;
+    curX = CS_FB_INIT_CURX;
+    curY = CS_FB_INIT_CURY;
 
     width = height = 1;
 
@@ -67,8 +67,8 @@ CS_FrameBuffer::CS_FrameBuffer()
 
 CS_FrameBuffer::CS_FrameBuffer(i32 Width_, i32 Height_)
 {
-    curX = initCurX = CS_FONT_INIT_CUR_X;
-    curY = initCurY = CS_FONT_INIT_CUR_Y;
+    curX = CS_FB_INIT_CURX;
+    curY = CS_FB_INIT_CURY;
 
     width  = Width_;
     height = Height_;
@@ -84,8 +84,6 @@ CS_FrameBuffer::CS_FrameBuffer(const CS_FrameBuffer& fb)
 
     curX = fb.curX;
     curY = fb.curY;
-    initCurX = fb.initCurX;
-    initCurY = fb.initCurY;
 
     AllocateBuffer(width, height);
     CopySameSizeBuffer(fb, (*this));
@@ -100,8 +98,6 @@ CS_FrameBuffer& CS_FrameBuffer::operator=(const CS_FrameBuffer& fb)
 
     curX = fb.curX;
     curY = fb.curY;
-    initCurX = fb.initCurX;
-    initCurY = fb.initCurY;
 
     AllocateBuffer(width, height);
     CopySameSizeBuffer(fb, (*this));
@@ -173,6 +169,30 @@ void CS_FrameBuffer::DrawString
         }
         else {
             xNow+= CS_FONT_WIDTH;
+        }
+    }
+}
+
+void CS_FrameBuffer::Print(const i8* str)
+{
+    i8* charNow = (i8*)str;
+    while (*charNow != 0) {
+        if (*charNow == '\n') {
+            curY += CS_FONT_HEIGHT;
+            curX = CS_FB_INIT_CURX;
+            charNow++;
+        }
+        else{
+            DrawChar(*charNow, curX + 1, curY + 1, 0, 0, 0);
+            DrawChar(*charNow, curX, curY, 255, 255, 255);
+            charNow++;
+            if ((curX + CS_FONT_WIDTH * 2) > width) {
+                curY += CS_FONT_HEIGHT;
+                curX = CS_FB_INIT_CURX;
+            }
+            else {
+                curX += CS_FONT_WIDTH;
+            }
         }
     }
 }

@@ -31,6 +31,44 @@ void Update(CS_FrameBuffer& fb, CS_Keyboard kb, i32 deltaTime) {
 	fb.DrawString("Alphabet", startX + 11, startY + 11, 0, 0, 0);
 	fb.DrawString("Alphabet", startX + 10, startY + 10, 255, 255, 255);
 
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!\n");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+	fb.Print("Hello world!");
+
 	if (kb.IsKeyPressed('W')) {
 		startY -= (i32)(deltaTime * step);
 	}

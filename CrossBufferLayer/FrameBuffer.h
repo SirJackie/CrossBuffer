@@ -4,10 +4,9 @@
 #include "BasicDataTypeDeclarations.h"
 #include "FontSupport.h"
 
-#define CS_FONT_INIT_CUR_X   10
-#define CS_FONT_INIT_CUR_Y   10
-#define CS_FONT_TEXT_WIDTH   8
-#define CS_FONT_TEXT_HEIGHT  16
+#define CS_FB_INIT_CURX 10
+#define CS_FB_INIT_CURY 10
+
 
 class CS_FrameBuffer
 {
@@ -23,8 +22,6 @@ public:
 
     i32 curX;
     i32 curY;
-    i32 initCurX;
-    i32 initCurY;
 
 
     // Methods
@@ -53,6 +50,7 @@ public:
         const i8* str, const i32 x, const i32 y,
         const ui8 r, const ui8 g, const ui8 b
     );
+    void Print(const i8* str);
 };
 
 #endif
