@@ -35,10 +35,12 @@ public:
     
     LSM_SDLHelper();
     void GetResolution();
-    void CreateWindow(const i8* title);
+    void CreateWindow(const i32* title);
     void Maximize();
     void Minimize();
 
+    i32 getWcharLen(const i32* wcharPtr);
+    char* wchar2char(const i32* wcharPtr);
     SDL_Surface* LoadMedia(const i8* bmpAddress);
     void ReleaseMedia(SDL_Surface* media);
     void Close();

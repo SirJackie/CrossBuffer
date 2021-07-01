@@ -38,7 +38,27 @@ void LSM_SDLHelper::GetResolution(){
     printf("Framebuffer %d * %d - %dbpp\n", screenWidth, screenHeight, bpp);
 }
 
-void LSM_SDLHelper::CreateWindow(const i8* title){
+i32 LSM_SDLHelper::getWcharLen(const i32* wcharPtr){
+    i32 len = 0;
+    while(csTrue){
+        if(wcharPtr[len] == 0){
+            break;
+        }
+        len++;
+    }
+    return len + 1;
+}
+
+char* LSM_SDLHelper::wchar2char(const i32* wcharPtr){
+    i32 length = getWcharLen(wcharPtr);
+    char* charPtr = new char[length];
+    for(i32 i = 0; i < length; i++){
+        charPtr[i] = (i8)wcharPtr[i];
+    }
+    return charPtr;
+}
+
+void LSM_SDLHelper::CreateWindow(const i32* title){
     window = NULL;
     screenSurface = NULL;
 
@@ -47,16 +67,20 @@ void LSM_SDLHelper::CreateWindow(const i8* title){
         printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
     }
 
+    char* charTitle = wchar2char(title);
+
     // 创建 Window
     window = SDL_CreateWindow
     (
-        (const char*)title,
+        charTitle,
         leftMargin,
         topMargin,
         windowWidth,
         windowHeight,
         SDL_WINDOW_SHOWN
     );
+
+    delete[] charTitle;
 
     // 检测 Window 是否可用
     if(window == NULL){
