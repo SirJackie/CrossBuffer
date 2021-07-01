@@ -17,7 +17,7 @@
 #include <sys/ioctl.h>     /* BSD and Linux */
 #include <stropts.h>       /* XSI STREAMS */
 
-#include "../CrossBufferLayer/BasicDataTypeDeclarations.h"
+#include "../CrossBufferLayer/CrossBuffer.h"
 
 
 class LSM_SDLHelper{
@@ -43,6 +43,9 @@ public:
     void ReleaseMedia(SDL_Surface* media);
     void Close();
     void BlitSurfaceHere(SDL_Surface* from);
+    void LockSurface();
+    void UnlockSurface();
+    void PaintFrameBufferHere(CS_FrameBuffer& fb);
 };
 
 #endif

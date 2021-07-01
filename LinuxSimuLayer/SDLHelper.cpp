@@ -102,3 +102,38 @@ void LSM_SDLHelper::Close()
 void LSM_SDLHelper::BlitSurfaceHere(SDL_Surface* from){
     SDL_BlitSurface( from, NULL, screenSurface, NULL );
 }
+
+void LSM_SDLHelper::LockSurface(){
+    SDL_LockSurface(screenSurface);
+}
+
+void LSM_SDLHelper::UnlockSurface(){
+    SDL_UnlockSurface(screenSurface);
+    SDL_UpdateWindowSurface(window);
+}
+
+void LSM_SDLHelper::PaintFrameBufferHere(CS_FrameBuffer& fb){
+    i32* pBitsNow = (int*)screenSurface->pixels;
+    i32  bufferPitch = screenSurface->pitch / 4;
+    i8*  pRed = fb.redBuffer;
+    i8*  pGreen = fb.greenBuffer;
+    i8*  pBlue = fb.blueBuffer;
+
+    for (i32 y = 0; y < fb.height; y++) {
+        for (i32 x = 0; x < fb.width; x++) {
+            *pBitsNow =
+                (i32)
+                (
+                    (0xff << 24) |
+                    (((*pRed) & 0xff) << 16) |
+                    (((*pGreen) & 0xff) << 8) |
+                    ((*pBlue) & 0xff)
+                    );
+            pRed++;
+            pGreen++;
+            pBlue++;
+            pBitsNow++;
+        }
+        pBitsNow += bufferPitch - fb.width;
+    }
+}
