@@ -29,36 +29,38 @@ void Update(CS_FrameBuffer& fb, CS_Keyboard kb, i32 deltaTime) {
 	}
 
 	if (kb.IsKeyPressed('W')) {
-		startY -= deltaTime * step;
+		startY -= (i32)(deltaTime * step);
 	}
 
 	if (kb.IsKeyPressed('S')) {
-		startY += deltaTime * step;
+		startY += (i32)(deltaTime * step);
 	}
 
 	if (kb.IsKeyPressed('A')) {
-		startX -= deltaTime * step;
+		startX -= (i32)(deltaTime * step);
 	}
 
 	if (kb.IsKeyPressed('D')) {
-		startX += deltaTime * step;
+		startX += (i32)(deltaTime * step);
 	}
 
 	if (kb.IsKeyPressed('I')) {
-		endY -= deltaTime * step;
+		endY -= (i32)(deltaTime * step);
 	}
 
 	if (kb.IsKeyPressed('K')) {
-		endY += deltaTime * step;
+		endY += (i32)(deltaTime * step);
 	}
 
 	if (kb.IsKeyPressed('J')) {
-		endX -= deltaTime * step;
+		endX -= (i32)(deltaTime * step);
 	}
 
 	if (kb.IsKeyPressed('L')) {
-		endX += deltaTime * step;
+		endX += (i32)(deltaTime * step);
 	}
 
 	deltaColor += 1;
+
+	fb.DrawString("Alphabet", startX, startY);
 }

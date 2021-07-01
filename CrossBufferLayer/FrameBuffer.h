@@ -17,9 +17,9 @@ public:
     i32 width;
     i32 height;
 
-    i8* redBuffer;
-    i8* greenBuffer;
-    i8* blueBuffer;
+    ui8* redBuffer;
+    ui8* greenBuffer;
+    ui8* blueBuffer;
 
     i32 curX;
     i32 curY;
@@ -42,6 +42,9 @@ public:
     CS_FrameBuffer(const CS_FrameBuffer& fb);
     CS_FrameBuffer& operator=(const CS_FrameBuffer& fb);
     ~CS_FrameBuffer();
+
+    void DrawChar(const char& ch, i32 x, i32 y);
+    void DrawString(const i8* str, const i32 x, const i32 y);
 };
 
 #endif

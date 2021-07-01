@@ -14,7 +14,8 @@ typedef    unsigned short    ui16;    // Should be 16-bit 2-byte sign-less
 typedef    signed   short    i16;     // Should be 16-bit 2-byte sign-ful
 
 typedef    unsigned char     ui8;     // Should be 16-bit 2-byte sign-less
-typedef    signed   char     i8;      // Should be 16-bit 2-byte sign-ful
+typedef    signed   char     si8;     // Should be 16-bit 2-byte sign-ful
+typedef    char              i8;      // Should be 16-bit 2-byte sign-less
 
 typedef    double            f64;     // Should be 64-bit 8-byte float
 typedef    float             f32;     // Should be 32-bit 4-byte float
