@@ -13,8 +13,8 @@ void Update(CS_FrameBuffer& fb, CS_Keyboard kb, i32 deltaTime) {
 	startX = CS_iclamp(0, startX, fb.width);
 	startY = CS_iclamp(0, startY, fb.height);
 
-	endX = CS_iclamp(0, endX, fb.width);
-	endY = CS_iclamp(0, endY, fb.height);
+	endX = CS_iclamp(startX+100, endX, fb.width);
+	endY = CS_iclamp(startY+100, endY, fb.height);
 
 	if (deltaColor == 255) {
 		deltaColor = 0;
@@ -31,43 +31,17 @@ void Update(CS_FrameBuffer& fb, CS_Keyboard kb, i32 deltaTime) {
 	fb.DrawString("Alphabet", startX + 11, startY + 11, 0, 0, 0);
 	fb.DrawString("Alphabet", startX + 10, startY + 10, 255, 255, 255);
 
-	fb.Print("Hello world!");
-	fb.Print("Hello world!");
-	fb.Print("Hello world!");
-	fb.Print("Hello world!");
-	fb.Print("Hello world!");
-	fb.Print("Hello world!");
-	fb.Print("Hello world!");
-	fb.Print("Hello world!");
-	fb.Print("Hello world!");
-	fb.Print("Hello world!");
-	fb.Print("Hello world!");
-	fb.Print("Hello world!");
-	fb.Print("Hello world!");
-	fb.Print("Hello world!");
-	fb.Print("Hello world!");
-	fb.Print("Hello world!");
-	fb.Print("Hello world!");
-	fb.Print("Hello world!");
-	fb.Print("Hello world!");
-	fb.Print("Hello world!");
-	fb.Print("Hello world!");
-	fb.Print("Hello world!");
-	fb.Print("Hello world!");
-	fb.Print("Hello world!");
-	fb.Print("Hello world!");
-	fb.Print("Hello world!");
-	fb.Print("Hello world!");
-	fb.Print("Hello world!");
-	fb.Print("Hello world!");
-	fb.Print("Hello world!");
-	fb.Print("Hello world!");
-	fb.Print("Hello world!");
-	fb.Print("Hello world!\n");
-	fb.PrintLn("Hello world!");
-	fb.Print("Hello world!");
-	fb.Print("Hello world!");
-	fb.Print("Hello world!");
+	string ts = "C++ String Test!";
+	i32 ti32 = 32;
+	i16 ti16 = 16;
+
+	fb.Print("Hel");
+	fb.Print("lo wor");
+	fb.PrintLn("ld!");
+	fb.PrintLn(32);
+	fb.PrintLn(100.32f);
+	fb.PrintLn(100.64f);
+	fb.PrintLn('A');
 
 	if (kb.IsKeyPressed('W')) {
 		startY -= (i32)(deltaTime * step);

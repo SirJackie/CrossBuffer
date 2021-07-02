@@ -196,3 +196,8 @@ void CS_FrameBuffer::Print(const i8* str)
         }
     }
 }
+
+void CS_FrameBuffer::Print(string str)
+{
+    Print(str.c_str());
+}

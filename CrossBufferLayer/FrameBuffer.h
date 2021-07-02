@@ -4,9 +4,13 @@
 #include "BasicDataTypeDeclarations.h"
 #include "FontSupport.h"
 
+#include <string>
+using std::string;
+#include <sstream>
+using std::stringstream;
+
 #define CS_FB_INIT_CURX 10
 #define CS_FB_INIT_CURY 10
-
 
 class CS_FrameBuffer
 {
@@ -22,6 +26,8 @@ public:
 
     i32 curX;
     i32 curY;
+
+    stringstream temporalSS;
 
 
     // Methods
@@ -51,8 +57,20 @@ public:
         const ui8 r, const ui8 g, const ui8 b
     );
     void Print(const i8* str);
-    template <class T> void PrintLn(T thing) {
-        Print(thing);
+    void Print(string str);
+    template<class T>
+    void Print(T x)
+    {
+        temporalSS.clear();
+        temporalSS.str("");
+        temporalSS << x;
+        Print(temporalSS.str());
+    }
+
+    template<class T>
+    void PrintLn(T x)
+    {
+        Print(x);
         Print("\n");
     }
 };
