@@ -137,8 +137,8 @@ void LSM_SDLHelper::UnlockSurface(){
 }
 
 void LSM_SDLHelper::PaintFrameBufferHere(CS_FrameBuffer& fb){
-    i32* pBitsNow = (ui32*)screenSurface->pixels;
-    i32  bufferPitch = screenSurface->pitch / 4;
+    ui32* pBitsNow = (ui32*)screenSurface->pixels;
+    i32   bufferPitch = screenSurface->pitch / 4;
     ui8*  pRed = fb.redBuffer;
     ui8*  pGreen = fb.greenBuffer;
     ui8*  pBlue = fb.blueBuffer;
