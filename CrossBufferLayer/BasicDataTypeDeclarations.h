@@ -9,7 +9,7 @@
 
 typedef    unsigned int      ui32;    // Should be 32-bit 4-byte sign-less
 typedef    signed   int      si32;    // Should be 32-bit 4-byte sign-ful
-typedef    unsigned int       i32;    // Should be 32-bit 4-byte auto
+typedef    int                i32;    // Should be 32-bit 4-byte auto
 
 typedef    unsigned short    ui16;    // Should be 16-bit 2-byte sign-less
 typedef    signed   short    si16;    // Should be 16-bit 2-byte sign-ful

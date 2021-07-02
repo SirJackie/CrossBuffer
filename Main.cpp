@@ -13,8 +13,8 @@ void Update(CS_FrameBuffer& fb, CS_Keyboard kb, i32 deltaTime) {
 	startX = CS_iclamp(0, startX, fb.width);
 	startY = CS_iclamp(0, startY, fb.height);
 
-	endX = CS_iclamp(startX+100, endX, fb.width);
-	endY = CS_iclamp(startY+100, endY, fb.height);
+	endX = CS_iclamp(CS_iclamp(0, startX+100, fb.width),  endX, fb.width);
+	endY = CS_iclamp(CS_iclamp(0, startY+100, fb.height), endY, fb.height);
 
 	if (deltaColor == 255) {
 		deltaColor = 0;
