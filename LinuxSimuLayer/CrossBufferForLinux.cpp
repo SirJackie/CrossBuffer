@@ -38,15 +38,18 @@ int main( int argc, char* args[] )
         while(SDL_PollEvent(&e) != 0)
         {
             // If exit
-            if( e.type == SDL_QUIT )
+            if(e.type == SDL_QUIT)
             {
                 quit = true;
             }
 
             // If key pressed
-            if( e.type == SDL_KEYDOWN )
+            if(e.type == SDL_KEYDOWN)
             {
-                e.key.keysym.sym;
+                kb.SimuLayerSetKeyIsPressed(e.key.keysym.sym);
+            }
+            if(e.type == SDL_KEYUP){
+                kb.SimuLayerSetKeyIsReleased(e.key.keysym.sym);
             }
         }
 
