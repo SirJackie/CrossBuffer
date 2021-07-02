@@ -44,165 +44,84 @@ void CS_Memset(void* ptr, i8 fillingContent, i32 length);
 ** Systematic Keyboard Index Declaration
 */
 
-#define    KEY_LBUTTON                1    // ������������̨��ʹ�ã�
-#define    KEY_RBUTTON                2    // ����Ҽ�������̨��ʹ�ã�
-#define    KEY_CANCEL                 3    // �����жϼ�������Ctrl+PauseBreak������̨��ʹ�ã�
-#define    KEY_MBUTTON                4    // ����м�������̨��ʹ�ã�
-#define    KEY_XBUTTON1               5    // ���X1���������ĸ�������ʵ���������������̨��ʹ�ã�
-#define    KEY_XBUTTON2               6    // ���X2���������ĸ�������ʵ���������������̨��ʹ�ã�
-#define    KEY_BACK                   8    // �˸��������Backspace
-#define    KEY_TAB                    9    // �Ʊ���������Tab
-#define    KEY_CLEAR                 12    // Clear����NumLock�ر�ʱ�����ּ���5
-#define    KEY_RETURN                13    // �س���������Enter
-#define    KEY_SHIFT                 16    // �ϵ���������Shift
-#define    KEY_CONTROL               17    // ���Ƽ�������Ctrl
-#define    KEY_MENU                  18    // ������������Alt
-#define    KEY_PAUSE                 19    // �ж���ͣ��������PauseBreak
-#define    KEY_CAPITAL               20    // ��Сд������������CapsLock
-#define    KEY_KANA                  21    // ���뷨�༭����InputMethodEditor���IME������ģʽ
-#define    KEY_HANGEUL               21    // ���뷨�༭������ģʽ���������ˣ�Ϊ�˼�����
-#define    KEY_HANGUL                21    // ���뷨�༭������ģʽ���������ˣ�Ϊ�˼�����
-#define    KEY_JUNJA                 23    // ���뷨�༭��junjaģʽ
-#define    KEY_FINAL                 24    // ���뷨�༭��finalģʽ
-#define    KEY_HANJA                 25    // ���뷨�༭������ģʽ
-#define    KEY_KANJI                 25    // ���뷨�༭������ģʽ
-#define    KEY_ESCAPE                27    // �˳���������Esc
-#define    KEY_CONVERT               28    // IMEconvert
-#define    KEY_NONCONVERT            29    // IMEnonconvert
-#define    KEY_ACCEPT                30    // IMEaccept
-#define    KEY_MODECHANGE            31    // IMEmodechangerequest
-#define    KEY_SPACE                 32    // �ո��������SpaceBar
-#define    KEY_PRIOR                 33    // ���Ϸ�ҳ��������PageUp
-#define    KEY_NEXT                  34    // ���·�ҳ��������PageDown
-#define    KEY_END                   35    // ��β��������End
-#define    KEY_HOME                  36    // ��ʼ��������Home
-#define    KEY_LEFT                  37    // ����������ǡ�
-#define    KEY_UP                    38    // �Ϸ���������ǡ�
-#define    KEY_RIGHT                 39    // �ҷ���������ǡ�
-#define    KEY_DOWN                  40    // �·���������ǡ�
-#define    KEY_SELECT                41    // Select��
-#define    KEY_PRINT                 42    // Print��
-#define    KEY_EXE                   43    // Excute��
-#define    KEY_SNAPSHOT              44    // ��Ļ��ӡ��������PrintScreen
-#define    KEY_INSERT                45    // �����������Insert
-#define    KEY_DELETE                46    // ɾ����������Delete
-#define    KEY_HELP                  47    // Help��
-#define    KEY_LWIN                  91    // ��windows�ձ��������һ��������״���Ǹ���
-#define    KEY_RWIN                  92    // ��windows�ձ��������һ��������״���Ǹ���
-#define    KEY_APPS                  93    // Ӧ�ó���������ǰ�һ�µ����Ҽ��˵����Ǹ���
-#define    KEY_SLEEP                 95    // ˯�߼�������Sleep
-#define    KEY_NUMPAD0               96    // ���ּ���0��
-#define    KEY_NUMPAD1               97    // ���ּ���1��
-#define    KEY_NUMPAD2               98    // ���ּ���2��
-#define    KEY_NUMPAD3               99    // ���ּ���3��
-#define    KEY_NUMPAD4              100    // ���ּ���4��
-#define    KEY_NUMPAD5              101    // ���ּ���5��
-#define    KEY_NUMPAD6              102    // ���ּ���6��
-#define    KEY_NUMPAD7              103    // ���ּ���7��
-#define    KEY_NUMPAD8              104    // ���ּ���8��
-#define    KEY_NUMPAD9              105    // ���ּ���9��
-#define    KEY_MULTIPLY             106    // �˷������������ּ���*��
-#define    KEY_ADD                  107    // �ӷ������������ּ���+��
-#define    KEY_SEPARATOR            108    // Separator��
-#define    KEY_SUBTRACT             109    // ���������������ּ���-��
-#define    KEY_DECIMAL              110    // С��������������ּ���.��
-#define    KEY_DIVIDE               111    // ���������������ּ���/��
-#define    KEY_F1                   112    // ����1��������F1
-#define    KEY_F2                   113    // ����2��������F2
-#define    KEY_F3                   114    // ����3��������F3
-#define    KEY_F4                   115    // ����4��������F4
-#define    KEY_F5                   116    // ����5��������F5
-#define    KEY_F6                   117    // ����6��������F6
-#define    KEY_F7                   118    // ����7��������F7
-#define    KEY_F8                   119    // ����8��������F8
-#define    KEY_F9                   120    // ����9��������F9
-#define    KEY_F10                  121    // ����10��������F10
-#define    KEY_F11                  122    // ����11��������F11
-#define    KEY_F12                  123    // ����12��������F12
-#define    KEY_F13                  124    // ����13��������F13
-#define    KEY_F14                  125    // ����14��������F14
-#define    KEY_F15                  126    // ����15��������F15
-#define    KEY_F16                  127    // ����16��������F16
-#define    KEY_F17                  128    // ����17��������F17
-#define    KEY_F18                  129    // ����18��������F18
-#define    KEY_F19                  130    // ����19��������F19
-#define    KEY_F20                  131    // ����20��������F20
-#define    KEY_F21                  132    // ����21��������F21
-#define    KEY_F22                  133    // ����22��������F22
-#define    KEY_F23                  134    // ����23��������F23
-#define    KEY_F24                  135    // ����24��������F24
-#define    KEY_NUMLOCK              144    // ���ּ���������������NumLock
-#define    KEY_SCROLL               145    // ����������������ScrollLock
-#define    KEY_OEM_NEC_EQUAL        146    // NECPC-9800���̶�������ּ���=��
-#define    KEY_OEM_FJ_JISHO         146    // Fujitsu/OASYS���̶����'Dictionary'��
-#define    KEY_OEM_FJ_MASSHOU       147    // Fujitsu/OASYS���̶����'Unregisterword'��
-#define    KEY_OEM_FJ_TOUROKU       148    // Fujitsu/OASYS���̶����'Registerword'��
-#define    KEY_OEM_FJ_LOYA          149    // Fujitsu/OASYS���̶����'LeftOYAYUBI'��
-#define    KEY_OEM_FJ_ROYA          150    // Fujitsu/OASYS���̶����'RightOYAYUBI'��
-#define    KEY_LSHIFT               160    // ���ϵ���������Shift������ֻ̨ʹ��KEY_SHIFT������̨��ʹ�ã�
-#define    KEY_RSHIFT               161    // ���ϵ���������Shift������ֻ̨ʹ��KEY_SHIFT������̨��ʹ�ã�
-#define    KEY_LCONTROL             162    // ����Ƽ�������Ctrl������ֻ̨����KEY_CONTROL������̨��ʹ�ã�
-#define    KEY_RCONTROL             163    // �ҿ��Ƽ�������Ctrl������ֻ̨����KEY_CONTROL������̨��ʹ�ã�
-#define    KEY_LMENU                164    // �󻻵���������Alt������ֻ̨����KEY_MENU������̨��ʹ�ã�
-#define    KEY_RMENU                165    // �һ�����������Alt������ֻ̨����KEY_MENU������̨��ʹ�ã�
-#define    KEY_BROWSER_BACK         166    // ��������˼�
-#define    KEY_BROWSER_FORWARD      167    // �����ǰ����
-#define    KEY_BROWSER_REFRESH      168    // �����ˢ�¼�
-#define    KEY_BROWSER_STOP         169    // �����ֹͣ��
-#define    KEY_BROWSER_SEARCH       170    // ��������Ҽ�
-#define    KEY_BROWSER_FAVORITES    171    // ������ղؼм�
-#define    KEY_BROWSER_HOME         172    // �������ҳ��
-#define    KEY_VOLUME_MUTE          173    // ����������
-#define    KEY_VOLUME_DOWN          174    // �������ͼ�
-#define    KEY_VOLUME_UP            175    // �������߼�
-#define    KEY_MEDIA_NEXT_TRACK     176    // ý����һ��Ŀ��
-#define    KEY_MEDIA_PREV_TRACK     177    // ý����һ��Ŀ��
-#define    KEY_MEDIA_STOP           178    // ý��ֹͣ��
-#define    KEY_MEDIA_PLAY_PAUSE     179    // ý�岥��/��ͣ��
-#define    KEY_LAUNCH_MAIL          180    // �����ʼ���
-#define    KEY_LAUNCH_MEDIA_SELECT  181    // ����ý��ѡ���
-#define    KEY_LAUNCH_APP1          182    // ����Ӧ�ó���1��
-#define    KEY_LAUNCH_APP2          183    // ����Ӧ�ó���2��
-#define    KEY_OEM_1                186    // ����';:'��
-#define    KEY_OEM_PLUS             187    // ����'=+'��
-#define    KEY_OEM_COMMA            188    // ����',<'��
-#define    KEY_OEM_MINUS            189    // ����'-_'��
-#define    KEY_OEM_PERIOD           190    // ����'.>'��
-#define    KEY_OEM_2                191    // ����'/?'��
-#define    KEY_OEM_3                192    // ����'`~'��
-#define    KEY_OEM_4                219    // ����'[{'��
-#define    KEY_OEM_5                220    // ����'|'��
-#define    KEY_OEM_6                221    // ����']}'��
-#define    KEY_OEM_7                222    // ����''"'��
-#define    KEY_OEM_8                223    // ���������ַ�����ͬ�ļ��̲�һ��һ��
-#define    KEY_OEM_AX               225    // �ձ�AX���̵�'AX'��
-#define    KEY_OEM_102              226    // RT102-key���̵�"<>"��"|"��
-#define    KEY_ICO_HELP             227    // ����ͼ���
-#define    KEY_ICO_00               228    // 00ͼ���
-#define    KEY_PROCESSKEY           229    // IMEPROCESS��
-#define    KEY_ICO_CLEAR            230    // Clearͼ���
-#define    KEY_PACKET               231    // ��̫�����ʲô��˼
-#define    KEY_OEM_RESET            233    // ŵ���ǡ�������ʹ�õ�
-#define    KEY_OEM_JUMP             234    // ŵ���ǡ�������ʹ�õ�
-#define    KEY_OEM_PA1              235    // ŵ���ǡ�������ʹ�õ�
-#define    KEY_OEM_PA2              236    // ŵ���ǡ�������ʹ�õ�
-#define    KEY_OEM_PA3              237    // ŵ���ǡ�������ʹ�õ�
-#define    KEY_OEM_WSCTRL           238    // ŵ���ǡ�������ʹ�õ�
-#define    KEY_OEM_CUSEL            239    // ŵ���ǡ�������ʹ�õ�
-#define    KEY_OEM_ATTN             240    // ŵ���ǡ�������ʹ�õ�
-#define    KEY_OEM_FINISH           241    // ŵ���ǡ�������ʹ�õ�
-#define    KEY_OEM_COPY             242    // ŵ���ǡ�������ʹ�õ�
-#define    KEY_OEM_AUTO             243    // ŵ���ǡ�������ʹ�õ�
-#define    KEY_OEM_ENLW             244    // ŵ���ǡ�������ʹ�õ�
-#define    KEY_OEM_BACKTAB          245    // ŵ���ǡ�������ʹ�õ�
-#define    KEY_ATTN                 246    // Attn��
-#define    KEY_CRSEL                247    // CrSel��
-#define    KEY_EXSEL                248    // ExSel��
-#define    KEY_EREOF                249    // EraseEOF��
-#define    KEY_PLAY                 250    // Play��
-#define    KEY_ZOOM                 251    // Zoom��
-#define    KEY_NONAME               252    // δ��
-#define    KEY_PA1                  253    // PA1��
-#define    KEY_OEM_CLEAR            254    // Clear��
+#define CSK_Esc                     27
+#define CSK_F1                      112
+#define CSK_F2                      113
+#define CSK_F3                      114
+#define CSK_F4                      115
+#define CSK_F5                      116
+#define CSK_F6                      117
+#define CSK_F7                      118
+#define CSK_F8                      119
+#define CSK_F9                      120
+#define CSK_F10                     121
+#define CSK_F11                     122
+#define CSK_F12                     123
+#define CSK_BackQuote               58
+#define CSK_Num1                    49
+#define CSK_Num2                    50
+#define CSK_Num3                    51
+#define CSK_Num4                    52
+#define CSK_Num5                    53
+#define CSK_Num6                    54
+#define CSK_Num7                    55
+#define CSK_Num8                    56
+#define CSK_Num9                    57
+#define CSK_Num0                    58
+#define CSK_Minus                   59
+#define CSK_Plus                    60
+#define CSK_Backspace               8
+#define CSK_Tab                     9
+#define CSK_Q                       81
+#define CSK_W                       87
+#define CSK_E                       69
+#define CSK_R                       82
+#define CSK_T                       84
+#define CSK_Y                       89
+#define CSK_U                       85
+#define CSK_I                       73
+#define CSK_O                       79
+#define CSK_P                       80
+#define CSK_LeftSquareBracket       92
+#define CSK_RightSquareBracket      93
+#define CSK_BackSlash               94
+#define CSK_CapsLock                20
+#define CSK_A                       65
+#define CSK_S                       83
+#define CSK_D                       68
+#define CSK_F                       70
+#define CSK_G                       71
+#define CSK_H                       72
+#define CSK_J                       74
+#define CSK_K                       75
+#define CSK_L                       76
+#define CSK_Semicolon               95
+#define CSK_Quote                   96
+#define CSK_Enter                   13
+#define CSK_Shift                   16
+#define CSK_Z                       90
+#define CSK_X                       88
+#define CSK_C                       67
+#define CSK_V                       86
+#define CSK_B                       66
+#define CSK_N                       78
+#define CSK_M                       77
+#define CSK_Comma                   97
+#define CSK_FullStop                98
+#define CSK_Slash                   99
+#define CSK_RightShift              103
+#define CSK_Ctrl                    100
+#define CSK_Win                     91
+#define CSK_Alt                     101
+#define CSK_Space                   32
+#define CSK_RightAlt                102
+#define CSK_RightCtrl               104
+#define CSK_Up                      38
+#define CSK_Down                    40
+#define CSK_Left                    37
+#define CSK_Right                   39
+#define CSK_Insert                  45
+#define CSK_Delete                  46
+
 
 #endif
