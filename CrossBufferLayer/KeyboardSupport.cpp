@@ -21,3 +21,8 @@ void CS_Keyboard::SimuLayerSetKeyIsReleased(i8 key)
 {
     keyBuffer[key] = csFalse;
 }
+
+void CS_Keyboard::SimuLayerSetKeyState(i8 key, csbool state)
+{
+    keyBuffer[key] = state;
+}

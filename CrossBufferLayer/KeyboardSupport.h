@@ -12,6 +12,7 @@ public:
 	csbool IsKeyPressed(i8 key);
 	void   SimuLayerSetKeyIsPressed(i8 key);
 	void   SimuLayerSetKeyIsReleased(i8 key);
+	void   SimuLayerSetKeyState(i8 key, csbool state);
 };
 
 
@@ -104,32 +105,32 @@ public:
 
 #define CSK_Insert                  45
 #define CSK_Delete                  46
-#define CSK_Home
-#define CSK_End
-#define CSK_PageUp
-#define CSK_PageDown
+#define CSK_Home                    36
+#define CSK_End                     35
+#define CSK_PageUp                  33
+#define CSK_PageDown                34
 
-#define CSK_PrintScreen
-#define CSK_ScrollLock
-#define CSK_PauseAndBreak
+#define CSK_PrintScreen             30
+#define CSK_ScrollLock              31
+#define CSK_PauseAndBreak           19
 
-#define CSK_Keypad0
-#define CSK_Keypad1
-#define CSK_Keypad2
-#define CSK_Keypad3
-#define CSK_Keypad4
-#define CSK_Keypad5
-#define CSK_Keypad6
-#define CSK_Keypad7
-#define CSK_Keypad8
-#define CSK_Keypad9
-#define CSK_KeypadDot
-#define CSK_KeypadNumLock
-#define CSK_KeypadEnter
-#define CSK_KeypadAdd
-#define CSK_KeypadMinus
-#define CSK_KeypadMultiply
-#define CSK_MultiplyDevide
+#define CSK_Keypad0                 96
+#define CSK_Keypad1                 97
+#define CSK_Keypad2                 98
+#define CSK_Keypad3                 99
+#define CSK_Keypad4                 100
+#define CSK_Keypad5                 101
+#define CSK_Keypad6                 102
+#define CSK_Keypad7                 103
+#define CSK_Keypad8                 104
+#define CSK_Keypad9                 105
+#define CSK_KeypadDot               110
+#define CSK_KeypadNumLock           122
+#define CSK_KeypadEnter             121
+#define CSK_KeypadAdd               107
+#define CSK_KeypadMinus             109
+#define CSK_KeypadMultiply          106
+#define CSK_MultiplyDevide          111
 
 
 #endif
