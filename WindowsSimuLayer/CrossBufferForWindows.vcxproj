@@ -152,6 +152,7 @@
     <ClCompile Include="..\Main.cpp" />
     <ClCompile Include="CrossBufferForWindows.cpp" />
     <ClCompile Include="D3DHelper.cpp" />
+    <ClCompile Include="KeyboardHelper.cpp" />
     <ClCompile Include="WindowsHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -170,6 +171,7 @@
     <ClInclude Include="..\CrossBufferLayer\KeyboardSupport.h" />
     <ClInclude Include="..\Main.h" />
     <ClInclude Include="D3DHelper.h" />
+    <ClInclude Include="KeyboardHelper.h" />
     <ClInclude Include="WindowsHelper.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

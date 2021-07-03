@@ -1,6 +1,7 @@
 ﻿// Include Hardware Simulation Parts
 #include "WindowsHelper.h"
 #include "D3DHelper.h"
+#include "KeyboardHelper.h"
 
 // Include Standard Libraries
 #include <time.h>
@@ -10,12 +11,12 @@
 #include "../CrossBufferLayer/CrossBuffer.h"
 
 // WindowsSimuLayer Variables
-WSL_WindowsHelper windowsHelper;
-WSL_D3DHelper     d3dHelper;
+WSL_WindowsHelper   windowsHelper;
+WSL_D3DHelper       d3dHelper;
+WSL_KeyboardHelper  keyboardHelper;
 
 // CrossBufferLayer Variables
 CS_FrameBuffer fb;
-CS_Keyboard    kb;
 
 // Time Counting Variables
 csbool FirstTimeRunning;
@@ -42,10 +43,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 {
 
 	// Initialize CrossBufferLayer and WIndowsSimuLayer Objects
-	windowsHelper = WSL_WindowsHelper(MsgProc, hInstance, (wchar_t*)WindowTitle, (wchar_t*)WindowTitle);
-	d3dHelper     = WSL_D3DHelper(windowsHelper.hWnd);
-	fb            = CS_FrameBuffer(windowsHelper.windowWidth, windowsHelper.windowHeight);
-	kb            = CS_Keyboard();
+	windowsHelper   = WSL_WindowsHelper(MsgProc, hInstance, (wchar_t*)WindowTitle, (wchar_t*)WindowTitle);
+	d3dHelper       = WSL_D3DHelper(windowsHelper.hWnd);
+	keyboardHelper  = WSL_KeyboardHelper();
+	fb              = CS_FrameBuffer(windowsHelper.windowWidth, windowsHelper.windowHeight);
 
 	// Initialize Time Counting Variables
 	FirstTimeRunning = csTrue;
@@ -82,13 +83,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 			// If it is the First Time Running
 			if (FirstTimeRunning) {
-				Setup(fb, kb, 0);                     // Call the Setup()  in Main.h
+				Setup(fb, keyboardHelper.kb, 0);                     // Call the Setup()  in Main.h
 				FirstTimeRunning = csFalse;
 			}
 
 			// If it is not the First Time Running
 			else {
-				Update(fb, kb, thisTime - lastTime);  // Call the Update() in Main.h
+				Update(fb, keyboardHelper.kb, thisTime - lastTime);  // Call the Update() in Main.h
 			}
 
 			// Paint Our FrameBuffer to System BackBuffer
@@ -128,11 +129,13 @@ LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		return 0;
 
 	case WM_KEYDOWN:
-		kb.SimuLayerSetKeyIsPressed(wParam);
+		keyboardHelper.windowsKeyBuffer[wParam] = 1;
+		keyboardHelper.MoveWinBufIntoKeyBuf();
 		return DefWindowProc(hWnd, msg, wParam, lParam);
 
 	case WM_KEYUP:
-		kb.SimuLayerSetKeyIsReleased(wParam);
+		keyboardHelper.windowsKeyBuffer[wParam] = 0;
+		keyboardHelper.MoveWinBufIntoKeyBuf();
 		return DefWindowProc(hWnd, msg, wParam, lParam);
 
 	//case WM_LBUTTONDOWN:
