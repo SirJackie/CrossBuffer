@@ -2,24 +2,24 @@
 
 LSL_KeyboardHelper::LSL_KeyboardHelper()
 {
-	CS_Memset(linuxKeyBuffer, 0, 256);
+	CS_Memset(linuxKeyBuffer, 0, 3000);
 }
 
 void LSL_KeyboardHelper::MoveLnxBufIntoKeyBuf()
 {
 	kb.SimuLayerSetKeyState(CSK_Esc, linuxKeyBuffer[27]);
-	kb.SimuLayerSetKeyState(CSK_F1, linuxKeyBuffer[58]);
-	kb.SimuLayerSetKeyState(CSK_F2, linuxKeyBuffer[59]);
-	kb.SimuLayerSetKeyState(CSK_F3, linuxKeyBuffer[60]);
-	kb.SimuLayerSetKeyState(CSK_F4, linuxKeyBuffer[61]);
-	kb.SimuLayerSetKeyState(CSK_F5, linuxKeyBuffer[62]);
-	kb.SimuLayerSetKeyState(CSK_F6, linuxKeyBuffer[63]);
-	kb.SimuLayerSetKeyState(CSK_F7, linuxKeyBuffer[64]);
-	kb.SimuLayerSetKeyState(CSK_F8, linuxKeyBuffer[65]);
-	kb.SimuLayerSetKeyState(CSK_F9, linuxKeyBuffer[66]);
-	kb.SimuLayerSetKeyState(CSK_F10, linuxKeyBuffer[67]);
-	kb.SimuLayerSetKeyState(CSK_F11, linuxKeyBuffer[68]);
-	kb.SimuLayerSetKeyState(CSK_F12, linuxKeyBuffer[69]);
+	kb.SimuLayerSetKeyState(CSK_F1, linuxKeyBuffer[1882]);
+	kb.SimuLayerSetKeyState(CSK_F2, linuxKeyBuffer[1883]);
+	kb.SimuLayerSetKeyState(CSK_F3, linuxKeyBuffer[1884]);
+	kb.SimuLayerSetKeyState(CSK_F4, linuxKeyBuffer[1885]);
+	kb.SimuLayerSetKeyState(CSK_F5, linuxKeyBuffer[1886]);
+	kb.SimuLayerSetKeyState(CSK_F6, linuxKeyBuffer[1887]);
+	kb.SimuLayerSetKeyState(CSK_F7, linuxKeyBuffer[1888]);
+	kb.SimuLayerSetKeyState(CSK_F8, linuxKeyBuffer[1889]);
+	kb.SimuLayerSetKeyState(CSK_F9, linuxKeyBuffer[1890]);
+	kb.SimuLayerSetKeyState(CSK_F10, linuxKeyBuffer[1891]);
+	kb.SimuLayerSetKeyState(CSK_F11, linuxKeyBuffer[1892]);
+	kb.SimuLayerSetKeyState(CSK_F12, linuxKeyBuffer[1893]);
 
 	kb.SimuLayerSetKeyState(CSK_BackQuote, linuxKeyBuffer[96]);
 	kb.SimuLayerSetKeyState(CSK_Num1, linuxKeyBuffer[49]);
@@ -51,7 +51,7 @@ void LSL_KeyboardHelper::MoveLnxBufIntoKeyBuf()
 	kb.SimuLayerSetKeyState(CSK_RightSquareBracket, linuxKeyBuffer[93]);
 	kb.SimuLayerSetKeyState(CSK_BackSlash, linuxKeyBuffer[92]);
 
-	kb.SimuLayerSetKeyState(CSK_CapsLock, linuxKeyBuffer[57]);
+	kb.SimuLayerSetKeyState(CSK_CapsLock, linuxKeyBuffer[1081]);
 	kb.SimuLayerSetKeyState(CSK_A, linuxKeyBuffer[97]);
 	kb.SimuLayerSetKeyState(CSK_S, linuxKeyBuffer[115]);
 	kb.SimuLayerSetKeyState(CSK_D, linuxKeyBuffer[100]);
@@ -65,7 +65,7 @@ void LSL_KeyboardHelper::MoveLnxBufIntoKeyBuf()
 	kb.SimuLayerSetKeyState(CSK_Quote, linuxKeyBuffer[39]);
 	kb.SimuLayerSetKeyState(CSK_Enter, linuxKeyBuffer[13]);
 
-	// kb.SimuLayerSetKeyState(CSK_Shift, linuxKeyBuffer[16]);
+	kb.SimuLayerSetKeyState(CSK_Shift, linuxKeyBuffer[2049]);
 	kb.SimuLayerSetKeyState(CSK_Z, linuxKeyBuffer[122]);
 	kb.SimuLayerSetKeyState(CSK_X, linuxKeyBuffer[120]);
 	kb.SimuLayerSetKeyState(CSK_C, linuxKeyBuffer[99]);
@@ -76,46 +76,46 @@ void LSL_KeyboardHelper::MoveLnxBufIntoKeyBuf()
 	kb.SimuLayerSetKeyState(CSK_Comma, linuxKeyBuffer[44]);
 	kb.SimuLayerSetKeyState(CSK_FullStop, linuxKeyBuffer[46]);
 	kb.SimuLayerSetKeyState(CSK_Slash, linuxKeyBuffer[47]);
-	// kb.SimuLayerSetKeyState(CSK_RightShift, linuxKeyBuffer[123]);
+	kb.SimuLayerSetKeyState(CSK_RightShift, linuxKeyBuffer[2053]);
 
-	// kb.SimuLayerSetKeyState(CSK_Ctrl, linuxKeyBuffer[17]);
-	// kb.SimuLayerSetKeyState(CSK_Win, linuxKeyBuffer[91]);
-	// kb.SimuLayerSetKeyState(CSK_Alt, linuxKeyBuffer[125]);
+	kb.SimuLayerSetKeyState(CSK_Ctrl, linuxKeyBuffer[2048]);
+	kb.SimuLayerSetKeyState(CSK_Win, linuxKeyBuffer[2051]);
+	kb.SimuLayerSetKeyState(CSK_Alt, linuxKeyBuffer[2050]);
 	kb.SimuLayerSetKeyState(CSK_Space, linuxKeyBuffer[32]);
-	// kb.SimuLayerSetKeyState(CSK_RightAlt, linuxKeyBuffer[126]);
-	// kb.SimuLayerSetKeyState(CSK_RightCtrl, linuxKeyBuffer[124]);
+	kb.SimuLayerSetKeyState(CSK_RightAlt, linuxKeyBuffer[2054]);
+	kb.SimuLayerSetKeyState(CSK_RightCtrl, linuxKeyBuffer[2052]);
 
-	kb.SimuLayerSetKeyState(CSK_Up, linuxKeyBuffer[82]);
-	kb.SimuLayerSetKeyState(CSK_Down, linuxKeyBuffer[81]);
-	kb.SimuLayerSetKeyState(CSK_Left, linuxKeyBuffer[80]);
-	kb.SimuLayerSetKeyState(CSK_Right, linuxKeyBuffer[79]);
+	kb.SimuLayerSetKeyState(CSK_Up, linuxKeyBuffer[1906]);
+	kb.SimuLayerSetKeyState(CSK_Down, linuxKeyBuffer[1905]);
+	kb.SimuLayerSetKeyState(CSK_Left, linuxKeyBuffer[1904]);
+	kb.SimuLayerSetKeyState(CSK_Right, linuxKeyBuffer[1903]);
 
-	kb.SimuLayerSetKeyState(CSK_Insert, linuxKeyBuffer[73]);
+	kb.SimuLayerSetKeyState(CSK_Insert, linuxKeyBuffer[1897]);
 	kb.SimuLayerSetKeyState(CSK_Delete, linuxKeyBuffer[127]);
-	kb.SimuLayerSetKeyState(CSK_Home, linuxKeyBuffer[74]);
-	kb.SimuLayerSetKeyState(CSK_End, linuxKeyBuffer[77]);
-	kb.SimuLayerSetKeyState(CSK_PageUp, linuxKeyBuffer[75]);
-	kb.SimuLayerSetKeyState(CSK_PageDown, linuxKeyBuffer[78]);
+	kb.SimuLayerSetKeyState(CSK_Home, linuxKeyBuffer[1898]);
+	kb.SimuLayerSetKeyState(CSK_End, linuxKeyBuffer[1901]);
+	kb.SimuLayerSetKeyState(CSK_PageUp, linuxKeyBuffer[1899]);
+	kb.SimuLayerSetKeyState(CSK_PageDown, linuxKeyBuffer[1902]);
 
 	// kb.SimuLayerSetKeyState(CSK_PrintScreen, linuxKeyBuffer[30]);
-	kb.SimuLayerSetKeyState(CSK_ScrollLock, linuxKeyBuffer[71]);
-	kb.SimuLayerSetKeyState(CSK_PauseAndBreak, linuxKeyBuffer[72]);
+	kb.SimuLayerSetKeyState(CSK_ScrollLock, linuxKeyBuffer[1895]);
+	kb.SimuLayerSetKeyState(CSK_PauseAndBreak, linuxKeyBuffer[1896]);
 
-	kb.SimuLayerSetKeyState(CSK_Keypad0, linuxKeyBuffer[98]);
-	kb.SimuLayerSetKeyState(CSK_Keypad1, linuxKeyBuffer[89]);
-	kb.SimuLayerSetKeyState(CSK_Keypad2, linuxKeyBuffer[90]);
-	kb.SimuLayerSetKeyState(CSK_Keypad3, linuxKeyBuffer[91]);
-	kb.SimuLayerSetKeyState(CSK_Keypad4, linuxKeyBuffer[92]);
-	kb.SimuLayerSetKeyState(CSK_Keypad5, linuxKeyBuffer[93]);
-	kb.SimuLayerSetKeyState(CSK_Keypad6, linuxKeyBuffer[94]);
-	kb.SimuLayerSetKeyState(CSK_Keypad7, linuxKeyBuffer[95]);
-	kb.SimuLayerSetKeyState(CSK_Keypad8, linuxKeyBuffer[96]);
-	kb.SimuLayerSetKeyState(CSK_Keypad9, linuxKeyBuffer[97]);
-	kb.SimuLayerSetKeyState(CSK_KeypadDot, linuxKeyBuffer[99]);
-	kb.SimuLayerSetKeyState(CSK_KeypadNumLock, linuxKeyBuffer[83]);
-	kb.SimuLayerSetKeyState(CSK_KeypadEnter, linuxKeyBuffer[88]);
-	kb.SimuLayerSetKeyState(CSK_KeypadAdd, linuxKeyBuffer[87]);
-	kb.SimuLayerSetKeyState(CSK_KeypadMinus, linuxKeyBuffer[86]);
-	kb.SimuLayerSetKeyState(CSK_KeypadMultiply, linuxKeyBuffer[85]);
-	kb.SimuLayerSetKeyState(CSK_MultiplyDevide, linuxKeyBuffer[84]);
+	kb.SimuLayerSetKeyState(CSK_Keypad0, linuxKeyBuffer[1922]);
+	kb.SimuLayerSetKeyState(CSK_Keypad1, linuxKeyBuffer[1913]);
+	kb.SimuLayerSetKeyState(CSK_Keypad2, linuxKeyBuffer[1914]);
+	kb.SimuLayerSetKeyState(CSK_Keypad3, linuxKeyBuffer[1915]);
+	kb.SimuLayerSetKeyState(CSK_Keypad4, linuxKeyBuffer[1916]);
+	kb.SimuLayerSetKeyState(CSK_Keypad5, linuxKeyBuffer[1917]);
+	kb.SimuLayerSetKeyState(CSK_Keypad6, linuxKeyBuffer[1918]);
+	kb.SimuLayerSetKeyState(CSK_Keypad7, linuxKeyBuffer[1919]);
+	kb.SimuLayerSetKeyState(CSK_Keypad8, linuxKeyBuffer[1920]);
+	kb.SimuLayerSetKeyState(CSK_Keypad9, linuxKeyBuffer[1921]);
+	kb.SimuLayerSetKeyState(CSK_KeypadDot, linuxKeyBuffer[1923]);
+	kb.SimuLayerSetKeyState(CSK_KeypadNumLock, linuxKeyBuffer[1907]);
+	kb.SimuLayerSetKeyState(CSK_KeypadEnter, linuxKeyBuffer[1912]);
+	kb.SimuLayerSetKeyState(CSK_KeypadAdd, linuxKeyBuffer[1911]);
+	kb.SimuLayerSetKeyState(CSK_KeypadMinus, linuxKeyBuffer[1910]);
+	kb.SimuLayerSetKeyState(CSK_KeypadMultiply, linuxKeyBuffer[1909]);
+	kb.SimuLayerSetKeyState(CSK_MultiplyDevide, linuxKeyBuffer[1908]);
 }

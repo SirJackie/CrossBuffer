@@ -47,13 +47,17 @@ int main( int argc, char* args[] )
             // If key pressed
             if(e.type == SDL_KEYDOWN)
             {
-                keyboardHelper.linuxKeyBuffer[(e.key.keysym.sym)] = 1;
-                // keyboardHelper.MoveLnxBufIntoKeyBuf();
+                int keycode = e.key.keysym.sym;
+                if(keycode > 1073740000) keycode -= 1073740000;
+                keyboardHelper.linuxKeyBuffer[keycode] = 1;
+                keyboardHelper.MoveLnxBufIntoKeyBuf();
             }
             
             if(e.type == SDL_KEYUP){
-                keyboardHelper.linuxKeyBuffer[(e.key.keysym.sym)] = 0;
-                // keyboardHelper.MoveLnxBufIntoKeyBuf();
+                int keycode = e.key.keysym.sym;
+                if(keycode > 1073740000) keycode -= 1073740000;
+                keyboardHelper.linuxKeyBuffer[keycode] = 0;
+                keyboardHelper.MoveLnxBufIntoKeyBuf();
             }
         }
 
