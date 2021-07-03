@@ -47,12 +47,13 @@ int main( int argc, char* args[] )
             // If key pressed
             if(e.type == SDL_KEYDOWN)
             {
-                keyboardHelper.linuxKeyBuffer[e.key.keysym.sym] = 1;
-                keyboardHelper.MoveLnxBufIntoKeyBuf();
+                keyboardHelper.linuxKeyBuffer[(e.key.keysym.sym)] = 1;
+                // keyboardHelper.MoveLnxBufIntoKeyBuf();
             }
+            
             if(e.type == SDL_KEYUP){
-                keyboardHelper.linuxKeyBuffer[e.key.keysym.sym] = 0;
-                keyboardHelper.MoveLnxBufIntoKeyBuf();
+                keyboardHelper.linuxKeyBuffer[(e.key.keysym.sym)] = 0;
+                // keyboardHelper.MoveLnxBufIntoKeyBuf();
             }
         }
 
