@@ -1,7 +1,7 @@
 #include "SDLHelper.h"
 #include <SDL.h>
 
-LSM_SDLHelper::LSM_SDLHelper(){
+LSL_SDLHelper::LSL_SDLHelper(){
     window = NULL;
     screenSurface = NULL;
 
@@ -23,7 +23,7 @@ LSM_SDLHelper::LSM_SDLHelper(){
     }
 }
 
-void LSM_SDLHelper::GetResolution(){
+void LSL_SDLHelper::GetResolution(){
     // Make sure we have the right to get resolution (important!)
     system("sudo chmod 777 /dev/fb0");
 
@@ -38,7 +38,7 @@ void LSM_SDLHelper::GetResolution(){
     printf("Framebuffer %d * %d - %dbpp\n", screenWidth, screenHeight, bpp);
 }
 
-i32 LSM_SDLHelper::getWcharLen(const i32* wcharPtr){
+i32 LSL_SDLHelper::getWcharLen(const i32* wcharPtr){
     i32 len = 0;
     while(csTrue){
         if(wcharPtr[len] == 0){
@@ -49,7 +49,7 @@ i32 LSM_SDLHelper::getWcharLen(const i32* wcharPtr){
     return len + 1;
 }
 
-char* LSM_SDLHelper::wchar2char(const i32* wcharPtr){
+char* LSL_SDLHelper::wchar2char(const i32* wcharPtr){
     i32 length = getWcharLen(wcharPtr);
     char* charPtr = new char[length];
     for(i32 i = 0; i < length; i++){
@@ -58,7 +58,7 @@ char* LSM_SDLHelper::wchar2char(const i32* wcharPtr){
     return charPtr;
 }
 
-void LSM_SDLHelper::CreateWindow(const i32* title){
+void LSL_SDLHelper::CreateWindow(const i32* title){
     window = NULL;
     screenSurface = NULL;
 
@@ -93,15 +93,15 @@ void LSM_SDLHelper::CreateWindow(const i32* title){
     }
 }
 
-void LSM_SDLHelper::Maximize(){
+void LSL_SDLHelper::Maximize(){
     SDL_MaximizeWindow(window);
 }
 
-void LSM_SDLHelper::Minimize(){
+void LSL_SDLHelper::Minimize(){
     SDL_MinimizeWindow(window);
 }
 
-SDL_Surface* LSM_SDLHelper::LoadMedia(const i8* bmpAddress)
+SDL_Surface* LSL_SDLHelper::LoadMedia(const i8* bmpAddress)
 {
     //载入 splash image
     SDL_Surface* media = SDL_LoadBMP((const char*)bmpAddress);
@@ -113,30 +113,30 @@ SDL_Surface* LSM_SDLHelper::LoadMedia(const i8* bmpAddress)
     return media;
 }
 
-void LSM_SDLHelper::ReleaseMedia(SDL_Surface* media){
+void LSL_SDLHelper::ReleaseMedia(SDL_Surface* media){
     SDL_FreeSurface(media);
 }
 
-void LSM_SDLHelper::Close()
+void LSL_SDLHelper::Close()
 {
     SDL_DestroyWindow(window);
     SDL_Quit();
 }
 
-void LSM_SDLHelper::BlitSurfaceHere(SDL_Surface* from){
+void LSL_SDLHelper::BlitSurfaceHere(SDL_Surface* from){
     SDL_BlitSurface( from, NULL, screenSurface, NULL );
 }
 
-void LSM_SDLHelper::LockSurface(){
+void LSL_SDLHelper::LockSurface(){
     SDL_LockSurface(screenSurface);
 }
 
-void LSM_SDLHelper::UnlockSurface(){
+void LSL_SDLHelper::UnlockSurface(){
     SDL_UnlockSurface(screenSurface);
     SDL_UpdateWindowSurface(window);
 }
 
-void LSM_SDLHelper::PaintFrameBufferHere(CS_FrameBuffer& fb){
+void LSL_SDLHelper::PaintFrameBufferHere(CS_FrameBuffer& fb){
     ui32* pBitsNow = (ui32*)screenSurface->pixels;
     i32   bufferPitch = screenSurface->pitch / 4;
     ui8*  pRed = fb.redBuffer;

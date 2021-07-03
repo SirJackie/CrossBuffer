@@ -1,18 +1,19 @@
 #include <stdio.h>
 #include "SDLHelper.h"
+#include "KeyboardHelper.h"
 #include <SDL.h>
 #include <stdlib.h>
 #include <time.h>
 #include "../Main.h"
 
 // LinuxSimuLayer Variables and Declarations
-LSM_SDLHelper sdlHelper;
+LSL_SDLHelper       sdlHelper;
+LSL_KeyboardHelper  keyboardHelper;
 bool quit = false;
 SDL_Event e;
 
 // CrossBufferLayer Variables
 CS_FrameBuffer fb;
-CS_Keyboard    kb;
 
 // Time Counting Variables
 csbool FirstTimeRunning;
@@ -28,7 +29,7 @@ clock_t thisTime;
 
 int main( int argc, char* args[] )
 {
-    // sdlHelper = LSM_SDLHelper();
+    // sdlHelper = LSL_SDLHelper();
     sdlHelper.CreateWindow(WindowTitle);
 
     // While it's not the time to quit
@@ -46,10 +47,12 @@ int main( int argc, char* args[] )
             // If key pressed
             if(e.type == SDL_KEYDOWN)
             {
-                kb.SimuLayerSetKeyIsPressed(e.key.keysym.sym);
+                keyboardHelper.linuxKeyBuffer[e.key.keysym.sym] = 1;
+                keyboardHelper.MoveLnxBufIntoKeyBuf();
             }
             if(e.type == SDL_KEYUP){
-                kb.SimuLayerSetKeyIsReleased(e.key.keysym.sym);
+                keyboardHelper.linuxKeyBuffer[e.key.keysym.sym] = 0;
+                keyboardHelper.MoveLnxBufIntoKeyBuf();
             }
         }
 
@@ -67,13 +70,13 @@ int main( int argc, char* args[] )
 
         // If it is the First Time Running
         if (FirstTimeRunning) {
-            Setup(fb, kb, 0);                     // Call the Setup()  in Main.h
+            Setup(fb, keyboardHelper.kb, 0);                     // Call the Setup()  in Main.h
             FirstTimeRunning = csFalse;
         }
 
         // If it is not the First Time Running
         else {
-            Update(fb, kb, thisTime - lastTime);  // Call the Update() in Main.h
+            Update(fb, keyboardHelper.kb, thisTime - lastTime);  // Call the Update() in Main.h
         }
 
         // Paint FrameBuffer on SDL Surface

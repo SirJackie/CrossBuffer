@@ -8,6 +8,7 @@ Objects += ../CrossBufferLayer/BasicDataTypeDeclarations.o
 Objects += ../CrossBufferLayer/FPSCalculator.o
 Objects += ../CrossBufferLayer/FontSupport.o
 Objects += ../LinuxSimuLayer/SDLHelper.o
+Objects += ../LinuxSimuLayer/KeyboardHelper.o
 Objects += ../LinuxSimuLayer/CrossBufferForLinux.o
 
 TargetGeneratingArguments = `sdl2-config --libs`

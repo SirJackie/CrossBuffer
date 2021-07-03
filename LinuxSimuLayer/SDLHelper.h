@@ -20,7 +20,7 @@
 #include "../CrossBufferLayer/CrossBuffer.h"
 
 
-class LSM_SDLHelper{
+class LSL_SDLHelper{
 public:
     i32 screenWidth;
 	i32 screenHeight;
@@ -33,7 +33,7 @@ public:
     SDL_Window* window;
     SDL_Surface* screenSurface;
     
-    LSM_SDLHelper();
+    LSL_SDLHelper();
     void GetResolution();
     void CreateWindow(const i32* title);
     void Maximize();
