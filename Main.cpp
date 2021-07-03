@@ -36,12 +36,7 @@ void Update(CS_FrameBuffer& fb, CS_Keyboard kb, i32 deltaTime) {
 	i16 ti16 = 16;
 
 	fb.Print("KeyboardStatus: {");
-	for (i32 i = 0; i < 128; i++) {
-		if (kb.IsKeyPressed(i)) {
-			fb.Print(i);
-			fb.Print(", ");
-		}
-	}
+	fb.Print(kb.GetStrStatus());
 	fb.Print("}");
 
 	deltaColor += 1;

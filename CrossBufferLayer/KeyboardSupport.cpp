@@ -26,3 +26,7 @@ void CS_Keyboard::SimuLayerSetKeyState(i8 key, csbool state)
 {
     keyBuffer[key] = state;
 }
+
+string CS_Keyboard::GetStrStatus(){
+    ;
+}

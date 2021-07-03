@@ -2,6 +2,10 @@
 #define __CSBF_KeyboardSupport__
 
 #include "BasicDataTypeDeclarations.h"
+#include <string>
+#include <sstream>
+using std::string;
+using std::stringstream;
 
 
 class CS_Keyboard {
@@ -13,6 +17,7 @@ public:
 	void   SimuLayerSetKeyIsPressed(i8 key);
 	void   SimuLayerSetKeyIsReleased(i8 key);
 	void   SimuLayerSetKeyState(i8 key, csbool state);
+	string GetStrStatus();
 };
 
 
@@ -24,7 +29,7 @@ public:
 #define CSK_F1                      112
 #define CSK_F2                      113
 #define CSK_F3                      114
-#define CSK_F4                     115
+#define CSK_F4                      115
 #define CSK_F5                      116
 #define CSK_F6                      117
 #define CSK_F7                      118
