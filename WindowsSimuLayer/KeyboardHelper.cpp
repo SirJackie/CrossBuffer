@@ -117,5 +117,5 @@ void WSL_KeyboardHelper::MoveWinBufIntoKeyBuf()
 	kb.SimuLayerSetKeyState(CSK_KeypadAdd, windowsKeyBuffer[107]);
 	kb.SimuLayerSetKeyState(CSK_KeypadMinus, windowsKeyBuffer[109]);
 	kb.SimuLayerSetKeyState(CSK_KeypadMultiply, windowsKeyBuffer[106]);
-	kb.SimuLayerSetKeyState(CSK_MultiplyDevide, windowsKeyBuffer[111]);
+	kb.SimuLayerSetKeyState(CSK_KeypadDevide, windowsKeyBuffer[111]);
 }
