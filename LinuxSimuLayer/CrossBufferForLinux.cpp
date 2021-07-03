@@ -81,7 +81,7 @@ int main( int argc, char* args[] )
 
         // If it is not the First Time Running
         else {
-            Update(fb, keyboardHelper.kb, thisTime - lastTime);  // Call the Update() in Main.h
+            Update(fb, keyboardHelper.kb, (thisTime - lastTime) / 1000);  // Call the Update() in Main.h
         }
 
         // Paint FrameBuffer on SDL Surface

@@ -2,13 +2,15 @@
 
 i32 deltaColor = 0;
 i32 startX = 100, startY = 100, endX = 200, endY = 200;
-f32 step = 0.2f;
+i32 step;
 
 void Setup(CS_FrameBuffer& fb, CS_Keyboard kb, i32 deltaTime) {
 	;
 }
 
 void Update(CS_FrameBuffer& fb, CS_Keyboard kb, i32 deltaTime) {
+
+	step = (i32)(0.2f * deltaTime);
 
 	startX = CS_iclamp(0, startX, fb.width);
 	startY = CS_iclamp(0, startY, fb.height);
@@ -38,6 +40,17 @@ void Update(CS_FrameBuffer& fb, CS_Keyboard kb, i32 deltaTime) {
 	fb.Print("KeyboardStatus: ");
 	fb.Print(kb.GetStrStatus());
 	fb.Print("\n");
+	fb.Print(deltaTime);
 
 	deltaColor += 1;
+
+	if(kb.IsKeyPressed('W')) startY -= step;
+	if(kb.IsKeyPressed('S')) startY += step;
+	if(kb.IsKeyPressed('A')) startX -= step;
+	if(kb.IsKeyPressed('D')) startX += step;
+
+	if(kb.IsKeyPressed('I')) endY -= step;
+	if(kb.IsKeyPressed('K')) endY += step;
+	if(kb.IsKeyPressed('J')) endX -= step;
+	if(kb.IsKeyPressed('L')) endX += step;
 }
