@@ -3,13 +3,14 @@
 i32 deltaColor = 0;
 i32 startX = 100, startY = 100, endX = 200, endY = 200;
 i32 step;
+CS_FPSCalculator fpsCalculator;
 
 void Setup(CS_FrameBuffer& fb, CS_Keyboard kb, i32 deltaTime) {
 	;
 }
 
 void Update(CS_FrameBuffer& fb, CS_Keyboard kb, i32 deltaTime) {
-
+	fpsCalculator.Count(deltaTime);
 	step = (i32)(0.2f * deltaTime);
 
 	startX = CS_iclamp(0, startX, fb.width);
@@ -37,10 +38,15 @@ void Update(CS_FrameBuffer& fb, CS_Keyboard kb, i32 deltaTime) {
 	i32 ti32 = 32;
 	i16 ti16 = 16;
 
+	fb.Print("FPS: ");
+	fb.Print(fpsCalculator.GetCurrentFPS());
+	fb.Print(", DeltaTime: ");
+	fb.Print(deltaTime);
+	fb.Print("\n");
+
 	fb.Print("KeyboardStatus: ");
 	fb.Print(kb.GetStrStatus());
 	fb.Print("\n");
-	fb.Print(deltaTime);
 
 	deltaColor += 1;
 
