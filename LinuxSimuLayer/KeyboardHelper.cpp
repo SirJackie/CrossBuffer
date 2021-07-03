@@ -117,5 +117,5 @@ void LSL_KeyboardHelper::MoveLnxBufIntoKeyBuf()
 	kb.SimuLayerSetKeyState(CSK_KeypadAdd, linuxKeyBuffer[1911]);
 	kb.SimuLayerSetKeyState(CSK_KeypadMinus, linuxKeyBuffer[1910]);
 	kb.SimuLayerSetKeyState(CSK_KeypadMultiply, linuxKeyBuffer[1909]);
-	kb.SimuLayerSetKeyState(CSK_MultiplyDevide, linuxKeyBuffer[1908]);
+	kb.SimuLayerSetKeyState(CSK_KeypadDevide, linuxKeyBuffer[1908]);
 }

@@ -140,7 +140,7 @@ string CS_Keyboard::GetStrStatus(){
     if(keyBuffer[CSK_KeypadAdd] == csTrue) str += "CSK_KeypadAdd, ";
     if(keyBuffer[CSK_KeypadMinus] == csTrue) str += "CSK_KeypadMinus, ";
     if(keyBuffer[CSK_KeypadMultiply] == csTrue) str += "CSK_KeypadMultiply, ";
-    if(keyBuffer[CSK_MultiplyDevide] == csTrue) str += "CSK_MultiplyDevide, ";
+    if(keyBuffer[CSK_KeypadDevide] == csTrue) str += "CSK_KeypadDevide, ";
 
     str += "}";
     return str;

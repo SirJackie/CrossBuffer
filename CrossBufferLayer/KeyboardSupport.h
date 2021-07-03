@@ -135,7 +135,7 @@ public:
 #define CSK_KeypadAdd               107
 #define CSK_KeypadMinus             109
 #define CSK_KeypadMultiply          106
-#define CSK_MultiplyDevide          111
+#define CSK_KeypadDevide            111
 
 
 #endif
