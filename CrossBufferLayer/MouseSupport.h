@@ -15,7 +15,6 @@ public:
     csbool lBtnState;
     csbool mBtnState;
     csbool rBtnState;
-    stringstream newSS;
 
     string GetStrStatus();
 };

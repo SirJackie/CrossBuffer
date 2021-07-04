@@ -70,6 +70,9 @@
     <ClInclude Include="KeyboardHelper.h">
       <Filter>头文件\WindowsSimuLayer</Filter>
     </ClInclude>
+    <ClInclude Include="..\CrossBufferLayer\MouseSupport.h">
+      <Filter>头文件\CrossBufferLayer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\CrossBufferLayer\FrameBuffer.cpp">
@@ -104,6 +107,9 @@
     </ClCompile>
     <ClCompile Include="KeyboardHelper.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CrossBufferLayer\MouseSupport.cpp">
+      <Filter>源文件\CrossBufferLayer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

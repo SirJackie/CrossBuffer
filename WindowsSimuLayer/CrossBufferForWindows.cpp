@@ -17,6 +17,7 @@ WSL_KeyboardHelper  keyboardHelper;
 
 // CrossBufferLayer Variables
 CS_FrameBuffer fb;
+CS_Mouse       mouse;
 
 // Time Counting Variables
 csbool FirstTimeRunning;
@@ -83,13 +84,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 			// If it is the First Time Running
 			if (FirstTimeRunning) {
-				Setup(fb, keyboardHelper.kb, 0);                     // Call the Setup()  in Main.h
+				Setup(fb, keyboardHelper.kb, mouse, 0);                     // Call the Setup()  in Main.h
 				FirstTimeRunning = csFalse;
 			}
 
 			// If it is not the First Time Running
 			else {
-				Update(fb, keyboardHelper.kb, thisTime - lastTime);  // Call the Update() in Main.h
+				Update(fb, keyboardHelper.kb, mouse, thisTime - lastTime);  // Call the Update() in Main.h
 			}
 
 			// Paint Our FrameBuffer to System BackBuffer
