@@ -12,6 +12,9 @@ class CS_Mouse {
 public:
 	int x;
     int y;
+    csbool lBtnState;
+    csbool mBtnState;
+    csbool rBtnState;
 };
 
 #endif

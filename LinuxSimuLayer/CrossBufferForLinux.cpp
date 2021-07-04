@@ -76,15 +76,15 @@ int main( int argc, char* args[] )
             {
                 if(SDL_BUTTON_LEFT == e.button.button)
                 {
-                    lBtnState = csTrue;
+                    mouse.lBtnState = csTrue;
                 }
                 else if(SDL_BUTTON_MIDDLE == e.button.button)
                 {
-                    mBtnState = csTrue;
+                    mouse.mBtnState = csTrue;
                 }
                 else if(SDL_BUTTON_RIGHT == e.button.button)
                 {
-                    rBtnState = csTrue;
+                    mouse.rBtnState = csTrue;
                 }
             }
 
@@ -92,15 +92,15 @@ int main( int argc, char* args[] )
             {
                 if(SDL_BUTTON_LEFT == e.button.button)
                 {
-                    lBtnState = csFalse;
+                    mouse.lBtnState = csFalse;
                 }
                 else if(SDL_BUTTON_MIDDLE == e.button.button)
                 {
-                    mBtnState = csFalse;
+                    mouse.mBtnState = csFalse;
                 }
                 else if(SDL_BUTTON_RIGHT == e.button.button)
                 {
-                    rBtnState = csFalse;
+                    mouse.rBtnState = csFalse;
                 }
             }
         }

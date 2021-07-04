@@ -48,12 +48,12 @@ void Update(CS_FrameBuffer& fb, CS_Keyboard kb, CS_Mouse& mouse, i32 deltaTime) 
 	fb.Print(mouse.x);
 	fb.Print("; MouseY: ");
 	fb.Print(mouse.y);
-	// fb.Print("; LBtnState: ");
-	// fb.Print(LBtnState);
-	// fb.Print("; MBtnState: ");
-	// fb.Print(MBtnState);
-	// fb.Print("; RBtnState: ");
-	// fb.Print(RBtnState);
+	fb.Print("; LBtnState: ");
+	fb.Print(mouse.lBtnState);
+	fb.Print("; MBtnState: ");
+	fb.Print(mouse.mBtnState);
+	fb.Print("; RBtnState: ");
+	fb.Print(mouse.rBtnState);
 	fb.Print("\n");
 
 	fb.Print("KeyboardStatus: ");
