@@ -58,6 +58,7 @@ public:
     );
     void Print(const i8* str);
     void Print(string str);
+    void Print(csbool csb);
     template<class T>
     void Print(T x)
     {

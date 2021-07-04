@@ -197,6 +197,15 @@ void CS_FrameBuffer::Print(const i8* str)
     }
 }
 
+void CS_FrameBuffer::Print(csbool csb){
+    if(csb == csFalse){
+        Print("False");
+    }
+    else{
+        Print("True");
+    }
+}
+
 void CS_FrameBuffer::Print(string str)
 {
     Print(str.c_str());
