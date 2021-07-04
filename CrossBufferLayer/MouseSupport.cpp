@@ -1,19 +1,40 @@
 #include "MouseSupport.h"
 
 string CS_Mouse::GetStrStatus(){
-    newSS.clear();
-    newSS.str("");
+    stringstream ss;
     
-    newSS << "MouseX: ";
-    newSS << x;
-    newSS << "; MouseY: ";
-    newSS << y;
-    newSS << "; LBtnState: ";
-    newSS << lBtnState;
-    newSS << "; MBtnState: ";
-    newSS << mBtnState;
-    newSS << "; RBtnState: ";
-    newSS << rBtnState;
+    ss << "MouseX: ";
+    ss << x;
+    ss << "; MouseY: ";
+    ss << y;
+
+
+    ss << "; LBtnState: ";
+    if (lBtnState == csTrue) {
+        ss << "True";
+    }
+    else {
+        ss << "False";
+    }
+
+
+    ss << "; MBtnState: ";
+    if (mBtnState == csTrue) {
+        ss << "True";
+    }
+    else {
+        ss << "False";
+    }
+
+
+    ss << "; RBtnState: ";
+    if (rBtnState == csTrue) {
+        ss << "True";
+    }
+    else {
+        ss << "False";
+    }
     
-    return newSS.str();
+
+    return ss.str();
 }
