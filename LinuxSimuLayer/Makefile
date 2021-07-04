@@ -2,6 +2,7 @@
 Target = CrossBufferForLinux
 Objects = ../Main.o
 Objects += ../CrossBufferLayer/FrameBuffer.o
+Objects += ../CrossBufferLayer/MouseSupport.o
 Objects += ../CrossBufferLayer/CrossBuffer.o
 Objects += ../CrossBufferLayer/KeyboardSupport.o
 Objects += ../CrossBufferLayer/BasicDataTypeDeclarations.o

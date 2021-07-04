@@ -9,6 +9,7 @@
 // LinuxSimuLayer Variables and Declarations
 LSL_SDLHelper       sdlHelper;
 LSL_KeyboardHelper  keyboardHelper;
+CS_Mouse            mouse;
 bool quit = false;
 SDL_Event e;
 
@@ -118,13 +119,13 @@ int main( int argc, char* args[] )
 
         // If it is the First Time Running
         if (FirstTimeRunning) {
-            Setup(fb, keyboardHelper.kb, 0);                     // Call the Setup()  in Main.h
+            Setup (fb, keyboardHelper.kb, mouse, 0);                     // Call the Setup()  in Main.h
             FirstTimeRunning = csFalse;
         }
 
         // If it is not the First Time Running
         else {
-            Update(fb, keyboardHelper.kb, (thisTime - lastTime) / 1000, mouseX, mouseY, lBtnState, mBtnState, rBtnState);  // Call the Update() in Main.h
+            Update(fb, keyboardHelper.kb, mouse, (thisTime - lastTime) / 1000);  // Call the Update() in Main.h
         }
 
         // Paint FrameBuffer on SDL Surface
