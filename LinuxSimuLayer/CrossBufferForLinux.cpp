@@ -20,6 +20,9 @@ csbool FirstTimeRunning;
 clock_t lastTime;
 clock_t thisTime;
 
+i32 mouseX,mouseY;
+csbool lBtnState = csFalse, mBtnState = csFalse, rBtnState = csFalse;
+
 
 
 
@@ -53,11 +56,51 @@ int main( int argc, char* args[] )
                 keyboardHelper.MoveLnxBufIntoKeyBuf();
             }
             
+            // If key released
             if(e.type == SDL_KEYUP){
                 int keycode = e.key.keysym.sym;
                 if(keycode > 1073740000) keycode -= 1073740000;
                 keyboardHelper.linuxKeyBuffer[keycode] = 0;
                 keyboardHelper.MoveLnxBufIntoKeyBuf();
+            }
+
+            // If mouse moved
+            else if (SDL_MOUSEMOTION == e.type)
+			{
+                mouseX = e.motion.x;
+				mouseY = e.motion.y;
+            }
+
+            if (SDL_MOUSEBUTTONDOWN == e.type) 
+            {
+                if(SDL_BUTTON_LEFT == e.button.button)
+                {
+                    lBtnState = csTrue;
+                }
+                else if(SDL_BUTTON_MIDDLE == e.button.button)
+                {
+                    mBtnState = csTrue;
+                }
+                else if(SDL_BUTTON_RIGHT == e.button.button)
+                {
+                    rBtnState = csTrue;
+                }
+            }
+
+            if (SDL_MOUSEBUTTONUP == e.type) 
+            {
+                if(SDL_BUTTON_LEFT == e.button.button)
+                {
+                    lBtnState = csFalse;
+                }
+                else if(SDL_BUTTON_MIDDLE == e.button.button)
+                {
+                    mBtnState = csFalse;
+                }
+                else if(SDL_BUTTON_RIGHT == e.button.button)
+                {
+                    rBtnState = csFalse;
+                }
             }
         }
 
@@ -81,7 +124,7 @@ int main( int argc, char* args[] )
 
         // If it is not the First Time Running
         else {
-            Update(fb, keyboardHelper.kb, (thisTime - lastTime) / 1000, 0, 0, csFalse, csFalse, csTrue);  // Call the Update() in Main.h
+            Update(fb, keyboardHelper.kb, (thisTime - lastTime) / 1000, mouseX, mouseY, lBtnState, mBtnState, rBtnState);  // Call the Update() in Main.h
         }
 
         // Paint FrameBuffer on SDL Surface
