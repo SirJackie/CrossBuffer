@@ -5,11 +5,11 @@ i32 startX = 100, startY = 100, endX = 200, endY = 200;
 i32 step;
 CS_FPSCalculator fpsCalculator;
 
-void Setup(CS_FrameBuffer& fb, CS_Keyboard kb, i32 deltaTime) {
+void Setup (CS_FrameBuffer& fb, CS_Keyboard kb, CS_Mouse& mouse, i32 deltaTime) {
 	;
 }
 
-void Update(CS_FrameBuffer& fb, CS_Keyboard kb, i32 deltaTime, i32 mouseX, i32 mouseY, csbool LBtnState, csbool MBtnState, csbool RBtnState) {
+void Update(CS_FrameBuffer& fb, CS_Keyboard kb, CS_Mouse& mouse, i32 deltaTime) {
 	fpsCalculator.Count(deltaTime);
 	step = (i32)(0.2f * deltaTime);
 
@@ -45,15 +45,15 @@ void Update(CS_FrameBuffer& fb, CS_Keyboard kb, i32 deltaTime, i32 mouseX, i32 m
 	fb.Print("\n");
 
 	fb.Print("MouseX: ");
-	fb.Print(mouseX);
+	fb.Print(mouse.x);
 	fb.Print("; MouseY: ");
-	fb.Print(mouseY);
-	fb.Print("; LBtnState: ");
-	fb.Print(LBtnState);
-	fb.Print("; MBtnState: ");
-	fb.Print(MBtnState);
-	fb.Print("; RBtnState: ");
-	fb.Print(RBtnState);
+	fb.Print(mouse.y);
+	// fb.Print("; LBtnState: ");
+	// fb.Print(LBtnState);
+	// fb.Print("; MBtnState: ");
+	// fb.Print(MBtnState);
+	// fb.Print("; RBtnState: ");
+	// fb.Print(RBtnState);
 	fb.Print("\n");
 
 	fb.Print("KeyboardStatus: ");

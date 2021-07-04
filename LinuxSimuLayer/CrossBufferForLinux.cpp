@@ -68,8 +68,8 @@ int main( int argc, char* args[] )
             // If mouse moved
             else if (SDL_MOUSEMOTION == e.type)
 			{
-                mouseX = e.motion.x;
-				mouseY = e.motion.y;
+                mouse.x = e.motion.x;
+				mouse.y = e.motion.y;
             }
 
             if (SDL_MOUSEBUTTONDOWN == e.type) 

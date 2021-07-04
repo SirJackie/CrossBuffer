@@ -7,6 +7,7 @@
 	#include "FontSupport.h"
 	#include "FPSCalculator.h"
 	#include "KeyboardSupport.h"
+	#include "MouseSupport.h"
 		// Level 3
 		#include "FrameBuffer.h"
 
