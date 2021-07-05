@@ -37,6 +37,8 @@ int main( int argc, char* args[] )
     sdlHelper.CreateWindow(WindowTitle);
 
     // Calculate Center of the Window
+    i32 CenterX = (sdlHelper.windowWidth  / 2);
+    i32 CenterY = (sdlHelper.windowHeight / 2);
     i32 GlobalCenterX = (sdlHelper.windowWidth  / 2) + sdlHelper.leftMargin;
     i32 GlobalCenterY = (sdlHelper.windowHeight / 2) + sdlHelper.topMargin;
 
@@ -153,6 +155,28 @@ int main( int argc, char* args[] )
         // lastTime in next frame = thisTime in this frame
         lastTime = thisTime;
 
+        // Do reset when the infinity mode changes
+        if(lastFrameInfinityState == csFalse){
+            if(mouse.infinityMode == csTrue){
+                // Make the next frame mouse.x|y equals to this frame
+                mouse.x = CenterX;
+                mouse.y = CenterY;
+                lastFrameInfinityState = csTrue;
+            }
+        }
+
+        if(lastFrameInfinityState == csTrue){
+            if(mouse.infinityMode == csFalse){
+                SDL_WarpMouseInWindow
+                (
+                    sdlHelper.window,
+                    mouse.x % sdlHelper.windowWidth,
+                    mouse.y % sdlHelper.windowHeight
+                );
+                lastFrameInfinityState = csFalse;
+            }
+        }
+
         // Clip the mouse every frame
         if(mouse.infinityMode == csTrue){
             i32 tmpx, tmpy;
@@ -161,22 +185,6 @@ int main( int argc, char* args[] )
             mouse.y += tmpy - GlobalCenterY;
 
             SDL_WarpMouseGlobal(GlobalCenterX, GlobalCenterY);
-        }
-
-        if(lastFrameInfinityState == csFalse){
-            if(mouse.infinityMode == csTrue){
-                mouse.x = 0;
-                mouse.y = 0;
-                lastFrameInfinityState = csTrue;
-            }
-        }
-
-        if(lastFrameInfinityState == csTrue){
-            if(mouse.infinityMode == csFalse){
-                mouse.x = 0;
-                mouse.y = 0;
-                lastFrameInfinityState = csFalse;
-            }
         }
     }
 
