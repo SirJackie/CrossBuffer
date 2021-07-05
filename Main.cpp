@@ -53,13 +53,22 @@ void Update(CS_FrameBuffer& fb, CS_Keyboard kb, CS_Mouse& mouse, i32 deltaTime) 
 
 	deltaColor += 1;
 
-	if(kb.IsKeyPressed('W')) startY -= step;
-	if(kb.IsKeyPressed('S')) startY += step;
-	if(kb.IsKeyPressed('A')) startX -= step;
-	if(kb.IsKeyPressed('D')) startX += step;
+	if (kb.IsKeyPressed('W')) startY -= step;
+	if (kb.IsKeyPressed('S')) startY += step;
+	if (kb.IsKeyPressed('A')) startX -= step;
+	if (kb.IsKeyPressed('D')) startX += step;
 
-	if(kb.IsKeyPressed('I')) endY -= step;
-	if(kb.IsKeyPressed('K')) endY += step;
-	if(kb.IsKeyPressed('J')) endX -= step;
-	if(kb.IsKeyPressed('L')) endX += step;
+	if (kb.IsKeyPressed('I')) endY -= step;
+	if (kb.IsKeyPressed('K')) endY += step;
+	if (kb.IsKeyPressed('J')) endX -= step;
+	if (kb.IsKeyPressed('L')) endX += step;
+
+	if (kb.IsKeyPressed('I')) {
+		if (mouse.IsInfinityModeOpened() == csFalse) {
+			mouse.OpenInfinityMode();
+		}
+		else {
+			mouse.CloseInfinityMode();
+		}
+	}
 }

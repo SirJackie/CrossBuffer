@@ -63,6 +63,14 @@ string CS_Mouse::GetStrStatus(){
     else {
         ss << "False";
     }
+
+    ss << "; InfinityMode: ";
+    if (infinityMode == csTrue) {
+        ss << "True";
+    }
+    else {
+        ss << "False";
+    }
     
 
     return ss.str();
@@ -74,4 +82,9 @@ void CS_Mouse::OpenInfinityMode(){
 
 void CS_Mouse::CloseInfinityMode(){
     infinityMode = csFalse;
+}
+
+csbool CS_Mouse::IsInfinityModeOpened()
+{
+    return infinityMode;
 }

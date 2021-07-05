@@ -25,6 +25,7 @@ public:
     string GetStrStatus();
     void OpenInfinityMode();
     void CloseInfinityMode();
+    csbool IsInfinityModeOpened();
 };
 
 #endif
