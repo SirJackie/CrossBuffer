@@ -105,11 +105,11 @@
     <ClCompile Include="..\Main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="KeyboardHelper.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\CrossBufferLayer\MouseSupport.cpp">
       <Filter>源文件\CrossBufferLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyboardHelper.cpp">
+      <Filter>源文件\WindowsSimuLayer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

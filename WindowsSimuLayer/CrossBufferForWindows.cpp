@@ -139,21 +139,29 @@ LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		keyboardHelper.MoveWinBufIntoKeyBuf();
 		return DefWindowProc(hWnd, msg, wParam, lParam);
 
-	//case WM_LBUTTONDOWN:
-	//	//kb.SimuLayerSetKeyIsPressed((i8)KEY_MOUSE_LBTN);
-	//	return DefWindowProc(hWnd, msg, wParam, lParam);
+	case WM_LBUTTONDOWN:
+		mouse.lBtnState = csTrue;
+		return DefWindowProc(hWnd, msg, wParam, lParam);
 
-	//case WM_LBUTTONUP:
-	//	//kb.SimuLayerSetKeyIsReleased((i8)KEY_MOUSE_LBTN);
-	//	return DefWindowProc(hWnd, msg, wParam, lParam);
+	case WM_LBUTTONUP:
+		mouse.lBtnState = csFalse;
+		return DefWindowProc(hWnd, msg, wParam, lParam);
 
-	//case WM_RBUTTONDOWN:
-	//	//kb.SimuLayerSetKeyIsPressed((i8)KEY_MOUSE_RBTN);
-	//	return DefWindowProc(hWnd, msg, wParam, lParam);
+	case WM_MBUTTONDOWN:
+		mouse.mBtnState = csTrue;
+		return DefWindowProc(hWnd, msg, wParam, lParam);
 
-	//case WM_RBUTTONUP:
-	//	//kb.SimuLayerSetKeyIsReleased((i8)KEY_MOUSE_RBTN);
-	//	return DefWindowProc(hWnd, msg, wParam, lParam);
+	case WM_MBUTTONUP:
+		mouse.mBtnState = csFalse;
+		return DefWindowProc(hWnd, msg, wParam, lParam);
+
+	case WM_RBUTTONDOWN:
+		mouse.rBtnState = csTrue;
+		return DefWindowProc(hWnd, msg, wParam, lParam);
+
+	case WM_RBUTTONUP:
+		mouse.rBtnState = csFalse;
+		return DefWindowProc(hWnd, msg, wParam, lParam);
 
 	//case WM_MOUSEMOVE:
 	//	/* Get Mouse Position */
