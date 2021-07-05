@@ -129,6 +129,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 ** Message Loop
 */
 
+void SetLocalCursorPos(i32 x, i32 y) {
+	SetCursorPos
+	(
+		windowsHelper.leftMargin + x,
+		windowsHelper.topMargin  + y
+	);
+}
+
 LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg)
@@ -181,6 +189,24 @@ LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		/* Get Mouse Position */
 		mouse.x = LOWORD(lParam);  // MouseX
 		mouse.y = HIWORD(lParam);  // MouseY
+
+		if (mouse.x == 0) {
+			SetLocalCursorPos(windowsHelper.windowWidth - 2, mouse.y);
+		}
+
+		if (mouse.x == windowsHelper.windowWidth - 1) {
+			SetLocalCursorPos(1, mouse.y);
+		}
+
+		if (mouse.y == 0) {
+			SetLocalCursorPos(mouse.x, windowsHelper.windowHeight - 2);
+		}
+
+		if (mouse.y == windowsHelper.windowHeight - 1) {
+			SetLocalCursorPos(mouse.x, 1);
+		}
+
+
 		return DefWindowProc(hWnd, msg, wParam, lParam);
 
 	default:
