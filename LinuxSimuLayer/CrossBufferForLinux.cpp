@@ -155,12 +155,14 @@ int main( int argc, char* args[] )
         // lastTime in next frame = thisTime in this frame
         lastTime = thisTime;
 
+
+
         // Do reset when the infinity mode changes
         if(lastFrameInfinityState == csFalse){
             if(mouse.infinityMode == csTrue){
                 // Make the next frame mouse.x|y equals to this frame
-                mouse.x = CenterX;
-                mouse.y = CenterY;
+                mouse.x = CenterX - 1;
+                mouse.y = CenterY - 1 - 40;
                 lastFrameInfinityState = csTrue;
             }
         }
@@ -169,14 +171,14 @@ int main( int argc, char* args[] )
             if(mouse.infinityMode == csFalse){
                 SDL_WarpMouseGlobal
                 (
-                    sdlHelper.leftMargin + mouse.x,
-                    sdlHelper.topMargin  + mouse.y
+                    sdlHelper.leftMargin + mouse.x + 1,
+                    sdlHelper.topMargin  + mouse.y + 1 + 40
                 );
                 lastFrameInfinityState = csFalse;
             }
         }
 
-        // Clip the mouse every frame
+        // Clip the mouse every frame if the infinity mode is opened
         if(mouse.infinityMode == csTrue){
             i32 tmpx, tmpy;
             SDL_GetGlobalMouseState(&tmpx, &tmpy);
