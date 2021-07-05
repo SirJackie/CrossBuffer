@@ -12,8 +12,8 @@ class CS_Mouse {
 public:
 	i32 x;
     i32 y;
-    i32 screenWidth;
-    i32 screenHeight;
+    i32 windowWidth;
+    i32 windowHeight;
 
     csbool lBtnState;
     csbool mBtnState;

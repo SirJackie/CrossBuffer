@@ -48,6 +48,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	d3dHelper       = WSL_D3DHelper(windowsHelper.hWnd);
 	keyboardHelper  = WSL_KeyboardHelper();
 	fb              = CS_FrameBuffer(windowsHelper.windowWidth, windowsHelper.windowHeight);
+	mouse           = CS_Mouse(windowsHelper.windowWidth, windowsHelper.windowHeight);
 
 	// Initialize Time Counting Variables
 	FirstTimeRunning = csTrue;

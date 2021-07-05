@@ -3,8 +3,8 @@
 CS_Mouse::CS_Mouse(){
     x = 0;
     y = 0;
-    screenWidth = 0;
-    screenHeight = 0;
+    windowWidth = 0;
+    windowHeight = 0;
 
     lBtnState = csFalse;
     mBtnState = csFalse;
@@ -12,11 +12,11 @@ CS_Mouse::CS_Mouse(){
     infinityMode = csFalse;
 }
 
-CS_Mouse::CS_Mouse(i32 screenWidth_, i32 screenHeight_){
+CS_Mouse::CS_Mouse(i32 windowWidth_, i32 windowHeight_){
     x = 0;
     y = 0;
-    screenWidth = screenWidth_;
-    screenHeight = screenHeight_;
+    windowWidth = windowWidth_;
+    windowHeight = windowHeight_;
 
     lBtnState = csFalse;
     mBtnState = csFalse;
@@ -32,10 +32,10 @@ string CS_Mouse::GetStrStatus(){
     ss << "; MouseY: ";
     ss << y;
 
-    ss << "; ScreenWidth: ";
-    ss << screenWidth;
-    ss << "; ScreenHeight: ";
-    ss << screenHeight;
+    ss << "; WindowWidth: ";
+    ss << windowWidth;
+    ss << "; WindowHeight: ";
+    ss << windowHeight;
     
 
     ss << "; LBtnState: ";
