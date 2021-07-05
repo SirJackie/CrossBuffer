@@ -36,6 +36,8 @@ int main( int argc, char* args[] )
     // sdlHelper = LSL_SDLHelper();
     sdlHelper.CreateWindow(WindowTitle);
 
+    mouse = CS_Mouse(sdlHelper.screenWidth, sdlHelper.screenHeight);
+
     // While it's not the time to quit
     while(!quit)
     {
