@@ -85,6 +85,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 			// If it is the First Time Running
 			if (FirstTimeRunning) {
+				RECT rect;
+				rect.left = 0;
+				rect.top = 0;
+				rect.bottom = 100;
+				rect.right = 100;
+				ClipCursor(&rect);
+
 				Setup(fb, keyboardHelper.kb, mouse, 0);                     // Call the Setup()  in Main.h
 				FirstTimeRunning = csFalse;
 			}
@@ -127,12 +134,18 @@ LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	switch (msg)
 	{
 	case WM_DESTROY:
+		ClipCursor(NULL);
 		PostQuitMessage(0);
 		return 0;
 
 	case WM_KEYDOWN:
 		keyboardHelper.windowsKeyBuffer[wParam] = 1;
 		keyboardHelper.MoveWinBufIntoKeyBuf();
+
+		if (keyboardHelper.kb.IsKeyPressed(CSK_Esc)) {
+			SendMessage(windowsHelper.hWnd, WM_CLOSE, 0, 0);
+		}
+
 		return DefWindowProc(hWnd, msg, wParam, lParam);
 
 	case WM_KEYUP:
