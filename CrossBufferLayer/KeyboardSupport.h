@@ -9,11 +9,11 @@ using std::stringstream;
 
 
 class CS_Keyboard {
-private:
-	csbool keyBuffer[256];
 public:
+	i32 keyBuffer[256];
 	CS_Keyboard();
 	csbool IsKeyPressed(i8 key);
+	csbool IsKeyFirstTimePressed(i8 key);
 	void   SimuLayerSetKeyIsPressed(i8 key);
 	void   SimuLayerSetKeyIsReleased(i8 key);
 	void   SimuLayerSetKeyState(i8 key, csbool state);

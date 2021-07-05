@@ -5,11 +5,11 @@ i32 startX = 100, startY = 100, endX = 200, endY = 200;
 i32 step;
 CS_FPSCalculator fpsCalculator;
 
-void Setup (CS_FrameBuffer& fb, CS_Keyboard kb, CS_Mouse& mouse, i32 deltaTime) {
+void Setup (CS_FrameBuffer& fb, CS_Keyboard& kb, CS_Mouse& mouse, i32 deltaTime) {
 	;
 }
 
-void Update(CS_FrameBuffer& fb, CS_Keyboard kb, CS_Mouse& mouse, i32 deltaTime) {
+void Update(CS_FrameBuffer& fb, CS_Keyboard& kb, CS_Mouse& mouse, i32 deltaTime) {
 	fpsCalculator.Count(deltaTime);
 	step = (i32)(0.2f * deltaTime);
 
@@ -51,6 +51,8 @@ void Update(CS_FrameBuffer& fb, CS_Keyboard kb, CS_Mouse& mouse, i32 deltaTime) 
 	fb.Print(kb.GetStrStatus());
 	fb.Print("\n");
 
+	fb.PrintLn((int)kb.keyBuffer['Z']);
+
 	deltaColor += 1;
 
 	if (kb.IsKeyPressed('W')) startY -= step;
@@ -63,7 +65,7 @@ void Update(CS_FrameBuffer& fb, CS_Keyboard kb, CS_Mouse& mouse, i32 deltaTime) 
 	if (kb.IsKeyPressed('J')) endX -= step;
 	if (kb.IsKeyPressed('L')) endX += step;
 
-	if (kb.IsKeyPressed('I')) {
+	if (kb.IsKeyFirstTimePressed('Z')) {
 		if (mouse.IsInfinityModeOpened() == csFalse) {
 			mouse.OpenInfinityMode();
 		}

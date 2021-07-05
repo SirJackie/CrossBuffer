@@ -85,6 +85,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		{
 			/* Process our Game Loop */
 			
+			// Update Keyboard Status when there's no message
+			// Why? Message Loop only process keyboard status
+			// when new message comes, but we want to process
+			// it every frame in order to provide kb.IsFirstTimePressed()
+			keyboardHelper.MoveWinBufIntoKeyBuf();
+			if (keyboardHelper.kb.IsKeyPressed(CSK_Esc)) {
+				SendMessage(windowsHelper.hWnd, WM_CLOSE, 0, 0);
+			}
+
 			// Update Time Counting Variables
 			thisTime = clock();
 
@@ -160,17 +169,10 @@ LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 	case WM_KEYDOWN:
 		keyboardHelper.windowsKeyBuffer[wParam] = 1;
-		keyboardHelper.MoveWinBufIntoKeyBuf();
-
-		if (keyboardHelper.kb.IsKeyPressed(CSK_Esc)) {
-			SendMessage(windowsHelper.hWnd, WM_CLOSE, 0, 0);
-		}
-
 		return DefWindowProc(hWnd, msg, wParam, lParam);
 
 	case WM_KEYUP:
 		keyboardHelper.windowsKeyBuffer[wParam] = 0;
-		keyboardHelper.MoveWinBufIntoKeyBuf();
 		return DefWindowProc(hWnd, msg, wParam, lParam);
 
 	case WM_LBUTTONDOWN:
