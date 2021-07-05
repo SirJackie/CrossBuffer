@@ -30,7 +30,14 @@ MSG msg;
 // Message Processing Function Declaration
 LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
+struct WinMouse {
+	i32 realx;
+	i32 realy;
+	i32 pagex;
+	i32 pagey;
+};
 
+WinMouse winMouse;
 
 
 /*
@@ -49,6 +56,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	keyboardHelper  = WSL_KeyboardHelper();
 	fb              = CS_FrameBuffer(windowsHelper.windowWidth, windowsHelper.windowHeight);
 	mouse           = CS_Mouse(windowsHelper.windowWidth, windowsHelper.windowHeight);
+
+	winMouse.realx = 0;
+	winMouse.realy = 0;
+	winMouse.pagex = 0;
+	winMouse.pagey = 0;
 
 	// Initialize Time Counting Variables
 	FirstTimeRunning = csTrue;
@@ -187,24 +199,31 @@ LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 	case WM_MOUSEMOVE:
 		/* Get Mouse Position */
-		mouse.x = LOWORD(lParam);  // MouseX
-		mouse.y = HIWORD(lParam);  // MouseY
+		winMouse.realx = LOWORD(lParam);  // MouseX
+		winMouse.realy = HIWORD(lParam);  // MouseY
 
-		if (mouse.x == 0) {
-			SetLocalCursorPos(windowsHelper.windowWidth - 2, mouse.y);
+		if (winMouse.realx == 0) {
+			SetLocalCursorPos(windowsHelper.windowWidth - 2, winMouse.realy);
+			winMouse.pagex -= 1;
 		}
 
-		if (mouse.x == windowsHelper.windowWidth - 1) {
-			SetLocalCursorPos(1, mouse.y);
+		if (winMouse.realx == windowsHelper.windowWidth - 1) {
+			SetLocalCursorPos(1, winMouse.realy);
+			winMouse.pagex += 1;
 		}
 
-		if (mouse.y == 0) {
-			SetLocalCursorPos(mouse.x, windowsHelper.windowHeight - 2);
+		if (winMouse.realy == 0) {
+			SetLocalCursorPos(winMouse.realx, windowsHelper.windowHeight - 2);
+			winMouse.pagey -= 1;
 		}
 
-		if (mouse.y == windowsHelper.windowHeight - 1) {
-			SetLocalCursorPos(mouse.x, 1);
+		if (winMouse.realy == windowsHelper.windowHeight - 1) {
+			SetLocalCursorPos(winMouse.realx, 1);
+			winMouse.pagey += 1;
 		}
+
+		mouse.x = (winMouse.realx - 1) + winMouse.pagex * (windowsHelper.windowWidth  - 2);
+		mouse.y = (winMouse.realy - 1) + winMouse.pagey * (windowsHelper.windowHeight - 2);
 
 
 		return DefWindowProc(hWnd, msg, wParam, lParam);
