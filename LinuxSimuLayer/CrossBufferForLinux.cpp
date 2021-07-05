@@ -52,7 +52,7 @@ int main( int argc, char* args[] )
             // If exit
             if(e.type == SDL_QUIT)
             {
-                quit = csFalse;
+                quit = csTrue;
             }
 
             // If key pressed
