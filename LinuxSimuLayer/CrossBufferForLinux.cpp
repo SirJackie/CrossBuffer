@@ -21,10 +21,9 @@ csbool FirstTimeRunning;
 clock_t lastTime;
 clock_t thisTime;
 
-i32 mouseX,mouseY;
 csbool lBtnState = csFalse, mBtnState = csFalse, rBtnState = csFalse;
 
-
+csbool lastFrameInfinityState = csFalse;
 
 
 /*
@@ -74,8 +73,10 @@ int main( int argc, char* args[] )
             // If mouse moved
             else if (SDL_MOUSEMOTION == e.type)
 			{
-                // mouse.x = e.motion.x;
-				// mouse.y = e.motion.y;
+                if(mouse.infinityMode == csFalse){
+                    mouse.x = e.motion.x;
+				    mouse.y = e.motion.y;
+                }
             }
 
             if (SDL_MOUSEBUTTONDOWN == e.type) 
@@ -152,12 +153,31 @@ int main( int argc, char* args[] )
         // lastTime in next frame = thisTime in this frame
         lastTime = thisTime;
 
-        i32 tmpx, tmpy;
-        SDL_GetGlobalMouseState(&tmpx, &tmpy);
-        mouse.x += tmpx - GlobalCenterX;
-        mouse.y += tmpy - GlobalCenterY;
+        // Clip the mouse every frame
+        if(mouse.infinityMode == csTrue){
+            i32 tmpx, tmpy;
+            SDL_GetGlobalMouseState(&tmpx, &tmpy);
+            mouse.x += tmpx - GlobalCenterX;
+            mouse.y += tmpy - GlobalCenterY;
 
-        SDL_WarpMouseGlobal(GlobalCenterX, GlobalCenterY);
+            SDL_WarpMouseGlobal(GlobalCenterX, GlobalCenterY);
+        }
+
+        if(lastFrameInfinityState == csFalse){
+            if(mouse.infinityMode == csTrue){
+                mouse.x = 0;
+                mouse.y = 0;
+                lastFrameInfinityState = csTrue;
+            }
+        }
+
+        if(lastFrameInfinityState == csTrue){
+            if(mouse.infinityMode == csFalse){
+                mouse.x = 0;
+                mouse.y = 0;
+                lastFrameInfinityState = csFalse;
+            }
+        }
     }
 
     // After Main Loop
