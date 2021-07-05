@@ -40,6 +40,14 @@ struct WinMouse {
 
 WinMouse winMouse;
 
+void SetLocalCursorPos(i32 x, i32 y) {
+	SetCursorPos
+	(
+		windowsHelper.leftMargin + x,
+		windowsHelper.topMargin + y
+	);
+}
+
 
 /*
 ** Main Function
@@ -94,6 +102,18 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 				winMouse.realy = 0;
 				winMouse.nowInfinityState = csFalse;
 				ClipCursor(NULL);
+				
+				i32 newCursorPosX = mouse.x;
+				i32 newCursorPosY = mouse.y;
+				if (newCursorPosX < 0) newCursorPosX = 0;
+				if (newCursorPosY < 0) newCursorPosY = 0;
+				if (newCursorPosX > windowsHelper.windowWidth - 1) {
+					newCursorPosX = windowsHelper.windowWidth - 1;
+				}
+				if (newCursorPosY > windowsHelper.windowHeight - 1) {
+					newCursorPosY = windowsHelper.windowHeight - 1;
+				}
+				SetLocalCursorPos(newCursorPosX, newCursorPosY);
 			}
 		}
 		
@@ -158,14 +178,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 /*
 ** Message Loop
 */
-
-void SetLocalCursorPos(i32 x, i32 y) {
-	SetCursorPos
-	(
-		windowsHelper.leftMargin + x,
-		windowsHelper.topMargin  + y
-	);
-}
 
 LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -233,8 +245,8 @@ LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 				winMouse.pagey += 1;
 			}
 
-			mouse.x = (winMouse.realx - 1) + winMouse.pagex * (windowsHelper.windowWidth - 2);
-			mouse.y = (winMouse.realy - 1) + winMouse.pagey * (windowsHelper.windowHeight - 2);
+			mouse.x = winMouse.realx + winMouse.pagex * (windowsHelper.windowWidth - 2);
+			mouse.y = winMouse.realy + winMouse.pagey * (windowsHelper.windowHeight - 2);
 		}
 		else {
 			mouse.x = LOWORD(lParam);
