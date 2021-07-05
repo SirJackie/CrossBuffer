@@ -38,10 +38,8 @@ int main( int argc, char* args[] )
     sdlHelper.CreateWindow(WindowTitle);
 
     // Calculate Center of the Window
-    i32 CenterX = sdlHelper.windowWidth  / 2;
-    i32 CenterY = sdlHelper.windowHeight / 2;
-    i32 GlobalCenterX = CenterX + sdlHelper.leftMargin;
-    i32 GlobalCenterY = CenterY + sdlHelper.topMargin + 40;
+    i32 GlobalCenterX = (sdlHelper.windowWidth  / 2) + sdlHelper.leftMargin;
+    i32 GlobalCenterY = (sdlHelper.windowHeight / 2) + sdlHelper.topMargin;
 
     mouse = CS_Mouse(sdlHelper.windowWidth, sdlHelper.windowHeight);
 
@@ -156,10 +154,10 @@ int main( int argc, char* args[] )
 
         i32 tmpx, tmpy;
         SDL_GetGlobalMouseState(&tmpx, &tmpy);
-        mouse.x = tmpx - GlobalCenterX;
-        mouse.y = tmpy - GlobalCenterY;
+        mouse.x += tmpx - GlobalCenterX;
+        mouse.y += tmpy - GlobalCenterY;
 
-        SDL_WarpMouseGlobal(500, 500);
+        SDL_WarpMouseGlobal(GlobalCenterX, GlobalCenterY);
     }
 
     // After Main Loop
