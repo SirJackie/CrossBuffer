@@ -10,7 +10,7 @@
 LSL_SDLHelper       sdlHelper;
 LSL_KeyboardHelper  keyboardHelper;
 CS_Mouse            mouse;
-bool quit = false;
+bool quit = csFalse;
 SDL_Event e;
 
 // CrossBufferLayer Variables
@@ -33,8 +33,14 @@ csbool lBtnState = csFalse, mBtnState = csFalse, rBtnState = csFalse;
 
 int main( int argc, char* args[] )
 {
+
     // sdlHelper = LSL_SDLHelper();
     sdlHelper.CreateWindow(WindowTitle);
+
+    // Calculate Center of the Window
+    i32 CenterX, CenterY;
+    CenterX = sdlHelper.windowWidth  / 2;
+    CenterY = sdlHelper.windowHeight / 2;
 
     mouse = CS_Mouse(sdlHelper.windowWidth, sdlHelper.windowHeight);
 
@@ -44,10 +50,12 @@ int main( int argc, char* args[] )
         /* Process the Message Queue */
         while(SDL_PollEvent(&e) != 0)
         {
+            SDL_WarpMouseInWindow(sdlHelper.window, CenterX, CenterY);
+
             // If exit
             if(e.type == SDL_QUIT)
             {
-                quit = true;
+                quit = csFalse;
             }
 
             // If key pressed
@@ -68,8 +76,8 @@ int main( int argc, char* args[] )
             // If mouse moved
             else if (SDL_MOUSEMOTION == e.type)
 			{
-                mouse.x = e.motion.x;
-				mouse.y = e.motion.y;
+                // mouse.x = e.motion.x;
+				// mouse.y = e.motion.y;
             }
 
             if (SDL_MOUSEBUTTONDOWN == e.type) 
@@ -103,6 +111,8 @@ int main( int argc, char* args[] )
                     mouse.rBtnState = csFalse;
                 }
             }
+
+            SDL_GetRelativeMouseState(&(mouse.x), &(mouse.y));
         }
 
         /* Process our Game Loop */
@@ -119,6 +129,10 @@ int main( int argc, char* args[] )
 
         // Update Keyboard Status when there is or isn't message
         keyboardHelper.MoveLnxBufIntoKeyBuf();
+
+        if(keyboardHelper.kb.IsKeyPressed(CSK_Esc)){
+            quit = csTrue;
+        }
 
         // If it is the First Time Running
         if (FirstTimeRunning) {
