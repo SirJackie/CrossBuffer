@@ -163,11 +163,11 @@ LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		mouse.rBtnState = csFalse;
 		return DefWindowProc(hWnd, msg, wParam, lParam);
 
-	//case WM_MOUSEMOVE:
-	//	/* Get Mouse Position */
-	//	LOWORD(lParam);  // MouseX
-	//	HIWORD(lParam);  // MouseY
-	//	return DefWindowProc(hWnd, msg, wParam, lParam);
+	case WM_MOUSEMOVE:
+		/* Get Mouse Position */
+		mouse.x = LOWORD(lParam);  // MouseX
+		mouse.y = HIWORD(lParam);  // MouseY
+		return DefWindowProc(hWnd, msg, wParam, lParam);
 
 	default:
 		return DefWindowProc(hWnd, msg, wParam, lParam);
