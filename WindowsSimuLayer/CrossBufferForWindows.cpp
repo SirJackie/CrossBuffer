@@ -51,11 +51,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 {
 
 	// Initialize CrossBufferLayer and WIndowsSimuLayer Objects
-	windowsHelper   = WSL_WindowsHelper(MsgProc, hInstance, (wchar_t*)WindowTitle, (wchar_t*)WindowTitle);
-	d3dHelper       = WSL_D3DHelper(windowsHelper.hWnd);
-	keyboardHelper  = WSL_KeyboardHelper();
-	fb              = CS_FrameBuffer(windowsHelper.windowWidth, windowsHelper.windowHeight);
-	mouse           = CS_Mouse(windowsHelper.windowWidth, windowsHelper.windowHeight);
+	windowsHelper = WSL_WindowsHelper(MsgProc, hInstance, (wchar_t*)WindowTitle, (wchar_t*)WindowTitle);
+	d3dHelper = WSL_D3DHelper(windowsHelper.hWnd);
+	keyboardHelper = WSL_KeyboardHelper();
+	fb = CS_FrameBuffer(windowsHelper.windowWidth, windowsHelper.windowHeight);
+	mouse = CS_Mouse(windowsHelper.windowWidth, windowsHelper.windowHeight);
 
 	winMouse.realx = 0;
 	winMouse.realy = 0;
@@ -75,63 +75,55 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		// If there is a Message
 		if (PeekMessage(&msg, csNull, 0, 0, PM_REMOVE))
 		{
-			/* Process it */
-
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
-		// Else
-		else
-		{
-			/* Process our Game Loop */
-			
-			// Update Keyboard Status when there's no message
-			// Why? Message Loop only process keyboard status
-			// when new message comes, but we want to process
-			// it every frame in order to provide kb.IsFirstTimePressed()
-			keyboardHelper.MoveWinBufIntoKeyBuf();
-			if (keyboardHelper.kb.IsKeyPressed(CSK_Esc)) {
-				SendMessage(windowsHelper.hWnd, WM_CLOSE, 0, 0);
-			}
 
-			// Update Time Counting Variables
-			thisTime = clock();
+		/* Process our Game Loop */
 
-			// Lock System BackBuffer and Clear the FrameBuffer
-			d3dHelper.LockBuffer();  
-			fb = CS_FrameBuffer
-			(
-				windowsHelper.windowWidth, windowsHelper.windowHeight
-			);
-
-			// If it is the First Time Running
-			if (FirstTimeRunning) {
-				RECT rect;
-				rect.left = windowsHelper.leftMargin;
-				rect.top = windowsHelper.topMargin;
-				rect.right = windowsHelper.leftMargin + windowsHelper.windowWidth - 1;
-				rect.bottom = windowsHelper.topMargin + windowsHelper.windowHeight - 1;
-				ClipCursor(&rect);
-
-				Setup(fb, keyboardHelper.kb, mouse, 0);                     // Call the Setup()  in Main.h
-				FirstTimeRunning = csFalse;
-			}
-
-			// If it is not the First Time Running
-			else {
-				Update(fb, keyboardHelper.kb, mouse, thisTime - lastTime);  // Call the Update() in Main.h
-			}
-
-			// Paint Our FrameBuffer to System BackBuffer
-			d3dHelper.PaintFrameBufferHere(fb);
-
-			// Release Back Buffer and Swap it as the FrontBuffer
-			d3dHelper.UnlockBuffer();
-
-			// Update Time Counting Variables
-			// lastTime in next frame = thisTime in this frame
-			lastTime = thisTime;
+		// Update Keyboard Status when there is or isn't a message
+		keyboardHelper.MoveWinBufIntoKeyBuf();
+		if (keyboardHelper.kb.IsKeyPressed(CSK_Esc)) {
+			SendMessage(windowsHelper.hWnd, WM_CLOSE, 0, 0);
 		}
+
+		// Update Time Counting Variables
+		thisTime = clock();
+
+		// Lock System BackBuffer and Clear the FrameBuffer
+		d3dHelper.LockBuffer();
+		fb = CS_FrameBuffer
+		(
+			windowsHelper.windowWidth, windowsHelper.windowHeight
+		);
+
+		// If it is the First Time Running
+		if (FirstTimeRunning) {
+			RECT rect;
+			rect.left = windowsHelper.leftMargin;
+			rect.top = windowsHelper.topMargin;
+			rect.right = windowsHelper.leftMargin + windowsHelper.windowWidth - 1;
+			rect.bottom = windowsHelper.topMargin + windowsHelper.windowHeight - 1;
+			ClipCursor(&rect);
+
+			Setup(fb, keyboardHelper.kb, mouse, 0);                     // Call the Setup()  in Main.h
+			FirstTimeRunning = csFalse;
+		}
+
+		// If it is not the First Time Running
+		else {
+			Update(fb, keyboardHelper.kb, mouse, thisTime - lastTime);  // Call the Update() in Main.h
+		}
+
+		// Paint Our FrameBuffer to System BackBuffer
+		d3dHelper.PaintFrameBufferHere(fb);
+
+		// Release Back Buffer and Swap it as the FrontBuffer
+		d3dHelper.UnlockBuffer();
+
+		// Update Time Counting Variables
+		// lastTime in next frame = thisTime in this frame
+		lastTime = thisTime;
 	}
 
 	/* After the Main Loop */
@@ -141,9 +133,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		d3dHelper.Release();
 		return 0;
 	}
-
 }
-
 
 
 /*

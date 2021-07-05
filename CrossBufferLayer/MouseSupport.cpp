@@ -64,7 +64,7 @@ string CS_Mouse::GetStrStatus(){
         ss << "False";
     }
 
-    ss << ";\nInfinityMode: ";
+    ss << "; InfinityMode: ";
     if (infinityMode == csTrue) {
         ss << "True";
     }
