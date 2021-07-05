@@ -38,9 +38,10 @@ int main( int argc, char* args[] )
     sdlHelper.CreateWindow(WindowTitle);
 
     // Calculate Center of the Window
-    i32 CenterX, CenterY;
-    CenterX = sdlHelper.windowWidth  / 2;
-    CenterY = sdlHelper.windowHeight / 2;
+    i32 CenterX = sdlHelper.windowWidth  / 2;
+    i32 CenterY = sdlHelper.windowHeight / 2;
+    i32 GlobalCenterX = CenterX + sdlHelper.leftMargin;
+    i32 GlobalCenterY = CenterY + sdlHelper.topMargin + 40;
 
     mouse = CS_Mouse(sdlHelper.windowWidth, sdlHelper.windowHeight);
 
@@ -50,7 +51,6 @@ int main( int argc, char* args[] )
         /* Process the Message Queue */
         while(SDL_PollEvent(&e) != 0)
         {
-            SDL_WarpMouseInWindow(sdlHelper.window, CenterX, CenterY);
 
             // If exit
             if(e.type == SDL_QUIT)
@@ -111,8 +111,7 @@ int main( int argc, char* args[] )
                     mouse.rBtnState = csFalse;
                 }
             }
-
-            SDL_GetRelativeMouseState(&(mouse.x), &(mouse.y));
+            
         }
 
         /* Process our Game Loop */
@@ -154,6 +153,13 @@ int main( int argc, char* args[] )
         // Update Time Counting Variables
         // lastTime in next frame = thisTime in this frame
         lastTime = thisTime;
+
+        i32 tmpx, tmpy;
+        SDL_GetGlobalMouseState(&tmpx, &tmpy);
+        mouse.x = tmpx - GlobalCenterX;
+        mouse.y = tmpy - GlobalCenterY;
+
+        SDL_WarpMouseGlobal(500, 500);
     }
 
     // After Main Loop
