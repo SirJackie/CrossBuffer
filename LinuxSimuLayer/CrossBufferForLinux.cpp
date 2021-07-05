@@ -56,7 +56,6 @@ int main( int argc, char* args[] )
                 int keycode = e.key.keysym.sym;
                 if(keycode > 1073740000) keycode -= 1073740000;
                 keyboardHelper.linuxKeyBuffer[keycode] = 1;
-                keyboardHelper.MoveLnxBufIntoKeyBuf();
             }
             
             // If key released
@@ -64,7 +63,6 @@ int main( int argc, char* args[] )
                 int keycode = e.key.keysym.sym;
                 if(keycode > 1073740000) keycode -= 1073740000;
                 keyboardHelper.linuxKeyBuffer[keycode] = 0;
-                keyboardHelper.MoveLnxBufIntoKeyBuf();
             }
 
             // If mouse moved
@@ -118,6 +116,9 @@ int main( int argc, char* args[] )
         (
             sdlHelper.windowWidth, sdlHelper.windowHeight
         );
+
+        // Update Keyboard Status when there is or isn't message
+        keyboardHelper.MoveLnxBufIntoKeyBuf();
 
         // If it is the First Time Running
         if (FirstTimeRunning) {
