@@ -167,11 +167,10 @@ int main( int argc, char* args[] )
 
         if(lastFrameInfinityState == csTrue){
             if(mouse.infinityMode == csFalse){
-                SDL_WarpMouseInWindow
+                SDL_WarpMouseGlobal
                 (
-                    sdlHelper.window,
-                    mouse.x % sdlHelper.windowWidth,
-                    mouse.y % sdlHelper.windowHeight
+                    sdlHelper.leftMargin + mouse.x,
+                    sdlHelper.topMargin  + mouse.y
                 );
                 lastFrameInfinityState = csFalse;
             }
