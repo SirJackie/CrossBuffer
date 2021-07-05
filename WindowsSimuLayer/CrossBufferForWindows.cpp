@@ -86,10 +86,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			// If it is the First Time Running
 			if (FirstTimeRunning) {
 				RECT rect;
-				rect.left = 0;
-				rect.top = 0;
-				rect.bottom = 100;
-				rect.right = 100;
+				rect.left = windowsHelper.leftMargin;
+				rect.top = windowsHelper.topMargin;
+				rect.right = windowsHelper.leftMargin + windowsHelper.windowWidth - 1;
+				rect.bottom = windowsHelper.topMargin + windowsHelper.windowHeight - 1;
 				ClipCursor(&rect);
 
 				Setup(fb, keyboardHelper.kb, mouse, 0);                     // Call the Setup()  in Main.h
