@@ -36,6 +36,11 @@ void LSL_SDLHelper::GetResolution(){
     screenHeight = fb_var.yres;
     i32 bpp = fb_var.bits_per_pixel;
     printf("Framebuffer %d * %d - %dbpp\n", screenWidth, screenHeight, bpp);
+
+    if(screenWidth == 0 || screenHeight == 0){
+        screenWidth = 1000;
+        screenHeight = 600;
+    }
 }
 
 i32 LSL_SDLHelper::getWcharLen(const i32* wcharPtr){
