@@ -32,15 +32,7 @@ csbool lastFrameInfinityState = csFalse;
 
 int main( int argc, char* args[] )
 {
-
-    // sdlHelper = LSL_SDLHelper();
     sdlHelper.CreateWindow(WindowTitle);
-
-    // Calculate Center of the Window
-    i32 CenterX = (sdlHelper.windowWidth  / 2);
-    i32 CenterY = (sdlHelper.windowHeight / 2);
-    i32 GlobalCenterX = (sdlHelper.windowWidth  / 2) + sdlHelper.leftMargin;
-    i32 GlobalCenterY = (sdlHelper.windowHeight / 2) + sdlHelper.topMargin;
 
     mouse = CS_Mouse(sdlHelper.windowWidth, sdlHelper.windowHeight);
 
@@ -161,18 +153,25 @@ int main( int argc, char* args[] )
         if(lastFrameInfinityState == csFalse){
             if(mouse.infinityMode == csTrue){
                 // Make the next frame mouse.x|y equals to this frame
-                mouse.x = CenterX - 1;
-                mouse.y = CenterY - 1 - 40;
+                i32 tmpx, tmpy;
+                SDL_GetGlobalMouseState(&tmpx, &tmpy);
+                tmpx -= sdlHelper.leftMargin;
+                tmpy -= sdlHelper.topMargin;
+
+                mouse.x = tmpx;
+                mouse.y = tmpy;
+
                 lastFrameInfinityState = csTrue;
             }
         }
 
         if(lastFrameInfinityState == csTrue){
             if(mouse.infinityMode == csFalse){
-                SDL_WarpMouseGlobal
+                SDL_WarpMouseInWindow
                 (
-                    sdlHelper.leftMargin + mouse.x + 1,
-                    sdlHelper.topMargin  + mouse.y + 1 + 40
+                    sdlHelper.window,
+                    CS_iclamp(0, mouse.x, sdlHelper.windowWidth),
+                    CS_iclamp(0, mouse.y, sdlHelper.windowHeight)
                 );
                 lastFrameInfinityState = csFalse;
             }
@@ -182,6 +181,10 @@ int main( int argc, char* args[] )
         if(mouse.infinityMode == csTrue){
             i32 tmpx, tmpy;
             SDL_GetGlobalMouseState(&tmpx, &tmpy);
+
+            i32 GlobalCenterX = sdlHelper.leftMargin + 100;
+            i32 GlobalCenterY = sdlHelper.topMargin + 100;
+
             mouse.x += tmpx - GlobalCenterX;
             mouse.y += tmpy - GlobalCenterY;
 
