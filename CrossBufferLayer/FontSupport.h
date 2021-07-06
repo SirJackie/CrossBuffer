@@ -3,9 +3,9 @@
 
 #include "BasicDataTypeDeclarations.h"
 
-
 #define CS_FONT_WIDTH   8
 #define CS_FONT_HEIGHT 16
+
 
 const ui8 CS_font[8 * 16 * 256] = {
 

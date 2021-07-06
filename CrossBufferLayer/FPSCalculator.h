@@ -3,9 +3,6 @@
 
 #include "BasicDataTypeDeclarations.h"
 
-/*
-** FPS Calculating
-*/
 
 class CS_FPSCalculator {
 private:

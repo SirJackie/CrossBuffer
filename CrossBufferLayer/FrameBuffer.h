@@ -12,6 +12,7 @@ using std::stringstream;
 #define CS_FB_INIT_CURX 10
 #define CS_FB_INIT_CURY 10
 
+
 class CS_FrameBuffer
 {
 public:
@@ -26,8 +27,6 @@ public:
 
     i32 curX;
     i32 curY;
-
-    stringstream temporalSS;
 
 
     // Methods
@@ -62,10 +61,11 @@ public:
     template<class T>
     void Print(T x)
     {
-        temporalSS.clear();
-        temporalSS.str("");
-        temporalSS << x;
-        Print(temporalSS.str());
+        stringstream ss;
+        ss.clear();
+        ss.str("");
+        ss << x;
+        Print(ss.str());
     }
 
     template<class T>

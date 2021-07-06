@@ -145,7 +145,6 @@
   <ItemGroup>
     <ClCompile Include="..\CrossBufferLayer\BasicDataTypeDeclarations.cpp" />
     <ClCompile Include="..\CrossBufferLayer\CrossBuffer.cpp" />
-    <ClCompile Include="..\CrossBufferLayer\FontSupport.cpp" />
     <ClCompile Include="..\CrossBufferLayer\FPSCalculator.cpp" />
     <ClCompile Include="..\CrossBufferLayer\FrameBuffer.cpp" />
     <ClCompile Include="..\CrossBufferLayer\KeyboardSupport.cpp" />
