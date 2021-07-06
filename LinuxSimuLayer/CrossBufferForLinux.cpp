@@ -34,11 +34,41 @@ int main( int argc, char* args[] )
 {
     sdlHelper.CreateWindow(WindowTitle);
 
+    i32 GlobalCenterX = sdlHelper.leftMargin + (sdlHelper.windowWidth  / 2);
+    i32 GlobalCenterY = sdlHelper.topMargin  + (sdlHelper.windowHeight / 2);
+
     mouse = CS_Mouse(sdlHelper.windowWidth, sdlHelper.windowHeight);
 
     // While it's not the time to quit
     while(!quit)
     {
+        if(lastFrameInfinityState == csFalse && mouse.infinityMode == csTrue){
+            // Make the next frame mouse.x|y equals to this frame
+            SDL_WarpMouseGlobal(GlobalCenterX, GlobalCenterY);
+
+            lastFrameInfinityState = csTrue;
+        }
+
+        else if(lastFrameInfinityState == csTrue && mouse.infinityMode == csFalse){
+            SDL_WarpMouseInWindow
+            (
+                sdlHelper.window,
+                CS_iclamp(0, mouse.x, sdlHelper.windowWidth),
+                CS_iclamp(0, mouse.y, sdlHelper.windowHeight)
+            );
+            lastFrameInfinityState = csFalse;
+        }
+
+        else if(lastFrameInfinityState == csTrue &&mouse.infinityMode == csTrue){
+            i32 tmpx, tmpy;
+            SDL_GetGlobalMouseState(&tmpx, &tmpy);
+
+            mouse.x += tmpx - GlobalCenterX;
+            mouse.y += tmpy - GlobalCenterY;
+
+            SDL_WarpMouseGlobal(GlobalCenterX, GlobalCenterY);
+        }
+
         /* Process the Message Queue */
         while(SDL_PollEvent(&e) != 0)
         {
@@ -146,50 +176,6 @@ int main( int argc, char* args[] )
         // Update Time Counting Variables
         // lastTime in next frame = thisTime in this frame
         lastTime = thisTime;
-
-
-
-        // Do reset when the infinity mode changes
-        if(lastFrameInfinityState == csFalse){
-            if(mouse.infinityMode == csTrue){
-                // Make the next frame mouse.x|y equals to this frame
-                i32 tmpx, tmpy;
-                SDL_GetGlobalMouseState(&tmpx, &tmpy);
-                tmpx -= sdlHelper.leftMargin;
-                tmpy -= sdlHelper.topMargin;
-
-                mouse.x = tmpx;
-                mouse.y = tmpy;
-
-                lastFrameInfinityState = csTrue;
-            }
-        }
-
-        if(lastFrameInfinityState == csTrue){
-            if(mouse.infinityMode == csFalse){
-                SDL_WarpMouseInWindow
-                (
-                    sdlHelper.window,
-                    CS_iclamp(0, mouse.x, sdlHelper.windowWidth),
-                    CS_iclamp(0, mouse.y, sdlHelper.windowHeight)
-                );
-                lastFrameInfinityState = csFalse;
-            }
-        }
-
-        // Clip the mouse every frame if the infinity mode is opened
-        if(mouse.infinityMode == csTrue){
-            i32 tmpx, tmpy;
-            SDL_GetGlobalMouseState(&tmpx, &tmpy);
-
-            i32 GlobalCenterX = sdlHelper.leftMargin + 100;
-            i32 GlobalCenterY = sdlHelper.topMargin + 100;
-
-            mouse.x += tmpx - GlobalCenterX;
-            mouse.y += tmpy - GlobalCenterY;
-
-            SDL_WarpMouseGlobal(GlobalCenterX, GlobalCenterY);
-        }
     }
 
     // After Main Loop
