@@ -1,5 +1,5 @@
-#ifndef __CSBF_WindowsSimuLayer_Win32Parts__
-#define __CSBF_WindowsSimuLayer_Win32Parts__
+#ifndef __CSBF_WindowsSimuLayer_WindowsHelper__
+#define __CSBF_WindowsSimuLayer_WindowsHelper__
 
 #include <Windows.h>
 #include "Resource.h"

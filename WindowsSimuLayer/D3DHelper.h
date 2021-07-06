@@ -1,5 +1,5 @@
-#ifndef __CSBF_WindowsSimuLayer_D3DParts__
-#define __CSBF_WindowsSimuLayer_D3DParts__
+#ifndef __CSBF_WindowsSimuLayer_D3DHelper__
+#define __CSBF_WindowsSimuLayer_D3DHelper__
 
 #include <d3d9.h>
 #include "../CrossBufferLayer/FrameBuffer.h"
