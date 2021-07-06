@@ -42,6 +42,15 @@ int main( int argc, char* args[] )
     // While it's not the time to quit
     while(!quit)
     {
+        if(mouse.x == 0 || mouse.y == 0){
+            i32 tmpx, tmpy;
+            SDL_GetGlobalMouseState(&tmpx, &tmpy);
+            tmpx -= sdlHelper.leftMargin;
+            tmpy -= sdlHelper.topMargin;
+            mouse.x = tmpx;
+            mouse.y = tmpy;
+        }
+
         if(lastFrameInfinityState == csFalse && mouse.infinityMode == csTrue){
             // Make the next frame mouse.x|y equals to this frame
             SDL_WarpMouseGlobal(GlobalCenterX, GlobalCenterY);
