@@ -4,11 +4,6 @@
 #include "BasicDataTypeDeclarations.h"
 #include "FontSupport.h"
 
-#include <string>
-using std::string;
-#include <sstream>
-using std::stringstream;
-
 #define CS_FB_INIT_CURX 10
 #define CS_FB_INIT_CURY 10
 
@@ -75,5 +70,17 @@ public:
         Print("\n");
     }
 };
+
+inline void CS_PutPixel
+(
+    CS_FrameBuffer& fb, const i32& x, const i32& y,
+    const i32& r, const i32& g, const i32& b
+)
+{
+    i32 pos = (y)*fb.width + (x);
+    fb.redBuffer[pos] = r;
+    fb.greenBuffer[pos] = g;
+    fb.blueBuffer[pos] = b;
+}
 
 #endif

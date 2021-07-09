@@ -1,6 +1,4 @@
 #include "FPSCalculator.h"
-#include <sstream>
-using std::stringstream;
 
 CS_FPSCalculator::CS_FPSCalculator() {
 	fps             = 0.0f;
@@ -24,4 +22,18 @@ void CS_FPSCalculator::Count(i32 deltaTime)
 f32 CS_FPSCalculator::GetCurrentFPS()
 {
 	return fps;
+}
+
+string CS_FPSCalculator::GetStrStatus() {
+	stringstream ss;
+	ss << "FPS: ";
+
+	if (abs(fps - 0.0f) < 0.005) {
+		ss << "Loading...";
+	}
+	else {
+		ss << fps;
+	}
+	
+	return ss.str();
 }
