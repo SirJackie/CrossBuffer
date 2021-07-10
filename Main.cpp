@@ -4,12 +4,17 @@ i32 deltaColor = 0;
 i32 startX = 100, startY = 100, endX = 200, endY = 200;
 i32 step;
 CS_FPSCalculator fpsCalculator;
+f32 firstdx, firstdy, seconddx, seconddy;
 
 void Setup (CS_FrameBuffer& fb, CS_Keyboard& kb, CS_Mouse& mouse, i32 deltaTime) {
-	;
+	firstdx = mouse.deltaX;
+	firstdy = mouse.deltaY;
 }
 
 void Update(CS_FrameBuffer& fb, CS_Keyboard& kb, CS_Mouse& mouse, i32 deltaTime) {
+	seconddx = mouse.deltaX;
+	seconddy = mouse.deltaY;
+
 	fpsCalculator.Count(deltaTime);
 	step = (i32)(0.2f * deltaTime);
 
@@ -41,6 +46,15 @@ void Update(CS_FrameBuffer& fb, CS_Keyboard& kb, CS_Mouse& mouse, i32 deltaTime)
 	fb.PrintLn(fpsCalculator.ToString());
 	fb.PrintLn(mouse.ToString());
 	fb.PrintLn(kb.ToString());
+
+	fb.Print(firstdx);
+	fb.Print(", ");
+	fb.Print(firstdy);
+	fb.Print("\n");
+	fb.Print(seconddx);
+	fb.Print(", ");
+	fb.Print(seconddy);
+	fb.Print("\n");
 
 	deltaColor += 1;
 
