@@ -180,6 +180,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		// Release All the Variables
 		windowsHelper.Unregister((wchar_t*)WindowTitle);
 		d3dHelper.Release();
+		if (isCursorShowingNow == csFalse) {
+			isCursorShowingNow = csTrue;
+			ShowCursor(csTrue);
+		}
 		return 0;
 	}
 }
