@@ -38,20 +38,9 @@ void Update(CS_FrameBuffer& fb, CS_Keyboard& kb, CS_Mouse& mouse, i32 deltaTime)
 	i32 ti32 = 32;
 	i16 ti16 = 16;
 
-	fb.Print("FPS: ");
-	fb.Print(fpsCalculator.GetCurrentFPS());
-	fb.Print(", DeltaTime: ");
-	fb.Print(deltaTime);
-	fb.Print("\n");
-
-	fb.Print(mouse.GetStrStatus());
-	fb.Print("\n");
-
-	fb.Print("KeyboardStatus: ");
-	fb.Print(kb.GetStrStatus());
-	fb.Print("\n");
-
-	fb.PrintLn((int)kb.keyBuffer['Z']);
+	fb.PrintLn(fpsCalculator.ToString());
+	fb.PrintLn(mouse.ToString());
+	fb.PrintLn(kb.ToString());
 
 	deltaColor += 1;
 
