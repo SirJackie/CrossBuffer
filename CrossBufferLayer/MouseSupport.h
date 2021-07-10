@@ -8,6 +8,10 @@ class CS_Mouse {
 public:
 	i32 x;
     i32 y;
+    i32 lastX;
+    i32 lastY;
+    i32 deltaX;
+    i32 deltaY;
     i32 windowWidth;
     i32 windowHeight;
 
@@ -18,10 +22,10 @@ public:
 
     CS_Mouse();
     CS_Mouse(i32 screenWidth_, i32 screenHeight_);
-    string GetStrStatus();
     void OpenInfinityMode();
     void CloseInfinityMode();
     csbool IsInfinityModeOpened();
+    string ToString();
 };
 
 #endif

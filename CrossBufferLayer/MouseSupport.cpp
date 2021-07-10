@@ -3,6 +3,10 @@
 CS_Mouse::CS_Mouse(){
     x = 0;
     y = 0;
+    lastX = 0;
+    lastY = 0;
+    deltaX = 0;
+    deltaY = 0;
     windowWidth = 0;
     windowHeight = 0;
 
@@ -15,6 +19,10 @@ CS_Mouse::CS_Mouse(){
 CS_Mouse::CS_Mouse(i32 windowWidth_, i32 windowHeight_){
     x = 0;
     y = 0;
+    lastX = 0;
+    lastY = 0;
+    deltaX = 0;
+    deltaY = 0;
     windowWidth = windowWidth_;
     windowHeight = windowHeight_;
 
@@ -24,7 +32,7 @@ CS_Mouse::CS_Mouse(i32 windowWidth_, i32 windowHeight_){
     infinityMode = csFalse;
 }
 
-string CS_Mouse::GetStrStatus(){
+string CS_Mouse::ToString(){
     stringstream ss;
     
     ss << "MouseX: ";
@@ -72,7 +80,7 @@ string CS_Mouse::GetStrStatus(){
         ss << "False";
     }
     
-
+    ss << "\n";
     return ss.str();
 }
 
