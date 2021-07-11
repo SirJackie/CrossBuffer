@@ -6,6 +6,10 @@
 ** Define Cross Platform Types
 */
 
+typedef    unsigned long long  ui64;     // Should be 32-bit 4-byte sign-less
+typedef    signed long long    si64;     // Should be 32-bit 4-byte sign-ful
+typedef    long long            i64;     // Should be 32-bit 4-byte auto
+
 typedef    unsigned int        ui32;     // Should be 32-bit 4-byte sign-less
 typedef    signed   int        si32;     // Should be 32-bit 4-byte sign-ful
 typedef    int                  i32;     // Should be 32-bit 4-byte auto

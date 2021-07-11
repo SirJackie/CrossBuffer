@@ -8,8 +8,9 @@ ui8 buffer[100];
 
 void Setup (CS_FrameBuffer& fb, CS_Keyboard& kb, CS_Mouse& mouse, i32 deltaTime) {
 	CS_Memset(buffer, 0, 100);
-	FILE *file = fopen("../Resources/Test.txt", "rb");
-	fread(buffer, sizeof(ui8), 6, file);
+	// FILE *file = fopen("../Resources/Test.txt", "rb");
+	CS_File file("../Resources/Test.txt", csReadBinary, fb);
+	fread(buffer, sizeof(ui8), 6, file.file);
 }
 
 void Update(CS_FrameBuffer& fb, CS_Keyboard& kb, CS_Mouse& mouse, i32 deltaTime) {

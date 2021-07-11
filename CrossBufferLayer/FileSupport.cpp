@@ -8,17 +8,18 @@ CS_File::CS_File(){
     length   = 0;
 }
 
-CS_File::CS_File(string fileName_, csFileMode fileMode_){
+CS_File::CS_File(string fileName_, csFileMode fileMode_, CS_FrameBuffer& fb){
     fileMode = fileMode_;
     file = fopen(fileName_.c_str(), fileMode == csReadBinary ? "rb" : "wb");
+    ptrfb = &fb;
+
+    ptrfb->PrintLn((i64) file);
 
     if(file != csNullPtr){
         // Get the Length of the File
-        fileHead = file;
         fseek(file, 0, SEEK_END);
-        fileEnd = file;
         length = GetPositionNow() + 1;
-        file = fileHead;
+        fseek(file, 0, SEEK_SET);
     }
     else{
         fileHead = csNullPtr;
