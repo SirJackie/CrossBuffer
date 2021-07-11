@@ -45,7 +45,7 @@ void CS_File::Open(string fileName_, csFileMode fileMode_){
     if(file != csNullPtr){
         // Get the Length of the File
         GoToEnd();
-        fileLength = GetPositionNow() + 1;
+        fileLength = GetPositionNow();
         GoToHead();
     }
     else{
@@ -59,7 +59,7 @@ void CS_File::Open(string fileName_, csFileMode fileMode_){
 }
 
 void CS_File::Read(){
-    ResizeAndClearBuffer(fileLength);
+    ResizeAndClearBuffer(fileLength + 1);
     GoToHead();
     if(fileMode == csReadBinary && file != csNullPtr){
         fread(buffer, sizeof(ui8), fileLength, file);

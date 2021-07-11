@@ -44,6 +44,7 @@ void Update(CS_FrameBuffer& fb, CS_Keyboard& kb, CS_Mouse& mouse, i32 deltaTime)
 	fb.PrintLn(mouse.ToString());
 	fb.PrintLn(kb.ToString());
 	fb.PrintLn((i8*)file.buffer);
+	fb.PrintLn(file.fileLength);
 
 	deltaColor += 1;
 
