@@ -1,23 +1,23 @@
 #include "Main.h"
 
 i32 deltaColor = 0;
-i32 startX = 100, startY = 100, endX = 200, endY = 200;
+i32 startX = 300, startY = 200, endX = 400, endY = 300;
 i32 step;
 CS_FPSCalculator fpsCalculator;
 CS_File file;
 
 void Setup (CS_FrameBuffer& fb, CS_Keyboard& kb, CS_Mouse& mouse, i32 deltaTime) {
-	file.Open("../Resources/Test.txt", csReadBinary);
+	file.Open(CS_Path().join("..").join("Resources").join("Test.txt"), csReadBinary);
 	file.Read();
 	file.Close();
 
-	file.Open("../Resources/Test.txt", csWriteBinary);
+	file.Open(CS_Path().join("..").join("Resources").join("Test.txt"), csWriteBinary);
 	file.ResizeAndClearBuffer(13);
 	strcpy((i8*)file.buffer, "Hello World!");
 	file.Write();
 	file.Close();
 
-	file.Open("../Resources/Test.txt", csReadBinary);
+	file.Open(CS_Path().join("..").join("Resources").join("Test.txt"), csReadBinary);
 	file.Read();
 }
 
@@ -53,6 +53,16 @@ void Update(CS_FrameBuffer& fb, CS_Keyboard& kb, CS_Mouse& mouse, i32 deltaTime)
 	fb.PrintLn(fpsCalculator.ToString());
 	fb.PrintLn(mouse.ToString());
 	fb.PrintLn(kb.ToString());
+
+	fb.PrintLn("Path Joining Test: (Path Spliter will be changed in defferent OS)");
+	extern string CS_OperatingSystem;
+	fb.Print("Operating System: ");
+	fb.PrintLn(CS_OperatingSystem);
+	fb.Print("Path: ");
+	fb.PrintLn((string)CS_Path().join("abc").join("def").join("ghi.jpg"));
+	fb.PrintLn("");
+
+	fb.PrintLn("File Reading and Writing Test: ");
 	fb.PrintLn((i8*)file.buffer);
 	fb.PrintLn(file.fileLength);
 

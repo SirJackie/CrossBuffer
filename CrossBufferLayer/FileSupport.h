@@ -8,6 +8,14 @@ typedef char csFileMode;
 const csFileMode csReadBinary = 0;
 const csFileMode csWriteBinary = 1;
 
+class CS_Path{
+public:
+    string nowpath;
+    CS_Path();
+    CS_Path& join(const string name);
+    operator string();
+};
+
 class CS_File{
 public:
     FILE *file;

@@ -1,5 +1,26 @@
 #include "FileSupport.h"
 
+CS_Path::CS_Path(){
+    nowpath = ".";
+}
+
+CS_Path& CS_Path::join(const string name){
+    extern string CS_OperatingSystem;
+    if(CS_OperatingSystem == string("Windows")){
+        nowpath += "\\";
+        nowpath += name;
+    }
+    else{
+        nowpath += "/";
+        nowpath += name;
+    }
+    return *this;
+}
+
+CS_Path::operator string(){
+    return nowpath;
+}
+
 CS_File::CS_File(){
     file         = csNullPtr;
     fileMode     = csReadBinary;

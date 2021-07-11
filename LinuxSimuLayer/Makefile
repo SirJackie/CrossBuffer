@@ -5,6 +5,7 @@ Objects += ../CrossBufferLayer/FileSupport.o
 Objects += ../CrossBufferLayer/FrameBuffer.o
 Objects += ../CrossBufferLayer/MouseSupport.o
 Objects += ../CrossBufferLayer/KeyboardSupport.o
+Objects += ../CrossBufferLayer/BasicDataTypeDeclarations.o
 Objects += ../CrossBufferLayer/FPSCalculator.o
 Objects += ../LinuxSimuLayer/SDLHelper.o
 Objects += ../LinuxSimuLayer/KeyboardHelper.o
