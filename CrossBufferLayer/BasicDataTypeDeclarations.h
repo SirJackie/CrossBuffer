@@ -79,6 +79,8 @@ using std::stringstream;
 using std::vector;
 
 #include <cstring>
+using std::strlen;
+using std::strcpy;
 using std::memset;
 #define CS_Memset(ptr, fillingContent, length) (memset(ptr, fillingContent, length))
 

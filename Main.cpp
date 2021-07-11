@@ -9,6 +9,16 @@ CS_File file;
 void Setup (CS_FrameBuffer& fb, CS_Keyboard& kb, CS_Mouse& mouse, i32 deltaTime) {
 	file.Open("../Resources/Test.txt", csReadBinary);
 	file.Read();
+	file.Close();
+
+	file.Open("../Resources/Test.txt", csWriteBinary);
+	file.ResizeAndClearBuffer(13);
+	strcpy((i8*)file.buffer, "Hello World!");
+	file.Write();
+	file.Close();
+
+	file.Open("../Resources/Test.txt", csReadBinary);
+	file.Read();
 }
 
 void Update(CS_FrameBuffer& fb, CS_Keyboard& kb, CS_Mouse& mouse, i32 deltaTime) {

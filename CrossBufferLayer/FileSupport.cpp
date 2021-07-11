@@ -20,6 +20,7 @@ void CS_File::ResizeAndClearBuffer(i32 size){
     }
     buffer = new ui8[size];
     CS_Memset(buffer, 0, size);
+    bufferLength = size;
 }
 
 i32 CS_File::GetPositionNow(){
@@ -70,6 +71,7 @@ void CS_File::Write(){
     if(fileMode == csWriteBinary && file != csNullPtr){
         fwrite(buffer, sizeof(ui8), bufferLength, file);
     }
+    fflush(file);
 }
 
 void CS_File::Close(){
