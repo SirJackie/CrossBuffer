@@ -4,13 +4,11 @@ i32 deltaColor = 0;
 i32 startX = 100, startY = 100, endX = 200, endY = 200;
 i32 step;
 CS_FPSCalculator fpsCalculator;
-ui8 buffer[100];
+CS_File file;
 
 void Setup (CS_FrameBuffer& fb, CS_Keyboard& kb, CS_Mouse& mouse, i32 deltaTime) {
-	CS_Memset(buffer, 0, 100);
-	// FILE *file = fopen("../Resources/Test.txt", "rb");
-	CS_File file("../Resources/Test.txt", csReadBinary, fb);
-	fread(buffer, sizeof(ui8), 6, file.file);
+	file.Open("../Resources/Test.txt", csReadBinary);
+	file.Read();
 }
 
 void Update(CS_FrameBuffer& fb, CS_Keyboard& kb, CS_Mouse& mouse, i32 deltaTime) {
@@ -45,10 +43,7 @@ void Update(CS_FrameBuffer& fb, CS_Keyboard& kb, CS_Mouse& mouse, i32 deltaTime)
 	fb.PrintLn(fpsCalculator.ToString());
 	fb.PrintLn(mouse.ToString());
 	fb.PrintLn(kb.ToString());
-
-	for(i32 i = 0; i < 6; i++){
-		fb.PrintLn((i32)buffer[i]);
-	}
+	fb.PrintLn((i8*)file.buffer);
 
 	deltaColor += 1;
 

@@ -11,22 +11,22 @@ const csFileMode csWriteBinary = 1;
 class CS_File{
 public:
     FILE *file;
-    FILE *fileHead;
-    FILE *fileEnd;
-
-    CS_FrameBuffer* ptrfb;
-
     csFileMode fileMode;
-    i32 length;
+    i32 fileLength;
+    ui8 *buffer;
+    i32 bufferLength;
 
     CS_File();
-    CS_File(string fileName_, csFileMode fileMode_, CS_FrameBuffer& fb);
 
-    void Read (ui8* buffer, i32 length);
-    void Write(ui8* buffer, i32 length);
+    void ResizeAndClearBuffer(i32 size);
     i32  GetPositionNow();
     void GoToHead();
     void GoToEnd();
+    void GoTo(i32 position);
+
+    void Open(string fileName_, csFileMode fileMode_);
+    void Read();
+    void Write();
     void Close();
 
     ~CS_File();

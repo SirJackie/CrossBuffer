@@ -1,44 +1,25 @@
 #include "FileSupport.h"
 
 CS_File::CS_File(){
-    file     = csNullPtr;
-    fileHead = csNullPtr;
-    fileEnd  = csNullPtr;
-    fileMode = csReadBinary;
-    length   = 0;
+    file         = csNullPtr;
+    fileMode     = csReadBinary;
+    fileLength   = 0;
+    buffer       = csNullPtr;
+    bufferLength = 0;
 }
 
-CS_File::CS_File(string fileName_, csFileMode fileMode_, CS_FrameBuffer& fb){
-    fileMode = fileMode_;
-    file = fopen(fileName_.c_str(), fileMode == csReadBinary ? "rb" : "wb");
-    ptrfb = &fb;
-
-    ptrfb->PrintLn((i64) file);
-
-    if(file != csNullPtr){
-        // Get the Length of the File
-        fseek(file, 0, SEEK_END);
-        length = GetPositionNow() + 1;
-        fseek(file, 0, SEEK_SET);
+void CS_File::ResizeAndClearBuffer(i32 size){
+    if(size == 0){
+        delete[] buffer;
+        buffer = csNullPtr;
+        return;
     }
-    else{
-        fileHead = csNullPtr;
-        fileEnd  = csNullPtr;
-        fileMode = csReadBinary;
-        length   = 0;
-    }
-}
 
-void CS_File::Read(ui8* buffer, i32 length){
-    if(fileMode == csReadBinary && file != csNullPtr){
-        fread(buffer, sizeof(ui8), length, file);
+    if(buffer != csNullPtr){
+        delete[] buffer;
     }
-}
-
-void CS_File::Write(ui8* buffer, i32 length){
-    if(fileMode == csWriteBinary && file != csNullPtr){
-        fwrite(buffer, sizeof(ui8), length, file);
-    }
+    buffer = new ui8[size];
+    CS_Memset(buffer, 0, size);
 }
 
 i32 CS_File::GetPositionNow(){
@@ -46,11 +27,49 @@ i32 CS_File::GetPositionNow(){
 }
 
 void CS_File::GoToHead(){
-    file = fileHead;
+    fseek(file, 0, SEEK_SET);
 }
 
 void CS_File::GoToEnd(){
-    file = fileEnd;
+    fseek(file, 0, SEEK_END);
+}
+
+void CS_File::GoTo(i32 position){
+    fseek(file, position, SEEK_SET);
+}
+
+void CS_File::Open(string fileName_, csFileMode fileMode_){
+    fileMode = fileMode_;
+    file = fopen(fileName_.c_str(), fileMode == csReadBinary ? "rb" : "wb");
+
+    if(file != csNullPtr){
+        // Get the Length of the File
+        GoToEnd();
+        fileLength = GetPositionNow() + 1;
+        GoToHead();
+    }
+    else{
+        file         = csNullPtr;
+        fileMode     = csReadBinary;
+        fileLength   = 0;
+    }
+
+    buffer       = csNullPtr;
+    bufferLength = 0;
+}
+
+void CS_File::Read(){
+    ResizeAndClearBuffer(fileLength);
+    GoToHead();
+    if(fileMode == csReadBinary && file != csNullPtr){
+        fread(buffer, sizeof(ui8), fileLength, file);
+    }
+}
+
+void CS_File::Write(){
+    if(fileMode == csWriteBinary && file != csNullPtr){
+        fwrite(buffer, sizeof(ui8), bufferLength, file);
+    }
 }
 
 void CS_File::Close(){
