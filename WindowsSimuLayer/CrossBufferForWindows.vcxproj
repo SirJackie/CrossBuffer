@@ -143,6 +143,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\CrossBufferLayer\BasicDataTypeDeclarations.cpp" />
+    <ClCompile Include="..\CrossBufferLayer\FileSupport.cpp" />
     <ClCompile Include="..\CrossBufferLayer\FPSCalculator.cpp" />
     <ClCompile Include="..\CrossBufferLayer\FrameBuffer.cpp" />
     <ClCompile Include="..\CrossBufferLayer\KeyboardSupport.cpp" />
@@ -163,6 +165,7 @@
   <ItemGroup>
     <ClInclude Include="..\CrossBufferLayer\BasicDataTypeDeclarations.h" />
     <ClInclude Include="..\CrossBufferLayer\CrossBuffer.h" />
+    <ClInclude Include="..\CrossBufferLayer\FileSupport.h" />
     <ClInclude Include="..\CrossBufferLayer\FontSupport.h" />
     <ClInclude Include="..\CrossBufferLayer\FPSCalculator.h" />
     <ClInclude Include="..\CrossBufferLayer\FrameBuffer.h" />

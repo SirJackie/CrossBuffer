@@ -1,6 +1,7 @@
 #ifndef __CSBF_BasicDataTypeDeclarations__
 #define __CSBF_BasicDataTypeDeclarations__
 
+#define _CRT_SECURE_NO_WARNINGS
 
 /*
 ** Define Cross Platform Types
