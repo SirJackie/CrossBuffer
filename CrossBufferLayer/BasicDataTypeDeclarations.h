@@ -78,6 +78,13 @@ using std::vector;
 using std::memset;
 #define CS_Memset(ptr, fillingContent, length) (memset(ptr, fillingContent, length))
 
+#include <cstdio>
+using std::fopen;
+using std::fread;
+using std::fwrite;
+using std::fclose;
+using std::FILE;
+
 #include <cmath>
 using std::sin;
 using std::cos;

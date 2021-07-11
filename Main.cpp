@@ -4,17 +4,15 @@ i32 deltaColor = 0;
 i32 startX = 100, startY = 100, endX = 200, endY = 200;
 i32 step;
 CS_FPSCalculator fpsCalculator;
-f32 firstdx, firstdy, seconddx, seconddy;
+ui8 buffer[100];
 
 void Setup (CS_FrameBuffer& fb, CS_Keyboard& kb, CS_Mouse& mouse, i32 deltaTime) {
-	firstdx = mouse.deltaX;
-	firstdy = mouse.deltaY;
+	CS_Memset(buffer, 0, 100);
+	FILE *file = fopen("../Resources/Test.txt", "rb");
+	fread(buffer, sizeof(ui8), 6, file);
 }
 
 void Update(CS_FrameBuffer& fb, CS_Keyboard& kb, CS_Mouse& mouse, i32 deltaTime) {
-	seconddx = mouse.deltaX;
-	seconddy = mouse.deltaY;
-
 	fpsCalculator.Count(deltaTime);
 	step = (i32)(0.2f * deltaTime);
 
@@ -47,14 +45,9 @@ void Update(CS_FrameBuffer& fb, CS_Keyboard& kb, CS_Mouse& mouse, i32 deltaTime)
 	fb.PrintLn(mouse.ToString());
 	fb.PrintLn(kb.ToString());
 
-	fb.Print(firstdx);
-	fb.Print(", ");
-	fb.Print(firstdy);
-	fb.Print("\n");
-	fb.Print(seconddx);
-	fb.Print(", ");
-	fb.Print(seconddy);
-	fb.Print("\n");
+	for(i32 i = 0; i < 6; i++){
+		fb.PrintLn((i32)buffer[i]);
+	}
 
 	deltaColor += 1;
 
